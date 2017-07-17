@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import Routes from '../navigators/Routes';
 
 const styles = StyleSheet.create({
   welcome: {
@@ -35,7 +34,7 @@ class LoginStatusMessage extends Component {
                 </Text>
                 <Button
                     onPress={() =>
-                        dispatch(NavigationActions.navigate({ routeName: Routes.getRouteName(Routes.Screens.Profile) }))}
+                        dispatch(NavigationActions.navigate({ routeName: 'Profile' }))}
                     title="Profile"
                 />
             </View>

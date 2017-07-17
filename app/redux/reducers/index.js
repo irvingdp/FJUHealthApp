@@ -1,9 +1,15 @@
 import { combineReducers } from 'redux';
-import nav from './nav';
+
+import tabBar from './tabBar';
+import homeTab from './homeTab';
+import reserveTab from './reserveTab';
+
 import auth from './auth';
 
 const AppReducer = combineReducers({
-    nav,
+    tabBar,
+    homeTab,
+    reserveTab,
     auth,
 });
 

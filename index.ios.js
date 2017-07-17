@@ -2,18 +2,16 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 
-import AppReducer from './app/redux/reducers/index';
-import AppWithNavigationState from './app/navigators/AppNavigator';
+import Store from './app/redux/store';
+import TabBarNavigation from './app/navigation/TabBarNavigation';
 
 class FJUHealthApp extends React.Component {
-    store = createStore(AppReducer);
 
     render() {
         return (
-            <Provider store={this.store}>
-              <AppWithNavigationState />
+            <Provider store={Store}>
+              <TabBarNavigation />
             </Provider>
         );
     }
