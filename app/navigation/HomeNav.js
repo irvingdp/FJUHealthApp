@@ -21,3 +21,25 @@ const stackNavigatorConfiguration = {
 export const HomeStackNavigator = StackNavigator(routeConfiguration,stackNavigatorConfiguration);
 
 
+
+class HomeStackNavigation extends React.Component {
+    render(){
+        const { dispatch, navigationState} = this.props
+        return (
+            <HomeStackNavigator
+                navigation={
+                    addNavigationHelpers({
+                        dispatch: dispatch,
+                        state: navigationState
+                    })
+                }
+            />
+        )
+    }
+}
+const mapStateToProps = (state) => {
+    return {
+        navigationState: state.HomeNav
+    }
+}
+export default connect(mapStateToProps)(HomeStackNavigation)

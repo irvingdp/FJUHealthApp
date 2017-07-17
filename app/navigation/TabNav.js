@@ -8,10 +8,10 @@ import {HomeStackNavigator} from './HomeNav'
 import {ReserveStackNavigator} from './ReserveNav'
 import {ProfileStackNavigator} from './ProfileNav'
 
-
+import HomeNav from './HomeNav'
 const routeConfiguration = {
     Home: {
-        screen: HomeStackNavigator,
+        screen: HomeNav,
         navigationOptions: {
             tabBarLabel: 'Home',
             tabBarIcon: ({ tintColor, focused }) => (
