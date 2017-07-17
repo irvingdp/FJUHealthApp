@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
-import ReduxNav from '../redux/Nav'
-import ReduxAuth from '../redux/Auth'
+import {StyleSheet, View, Text} from 'react-native';
 
-import {StyleSheet, View, Button, Text} from 'react-native';
-import {connect} from 'react-redux';
-
-import PropTypes from 'prop-types';
-import Routes from '../navigation/Routes'
-
+import LoginButton from '../componenets/LoginButton'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -27,28 +21,18 @@ class ProductScreen extends Component {
     };
 
     render() {
-        let {logout, go, isLoggedIn} = this.props;
         return (
             <View style={styles.container}>
                 <View>
                     <Text style={styles.welcome}>{'Product Screen'}</Text>
                 </View>
-                <Button
-                    title={isLoggedIn ? 'Log Out' : 'Go to Login Screen'}
-                    onPress={isLoggedIn ? () => logout() : () => go(Routes.Login)}
-                />
+                <LoginButton/>
             </View>
         )
     }
 }
 
 
-const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
-const mapDispatchToProps = dispatch => ({
-    go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
-    logout: () => dispatch(ReduxAuth.ActionCreator.logout()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductScreen);
+export default ProductScreen;
 
