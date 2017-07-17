@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReduxNav from '../redux/Nav'
 import ReduxHomeNav from '../redux/HomeNav'
-import ReduxAuth from '../redux/Auth'
 
 import {StyleSheet, View, Button, Text} from 'react-native';
 import {connect} from 'react-redux';
@@ -29,19 +28,19 @@ class HomeScreen extends Component {
     });
     static propTypes = {
         isLoggedIn: PropTypes.bool.isRequired,
-        go: PropTypes.func.isRequired,
+        TabNavGo: PropTypes.func.isRequired,
         HomeNavGo: PropTypes.func.isRequired,
     };
 
     render() {
-        let {isLoggedIn, go, HomeNavGo} = this.props;
+        let {isLoggedIn, TabNavGo, HomeNavGo} = this.props;
         return (
             <View style={styles.container}>
                 <View>
                     {isLoggedIn ?
                     <View>
                         <Text style={styles.welcome}>{'You are "logged in" right now'}</Text>
-                        <Button onPress={() => go(Routes.Profile)} title="Go To Profile"/>
+                        <Button onPress={() => TabNavGo(Routes.Profile)} title="Go To Profile"/>
                     </View> :
                         <Button onPress={() => HomeNavGo(Routes.Product)} title="Go To Product"/>
                     }
@@ -56,7 +55,7 @@ class HomeScreen extends Component {
 const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
 const mapDispatchToProps = dispatch => ({
-    go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
+    TabNavGo: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
     HomeNavGo: (routeName) => dispatch(ReduxHomeNav.ActionCreator.go(routeName)),
 });
 
