@@ -1,51 +1,56 @@
-import ActionType from '../redux/actions'
+import ReduxAuth from '../redux/Auth'
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
 });
 
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
     }
+
     static propTypes = {
-        navigation: PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
     };
     static navigationOptions = {
-        title: 'Log In',
+        title: 'Login',
     };
+
     render() {
-        let {navigation} = this.props;
-        return(
+        let {login} = this.props;
+        return (
             <View style={styles.container}>
                 <Text style={styles.welcome}>
-                    Screen A
+                    input your name...
                 </Text>
-                <Text style={styles.instructions}>
-                    This is great
+                <Text style={styles.welcome}>
+                    input your password...
                 </Text>
-                <Button
-                    onPress={() => navigation.dispatch({ type: ActionType.LOGIN })}
-                    title="Log in"
-                />
+                <Button onPress={login} title="Login"/>
             </View>
         )
     }
 }
 
-export default LoginScreen;
+const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
+
+const mapDispatchToProps = dispatch => ({
+    login: () => dispatch(ReduxAuth.ActionCreator.login()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

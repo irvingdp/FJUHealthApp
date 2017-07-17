@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
-
 import ReduxNav from '../redux/Nav'
+import ReduxAuth from '../redux/Auth'
+
+import {StyleSheet, View, Button, Text} from 'react-native';
 import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 import Routes from '../navigation/Routes'
-
 
 const styles = StyleSheet.create({
     container: {
@@ -15,44 +15,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
 });
 
-class ProfileScreen extends Component {
+class ProductScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
-
     static navigationOptions = {
-        title: 'Profile',
-    }
+        title: 'Product',
+    };
 
     render() {
+        let {logout, go, isLoggedIn} = this.props;
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Profile Screen
-                </Text>
-                <Text style={styles.welcome}>{this.props.isLoggedIn ? 'You are "logged in" right now.' : "You are not log in."}</Text>
-                {this.props.isLoggedIn ?
+                <View>
+                    <Text style={styles.welcome}>{'Product Screen'}</Text>
+                </View>
                 <Button
-                    title={'Go to Reserve Screen'}
-                    onPress={() => this.props.go(Routes.Reserve)}
-                /> : null
-                }
+                    title={isLoggedIn ? 'Log Out' : 'Go to Login Screen'}
+                    onPress={isLoggedIn ? () => logout() : () => go(Routes.Login)}
+                />
             </View>
         )
     }
 }
+
+
 const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
 const mapDispatchToProps = dispatch => ({
     go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
+    logout: () => dispatch(ReduxAuth.ActionCreator.logout()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductScreen);
 
