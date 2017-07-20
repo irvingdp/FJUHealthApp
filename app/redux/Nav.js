@@ -8,9 +8,8 @@ let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
         case ActionType.GO:
-            let route = action.data;
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate(route),
+                NavigationActions.navigate(action.data),
                 state);
             break;
         case ActionType.BACK:
@@ -45,11 +44,12 @@ let Reducer = (state = initialState, action) => {
 };
 
 let ActionCreator = {
-    go(routeName) {
+    go(route) {
         return function (dispatch) {
             return dispatch({
                 type: ActionType.GO,
-                data: {routeName: routeName}});
+                data: route
+            });
         }
     },
     back() {

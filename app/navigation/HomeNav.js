@@ -8,12 +8,14 @@ import Routes from './Routes'
 
 import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen';
-import ProductScreen from '../screens/ProductScreen';
+import GuildScreen from '../screens/GuildScreen';
+import Solution from '../screens/SolutionScreen';
 
 const routeConfiguration = {
     Home: {screen: HomeScreen},
     Login: {screen: LoginScreen},
-    Product: {screen: ProductScreen}
+    Guild: {screen: GuildScreen},
+    Solution: {screen: Solution}
 }
 const stackNavigatorConfiguration = {
     initialRouteName: Routes.Home

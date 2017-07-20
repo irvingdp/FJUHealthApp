@@ -1,9 +1,13 @@
 const Routes = {
     Home: "Home",
-    Login: "Login",
-    Product: "Product",
+    Guild: "Guild",
+    Traffic: "Traffic",
+    Report: "Report",
+    Setting: "Setting",
+
     Profile: "Profile",
-    Reserve: "Reserve"
+    Login: "Login",
+    Solution: "Solution",
 };
 
 export default Routes;

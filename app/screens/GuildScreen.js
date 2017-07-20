@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import AppLabels from '../AppLabels';
 
-import LoginButton from '../componenets/LoginButton'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -11,28 +11,25 @@ const styles = StyleSheet.create({
     },
 });
 
-class ProductScreen extends Component {
+class GuildScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
     static navigationOptions = {
-        title: 'Product',
+        title: AppLabels.GuildScreen.title,
     };
 
     render() {
         return (
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.welcome}>{'Product Screen'}</Text>
+                    <Text>{AppLabels.GuildScreen.title}</Text>
                 </View>
-                <LoginButton/>
             </View>
         )
     }
 }
 
-
-
-export default ProductScreen;
+export default GuildScreen;
 

@@ -5,9 +5,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Navigators
 import {HomeStackNavigator} from './HomeNav'
-import {ReserveStackNavigator} from './ReserveNav'
-import {ProfileStackNavigator} from './ProfileNav'
+import {GuildStackNavigator} from './GuildNav'
+import {TrafficStackNavigator} from './TrafficNav'
+import {ReportStackNavigator} from './ReportNav'
+import {SettingStackNavigator} from './SettingNav'
 
+
+import {Colors} from '../styles/BaseStyles'
 
 const routeConfiguration = {
     Home: {
@@ -23,26 +27,52 @@ const routeConfiguration = {
             ),
         },
     },
-    Reserve: {
-        screen: ReserveStackNavigator,
+    Guide: {
+        screen: GuildStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Reserve',
+            tabBarLabel: 'Guide',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Ionicons
-                    name={focused ? 'ios-settings' : 'ios-settings-outline'}
+                    name={focused ? 'ios-information-circle' : 'ios-information-circle-outline'}
                     size={26}
                     style={{ color: tintColor }}
                 />
             ),
         },
     },
-    Profile: {
-        screen: ProfileStackNavigator,
+    Traffic: {
+        screen: TrafficStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Traffic',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Ionicons
-                    name={focused ? 'ios-settings' : 'ios-settings-outline'}
+                    name={focused ? 'ios-pin' : 'ios-pin-outline'}
+                    size={26}
+                    style={{ color: tintColor }}
+                />
+            ),
+        },
+    },
+    Report: {
+        screen: ReportStackNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Report',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Ionicons
+                    name={focused ? 'ios-paper' : 'ios-paper-outline'}
+                    size={26}
+                    style={{ color: tintColor }}
+                />
+            ),
+        },
+    },
+    Setting: {
+        screen: SettingStackNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Setting',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Ionicons
+                    name={focused ? 'ios-menu' : 'ios-menu-outline'}
                     size={26}
                     style={{ color: tintColor }}
                 />
@@ -53,10 +83,10 @@ const routeConfiguration = {
 const tabBarConfiguration = {
     //...other configs
     tabBarOptions:{
-        activeTintColor: 'white',  // tint color is passed to text and icons (if enabled) on the tab bar
-        inactiveTintColor: 'blue',
-        activeBackgroundColor: 'blue', // background color is for the tab component
-        inactiveBackgroundColor: 'white',
+        activeTintColor: Colors.white,  // tint color is passed to text and icons (if enabled) on the tab bar
+        inactiveTintColor: Colors.black,
+        activeBackgroundColor: Colors.black, // background color is for the tab component
+        inactiveBackgroundColor: Colors.white,
     }
 }
 export const TabBarNavigator = TabNavigator(routeConfiguration,tabBarConfiguration);
