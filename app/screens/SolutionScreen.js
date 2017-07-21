@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import AppLabels from '../AppLabels';
-import Collapsible from 'react-native-collapsible';
 import {Colors} from '../styles/BaseStyles'
-import Accordion from 'react-native-collapsible/Accordion';
 import ToggleBox from 'react-native-show-hide-toggle-box'
 
 const styles = StyleSheet.create({
