@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addNavigationHelpers, TabNavigator} from 'react-navigation';
+import {addNavigationHelpers, TabNavigator, TabBarBottom, } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Navigators
@@ -9,7 +9,9 @@ import {GuildStackNavigator} from './GuildNav'
 import {TrafficStackNavigator} from './TrafficNav'
 import {ReportStackNavigator} from './ReportNav'
 import {SettingStackNavigator} from './SettingNav'
-
+import {
+    Platform
+} from 'react-native';
 
 import {Colors} from '../styles/BaseStyles'
 
@@ -82,11 +84,21 @@ const routeConfiguration = {
 }
 const tabBarConfiguration = {
     //...other configs
+    tabBarPosition: 'bottom',
     tabBarOptions:{
-        activeTintColor: Colors.white,  // tint color is passed to text and icons (if enabled) on the tab bar
-        inactiveTintColor: Colors.black,
+        showIcon: true,
+        showLabel: false,
+        activeTintColor: Colors.black,  // tint color is passed to text and icons (if enabled) on the tab bar
+        inactiveTintColor: (Platform.OS === 'ios') ? Colors.white : Colors.black,
+
         activeBackgroundColor: Colors.black, // background color is for the tab component
         inactiveBackgroundColor: Colors.white,
+
+        style: {
+            backgroundColor:   Colors.white
+        },
+        tabStyle: {
+        },
     }
 }
 export const TabBarNavigator = TabNavigator(routeConfiguration,tabBarConfiguration);

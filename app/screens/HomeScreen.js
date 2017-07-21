@@ -95,6 +95,8 @@ class HomeScreen extends Component {
                         backgroundColor: 'transparent',
                         justifyContent: "center",
                         alignItems: "center",
+                        zIndex: 99999,
+                        position: "absolute",
                     }}>
                         <Text style={{lineHeight: 25}}>{"防癌健檢"}</Text>
                         <Text style={{lineHeight: 20}}>{"男  NT24,000"}</Text>
@@ -110,6 +112,8 @@ class HomeScreen extends Component {
                         backgroundColor: 'transparent',
                         justifyContent: "center",
                         alignItems: "center",
+                        zIndex: 99999,
+                        position: "absolute",
                     }}>
                         <Text style={{lineHeight: 25}}>{"精準健檢"}</Text>
                         <Text style={{lineHeight: 20}}>{"男  NT24,000"}</Text>
