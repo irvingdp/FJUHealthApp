@@ -2,83 +2,71 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addNavigationHelpers, TabNavigator, TabBarBottom, } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AppLabels from '../AppLabels';
 
 // Navigators
-import {HomeStackNavigator} from './HomeNav'
-import {GuildStackNavigator} from './GuildNav'
-import {TrafficStackNavigator} from './TrafficNav'
-import {ReportStackNavigator} from './ReportNav'
+import {DashboardStackNavigator} from './DashboardNav'
+import {PackageStackNavigator} from './PackageNav'
+import {InstructionStackNavigator} from './InstructionNav'
+import {LocationStackNavigator} from './LocationNav'
 import {SettingStackNavigator} from './SettingNav'
 import {
-    Platform
+    Platform,
+    Image,
 } from 'react-native';
 
 import {Colors} from '../styles/BaseStyles'
 
+//TODO: Ivan replace the tab icons
 const routeConfiguration = {
-    Home: {
-        screen: HomeStackNavigator,
+    Dashboard: {
+        screen: DashboardStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Ionicons
-                    name={focused ? 'ios-home' : 'ios-home-outline'}
-                    size={26}
-                    style={{ color: tintColor }}
-                />
-            ),
+            tabBarLabel: 'Dashboard',
+            tabBarIcon: ({ tintColor, focused }) => {
+                return focused ? <Image source={require('../res/images/dashboard-tabbar-active-icon.png')}/> :
+                    <Image resizeMode="contain" source={require('../res/images/dashboard-tabbar-active-icon.png')}/>
+            },
         },
     },
-    Guide: {
-        screen: GuildStackNavigator,
+    Package: {
+        screen: PackageStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Guide',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Ionicons
-                    name={focused ? 'ios-information-circle' : 'ios-information-circle-outline'}
-                    size={26}
-                    style={{ color: tintColor }}
-                />
-            ),
+            tabBarLabel: 'Package',
+            tabBarIcon: ({ tintColor, focused }) => {
+            return focused ? <Image source={require('../res/images/package-tabbar-icon.png')}/> :
+                <Image resizeMode="contain" source={require('../res/images/package-tabbar-icon.png')}/>
+            },
         },
     },
-    Traffic: {
-        screen: TrafficStackNavigator,
+    Instruction: {
+        screen: InstructionStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Traffic',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Ionicons
-                    name={focused ? 'ios-pin' : 'ios-pin-outline'}
-                    size={26}
-                    style={{ color: tintColor }}
-                />
-            ),
+            tabBarLabel: 'Instruction',
+            tabBarIcon: ({ tintColor, focused }) => {
+                return focused ? <Image source={require('../res/images/instruction-tabbar-icon.png')}/> :
+                    <Image resizeMode="contain" source={require('../res/images/instruction-tabbar-icon.png')}/>
+            },
         },
     },
-    Report: {
-        screen: ReportStackNavigator,
+    Location: {
+        screen: LocationStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Report',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Ionicons
-                    name={focused ? 'ios-paper' : 'ios-paper-outline'}
-                    size={26}
-                    style={{ color: tintColor }}
-                />
-            ),
+            tabBarLabel: 'Location',
+            tabBarIcon: ({ tintColor, focused }) => {
+                return focused ? <Image source={require('../res/images/location-tabbar-icon.png')}/> :
+                    <Image resizeMode="contain" source={require('../res/images/location-tabbar-icon.png')}/>
+            },
         },
     },
     Setting: {
         screen: SettingStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Setting',
-            tabBarIcon: ({ tintColor, focused }) => (
-                <Ionicons
-                    name={focused ? 'ios-menu' : 'ios-menu-outline'}
-                    size={26}
-                    style={{ color: tintColor }}
-                />
-            ),
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ tintColor, focused }) => {
+                return focused ? <Image source={require('../res/images/settings-tabbar-icon.png')}/> :
+                    <Image resizeMode="contain" source={require('../res/images/settings-tabbar-icon.png')}/>
+            },
         },
     },
 }
@@ -87,18 +75,23 @@ const tabBarConfiguration = {
     tabBarPosition: 'bottom',
     tabBarOptions:{
         showIcon: true,
-        showLabel: false,
-        activeTintColor: Colors.black,  // tint color is passed to text and icons (if enabled) on the tab bar
-        inactiveTintColor: (Platform.OS === 'ios') ? Colors.white : Colors.black,
+        showLabel: true,
+        activeTintColor: Colors.green,  // tint color is passed to text and icons (if enabled) on the tab bar
+        inactiveTintColor: Colors.lightGrey,
 
-        activeBackgroundColor: Colors.black, // background color is for the tab component
+        activeBackgroundColor: Colors.tmp, // background color is for the tab component
         inactiveBackgroundColor: Colors.white,
 
         style: {
-            backgroundColor:   Colors.white
+            backgroundColor:   Colors.white,
+            height: 50,
         },
         tabStyle: {
+            paddingTop: 6,
+            paddingBottom: 2
         },
+        labelStyle: {
+        }
     }
 }
 export const TabBarNavigator = TabNavigator(routeConfiguration,tabBarConfiguration);

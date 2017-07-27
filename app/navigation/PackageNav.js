@@ -1,17 +1,17 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
 import Routes from './Routes'
-import SettingScreen from '../screens/SettingScreen';
+import PackageScreen from '../screens/PackageScreen';
 import {Layouts, Colors} from '../styles/BaseStyles'
 
 const routeConfiguration = {
-    Setting: {screen: SettingScreen},
+    Package: {screen: PackageScreen},
 }
 const stackNavigatorConfiguration = {
-    initialRouteName: Routes.Setting,
+    initialRouteName: Routes.Package,
     navigationOptions: {
         headerStyle: {backgroundColor: Colors.white},
         headerTitleStyle: {color: Colors.green},
     }
 }
-export const SettingStackNavigator = StackNavigator(routeConfiguration,stackNavigatorConfiguration);
+export const PackageStackNavigator = StackNavigator(routeConfiguration,stackNavigatorConfiguration);
