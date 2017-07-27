@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import AppLabels from '../AppLabels';
+import {Layouts, Colors} from '../styles/BaseStyles'
 
 const styles = StyleSheet.create({
     container: {
@@ -11,25 +12,25 @@ const styles = StyleSheet.create({
     },
 });
 
-class GuildScreen extends Component {
+class PackageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
     static navigationOptions = {
-        title: AppLabels.GuildScreen.title,
+        title: AppLabels.PackageScreen.title,
     };
 
     render() {
         return (
             <View style={styles.container}>
                 <View>
-                    <Text>{AppLabels.GuildScreen.title}</Text>
+                    <Text>{AppLabels.PackageScreen.title}</Text>
                 </View>
             </View>
         )
     }
 }
 
-export default GuildScreen;
+export default PackageScreen;
 

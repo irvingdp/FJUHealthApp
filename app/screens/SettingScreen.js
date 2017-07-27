@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import AppLabels from '../AppLabels';
 
 import Routes from '../navigation/Routes'
+import {Layouts, Colors} from '../styles/BaseStyles'
 
 
 const styles = StyleSheet.create({
@@ -35,7 +36,7 @@ class SettingScreen extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
+    navigate: (routeName) => dispatch(ReduxNav.ActionCreator.navigate(routeName)),
 });
 
 export default connect(null, mapDispatchToProps)(SettingScreen);

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native';
 import AppLabels from '../AppLabels';
-import {Colors} from '../styles/BaseStyles'
 import ToggleBox from 'react-native-show-hide-toggle-box'
+import {Layouts, Colors} from '../styles/BaseStyles'
 
 const styles = StyleSheet.create({
     container: {

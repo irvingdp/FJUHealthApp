@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 import Routes from '../navigation/Routes'
+import {Layouts, Colors} from '../styles/BaseStyles'
 
 
 const styles = StyleSheet.create({
@@ -42,7 +43,7 @@ class ProfileScreen extends Component {
                 {this.props.isLoggedIn ?
                 <Button
                     title={'Go to Reserve Screen'}
-                    onPress={() => this.props.go(Routes.Reserve)}
+                    onPress={() => this.props.navigate(Routes.Reserve)}
                 /> : null
                 }
             </View>
@@ -52,7 +53,7 @@ class ProfileScreen extends Component {
 const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
 const mapDispatchToProps = dispatch => ({
-    go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
+    navigate: (routeName) => dispatch(ReduxNav.ActionCreator.navigate(routeName)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
 

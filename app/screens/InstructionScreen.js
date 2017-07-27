@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import AppLabels from '../AppLabels';
 
 import Routes from '../navigation/Routes'
+import {Layouts, Colors} from '../styles/BaseStyles'
 
 
 const styles = StyleSheet.create({
@@ -16,27 +17,27 @@ const styles = StyleSheet.create({
     },
 });
 
-class TrafficScreen extends Component {
+class InstructionScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
         }
     }
     static navigationOptions = {
-        title: AppLabels.TrafficScreen.title,
+        title: AppLabels.InstructionScreen.title,
     };
     render() {
         return(
             <View style={styles.container}>
-                <Text>{AppLabels.TrafficScreen.title}</Text>
+                <Text>{AppLabels.InstructionScreen.title}</Text>
             </View>
         )
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    go: (routeName) => dispatch(ReduxNav.ActionCreator.go(routeName)),
+    navigate: (routeName) => dispatch(ReduxNav.ActionCreator.navigate(routeName)),
 });
 
-export default connect(null, mapDispatchToProps)(TrafficScreen);
+export default connect(null, mapDispatchToProps)(InstructionScreen);
 

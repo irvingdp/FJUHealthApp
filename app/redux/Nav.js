@@ -4,12 +4,32 @@ import {TabBarNavigator} from '../navigation/TabNav';
 import Routes from '../navigation/Routes'
 
 const initialState = null;
+
+let getNextNavigateRoute = (route, state) => {
+    let nextRouteName = route && route.routeName;
+    let nextRoute = {...route};
+    switch (nextRouteName) {
+        case "Book":
+            if(!state.Auth.isLoggedIn) {
+                nextRoute = {
+                    ...route,
+                    routeName: Routes.Login,
+                }
+            }
+            break;
+        default:
+            break;
+    }
+    return nextRoute;
+}
 let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
-        case ActionType.GO:
+        case ActionType.NAVIGATE:
+            let nextRoute = getNextNavigateRoute(action.data, action.state);
+
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate(action.data),
+                NavigationActions.navigate(nextRoute),
                 state);
             break;
         case ActionType.BACK:
@@ -18,23 +38,24 @@ let Reducer = (state = initialState, action) => {
                 state
             );
             break;
-        case ActionType.LOGIN:
+
+        case ActionType.LOGIN_SUCCESS:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.back(),
                 state);
             break;
-
+        /*
         case ActionType.LOGOUT:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.reset({
                     index: 0,
                     actions: [
-                        NavigationActions.navigate({ routeName: 'Home'}),
+                        NavigationActions.navigate({ routeName: 'Dashboard'}),
                     ]
                 }),
                 state);
             break;
-
+        */
         default:
             nextState = TabBarNavigator.router.getStateForAction(action,
                 state);
@@ -44,18 +65,20 @@ let Reducer = (state = initialState, action) => {
 };
 
 let ActionCreator = {
-    go(route) {
-        return function (dispatch) {
+    navigate(route) {
+        return function (dispatch, getState) {
             return dispatch({
-                type: ActionType.GO,
-                data: route
+                type: ActionType.NAVIGATE,
+                data: route,
+                state: getState(),
             });
         }
     },
     back() {
-        return function (dispatch) {
+        return function (dispatch, getState) {
             return dispatch({
-                type: ActionType.BACK
+                type: ActionType.BACK,
+                state: getState(),
             });
         }
     },
