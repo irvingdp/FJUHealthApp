@@ -15,7 +15,11 @@
 		"react-redux": "^5.0.5",
 		"redux": "^3.7.2",
 		"redux-logger": "^3.0.6",
-		"redux-thunk": "^2.2.0"
+		"redux-thunk": "^2.2.0",
+		"gulp": "^3.9.1",
+		"gulp-help": "^1.6.1",
+		"gulp-template": "^4.0.0",
+		"run-sequence": "^1.1.5"
 	},
 	"devDependencies": {
 		"babel-jest": "20.0.3",
