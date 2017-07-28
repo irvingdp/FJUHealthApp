@@ -7,7 +7,6 @@ import Store from './app/redux/Store';
 import TabNav from './app/navigation/TabNav';
 
 class FJUHealthApp extends React.Component {
-
     render() {
         return (
             <Provider store={Store}>

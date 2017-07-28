@@ -29,7 +29,7 @@ export default class LabelTextInput extends Component {
         let {labelProps, textInputProps, labelText, valid, errorMsg, style} = this.props;
         return (
             <View style={style}>
-                <Text style={[Texts.Font_14_400, {color: Colors.white,}]}
+                <Text style={[Texts.Font_14_400, {color: valid ? Colors.white : Colors.red,}]}
                       {...labelProps}>
                     {labelText}
                 </Text>

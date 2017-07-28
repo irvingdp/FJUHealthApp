@@ -15,6 +15,11 @@ let getNextNavigateRoute = (route, state) => {
                     ...route,
                     routeName: Routes.Login,
                 }
+            } else {
+                nextRoute = {
+                    ...route,
+                    routeName: Routes.Book,
+                }
             }
             break;
         default:
@@ -26,10 +31,9 @@ let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
         case ActionType.NAVIGATE:
-            let nextRoute = getNextNavigateRoute(action.data, action.state);
-
+            //let nextRoute = getNextNavigateRoute(action.data, action.state);
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate(nextRoute),
+                NavigationActions.navigate(action.data),
                 state);
             break;
         case ActionType.BACK:
@@ -42,6 +46,12 @@ let Reducer = (state = initialState, action) => {
         case ActionType.LOGIN_SUCCESS:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.back(),
+                state);
+            break;
+
+        case ActionType.REGISTER_SUCCESS:
+            nextState = TabBarNavigator.router.getStateForAction(
+                NavigationActions.navigate({routeName: Routes.Dashboard}),
                 state);
             break;
         /*

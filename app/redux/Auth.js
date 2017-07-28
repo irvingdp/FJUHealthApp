@@ -7,33 +7,78 @@ const initialAuthState = {isLoggedIn: false};
 
 let Reducer = (state = initialAuthState, action) => {
     switch (action.type) {
+        case ActionType.TOKEN_CHECKING:
+            return {
+                ...state,
+                isFetching: true,
+                isLoggedIn: false,
+                checkingTokenError: null,
+            };
+        case ActionType.TOKEN_CHECKING_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                isLoggedIn: true,
+                checkingTokenError: null,
+            };
+        case ActionType.TOKEN_CHECKING_FAIL:
+            return {
+                ...state,
+                isFetching: false,
+                isLoggedIn: false,
+                checkingTokenError: action.error,
+            };
+
         case ActionType.LOGGING:
             return {
                 ...state,
                 isFetching: true,
                 isLoggedIn: false,
-                error: null,
+                loginError: null,
             };
         case ActionType.LOGIN_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
                 isLoggedIn: true,
-                error: null,
+                loginError: null,
             };
         case ActionType.LOGIN_FAIL:
             return {
                 ...state,
                 isFetching: false,
                 isLoggedIn: false,
-                error: action.error,
+                loginError: action.error,
             };
+
+
+        case ActionType.REGISTERING:
+            return {
+                ...state,
+                isFetching: true,
+                isLoggedIn: false,
+                registerError: null,
+            };
+        case ActionType.REGISTER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                isLoggedIn: true,
+                registerError: null,
+            };
+        case ActionType.REGISTER_FAIL:
+            return {
+                ...state,
+                isFetching: false,
+                isLoggedIn: false,
+                registerError: action.error,
+            };
+
         case ActionType.LOGOUT:
             return {
                 ...state,
                 isFetching: false,
                 isLoggedIn: false,
-                error: null,
             };
         default:
             return state;
@@ -41,6 +86,20 @@ let Reducer = (state = initialAuthState, action) => {
 };
 
 let ActionCreator = {
+    isValidToken({token}) {
+        return function (dispatch) {
+            dispatch({type: ActionType.TOKEN_CHECKING});
+            return UserService.isValidToken({token}).then(json => {
+                if(!json.valid) {
+                    return DeviceStore.saveUserData(null);
+                }
+            }).then(() => {
+                return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS});
+            }).catch(err => {
+                return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
+            })
+        }
+    },
     login({email, password}) {
         return function (dispatch) {
             dispatch({type: ActionType.LOGGING});
@@ -50,6 +109,18 @@ let ActionCreator = {
                 return dispatch({type: ActionType.LOGIN_SUCCESS});
             }).catch(err => {
                 return dispatch({type: ActionType.LOGIN_FAIL, error: err})
+            })
+        }
+    },
+    register({email, password}) {
+        return function (dispatch) {
+            dispatch({type: ActionType.REGISTERING});
+            return UserService.register({email, password}).then(json => {
+                return DeviceStore.saveUserData(json);
+            }).then(() => {
+                return dispatch({type: ActionType.REGISTER_SUCCESS});
+            }).catch(err => {
+                return dispatch({type: ActionType.REGISTER_FAIL, error: err})
             })
         }
     },

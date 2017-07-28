@@ -10,21 +10,24 @@ const UserService = {
             return data;
         });
     },
-    /*
-     register: ({firstname, lastname, email, password, country, invitecode} = {}) => {
-     let endPoint = DomainCommon.buildAPIUrl() + "profile";
-     return new Promise((resolve, reject) => {
-     return DomainCommon.fetchPost(endPoint, {
-     FirstName: firstname,
-     LastName: lastname,
-     EmailAddress: email,
-     Password: password,
-     CountryIsoCode: country,
-     InviteCode: invitecode
-     }, resolve, reject);
-     });
-     },
-     */
+    register: ({email, password} = {}) => {
+        let endPoint = DomainCommon.buildAPIUrl() + "register";
+        return new Promise((resolve, reject) => {
+            return DomainCommon.fetchPost(endPoint, {email, password}, resolve, reject);
+        }).then((data) => {
+            DomainCommon.setAPIToken({token: data.token});
+            return data;
+        });
+    },
+    isValidToken: ({token} = {}) => {
+        let endPoint = DomainCommon.buildAPIUrl() + "isValidToken";
+        return new Promise((resolve, reject) => {
+            return DomainCommon.fetchPost(endPoint, {token}, resolve, reject);
+        }).then((data) => {
+            data.valid && DomainCommon.setAPIToken({token});
+            return data;
+        });
+    },
 };
 
 export default UserService;

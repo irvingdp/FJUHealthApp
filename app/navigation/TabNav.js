@@ -11,13 +11,14 @@ import {InstructionStackNavigator} from './InstructionNav'
 import {LocationStackNavigator} from './LocationNav'
 import {SettingStackNavigator} from './SettingNav'
 import {
-    Platform,
     Image,
 } from 'react-native';
 
 import {Colors} from '../styles/BaseStyles'
+import DeviceStore from '../DeviceStore'
+import ReduxAuth from '../redux/Auth'
+import Spinner from '../componenets/Spinner'
 
-//TODO: Ivan replace the tab icons
 const routeConfiguration = {
     Dashboard: {
         screen: DashboardStackNavigator,
@@ -25,7 +26,7 @@ const routeConfiguration = {
             tabBarLabel: 'Dashboard',
             tabBarIcon: ({ tintColor, focused }) => {
                 return focused ? <Image source={require('../res/images/dashboard-tabbar-active-icon.png')}/> :
-                    <Image resizeMode="contain" source={require('../res/images/dashboard-tabbar-active-icon.png')}/>
+                    <Image resizeMode="contain" source={require('../res/images/dashboard-tabbar-icon.png')}/>
             },
         },
     },
@@ -34,7 +35,7 @@ const routeConfiguration = {
         navigationOptions: {
             tabBarLabel: 'Package',
             tabBarIcon: ({ tintColor, focused }) => {
-            return focused ? <Image source={require('../res/images/package-tabbar-icon.png')}/> :
+            return focused ? <Image source={require('../res/images/package-tabbar-active-icon.png')}/> :
                 <Image resizeMode="contain" source={require('../res/images/package-tabbar-icon.png')}/>
             },
         },
@@ -44,7 +45,7 @@ const routeConfiguration = {
         navigationOptions: {
             tabBarLabel: 'Instruction',
             tabBarIcon: ({ tintColor, focused }) => {
-                return focused ? <Image source={require('../res/images/instruction-tabbar-icon.png')}/> :
+                return focused ? <Image source={require('../res/images/instruction-tabbar-active-icon.png')}/> :
                     <Image resizeMode="contain" source={require('../res/images/instruction-tabbar-icon.png')}/>
             },
         },
@@ -54,7 +55,7 @@ const routeConfiguration = {
         navigationOptions: {
             tabBarLabel: 'Location',
             tabBarIcon: ({ tintColor, focused }) => {
-                return focused ? <Image source={require('../res/images/location-tabbar-icon.png')}/> :
+                return focused ? <Image source={require('../res/images/location-tabbar-active-icon.png')}/> :
                     <Image resizeMode="contain" source={require('../res/images/location-tabbar-icon.png')}/>
             },
         },
@@ -64,7 +65,7 @@ const routeConfiguration = {
         navigationOptions: {
             tabBarLabel: 'Settings',
             tabBarIcon: ({ tintColor, focused }) => {
-                return focused ? <Image source={require('../res/images/settings-tabbar-icon.png')}/> :
+                return focused ? <Image source={require('../res/images/settings-tabbar-active-icon.png')}/> :
                     <Image resizeMode="contain" source={require('../res/images/settings-tabbar-icon.png')}/>
             },
         },
@@ -79,7 +80,7 @@ const tabBarConfiguration = {
         activeTintColor: Colors.green,  // tint color is passed to text and icons (if enabled) on the tab bar
         inactiveTintColor: Colors.lightGrey,
 
-        activeBackgroundColor: Colors.tmp, // background color is for the tab component
+        activeBackgroundColor: Colors.white,
         inactiveBackgroundColor: Colors.white,
 
         style: {
@@ -96,12 +97,32 @@ const tabBarConfiguration = {
 }
 export const TabBarNavigator = TabNavigator(routeConfiguration,tabBarConfiguration);
 
+
+
 class TabNav extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            initialized: false
+        };
+    }
+    componentWillMount() {
+        DeviceStore.loadUserData().then(data => {
+            if(data && data.token) {
+                return this.props.isValidToken(data.token);
+            } else {
+                return DeviceStore.saveUserData(null);
+            }
+        }).then(() => {
+            this.setState({initialized: true})
+        }).catch(() => {
+            this.setState({initialized: true})
+        })
     }
     render() {
+        if(!this.state.initialized) {
+            <Spinner />;
+        }
         const { dispatch, navigationState } = this.props;
         return (
             <TabBarNavigator
@@ -120,4 +141,9 @@ const mapStateToProps = state => ({
     navigationState: state.Nav,
 });
 
-export default connect(mapStateToProps)(TabNav);
+const mapDispatchToProps = dispatch => ({
+    isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken({token})),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabNav);
+

@@ -1,20 +1,19 @@
 'use strict'
-import React, {Component} from 'react';
-
-import {connect} from 'react-redux';
-
-import {addNavigationHelpers, StackNavigator} from 'react-navigation';
+import React from 'react';
+import {StackNavigator} from 'react-navigation';
 import Routes from './Routes'
 
 import LoginScreen from '../screens/LoginScreen';
 import DashboardScreen from '../screens/DashboardScreen';
-import PackageScreen from '../screens/PackageScreen';
-import Solution from '../screens/SolutionScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import BookScreen from '../screens/BookScreen';
 import {Layouts, Colors} from '../styles/BaseStyles'
 
 const routeConfiguration = {
     Dashboard: {screen: DashboardScreen},
     Login: {screen: LoginScreen},
+    Register: {screen: RegisterScreen},
+    Book: {screen: BookScreen}
 }
 const stackNavigatorConfiguration = {
     initialRouteName: Routes.Dashboard,
