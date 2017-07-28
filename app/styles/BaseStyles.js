@@ -1,20 +1,23 @@
 export const Colors = {
     pureBlack: '#000000',
     black: '#222222',
-    tmp: '#dddddd',
+
+    white: '#ffffff',
+
     lightGrey: "#8e8e93",
     grey: "#eeeeee",
-    white: '#ffffff',
+
+
     lightGreen: "#51B9B3",
-    green: '#2f9d96',
+    green: '#3BA9A2',
     deepGreen: '#328F88',
+
     red: "#d00000",
     transparent: 'rgba(0, 0, 0, 0)',
 
     textBlack: "rgba(0, 0, 0, 0.87)",
     textGrey: "rgba(0, 0, 0, 0.54)",
     textWhite: "rgba(255, 255, 255, 0.8)",
-
 };
 
 

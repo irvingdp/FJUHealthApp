@@ -3,23 +3,19 @@ import ReduxNav from '../redux/Nav'
 import Routes from '../navigation/Routes';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {
-    Button,
-    StyleSheet,
     Text,
     View,
     Image,
-    ActivityIndicator
 } from 'react-native';
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton';
 import LabelTextInput from '../componenets/LabelTextInput';
 import Spinner from '../componenets/Spinner'
-import ErrorMessage from "../componenets/ErrorMessage";
-import Header from "../componenets/Header";
+import ErrorMessage from '../componenets/ErrorMessage';
+import Header from '../componenets/Header'
 
-class LoginScreen extends Component {
+class RegisterScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,7 +34,7 @@ class LoginScreen extends Component {
         }
     }
     static navigationOptions = {
-        title: 'Login',
+        title: 'Register',
         tabBarVisible: false,
         header: null
     };
@@ -46,7 +42,7 @@ class LoginScreen extends Component {
         let valid = !!this.state.formData.email && !!this.state.formData.password;
 
         if(valid) {
-            this.props.login(this.state.formData)
+            this.props.register(this.state.formData)
         } else {
             this.setState({
                 validation:{
@@ -58,7 +54,6 @@ class LoginScreen extends Component {
     }
     render() {
         return (
-
             <View style={{flex: 1, justifyContent: "space-between"}}>
                 {this.props.isFetching ? <Spinner /> : null}
                 <Header/>
@@ -70,7 +65,15 @@ class LoginScreen extends Component {
                     paddingTop: 40,
                     backgroundColor: Colors.lightGreen
                 }}>
-                    <LabelTextInput labelText={"Email Address"}
+                    <Text style={[Texts.Font_17_600, {
+                        color: Colors.white,
+                    }]}>Create A New Account</Text>
+                    <Text style={[Texts.Font_14_400, {
+                        color: Colors.white,
+                        marginTop: 12
+                    }]}>Schedule an appointment, get reminders, see your check up report and more.</Text>
+                    <LabelTextInput style={{marginTop: 25}}
+                                    labelText={"Email Address"}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -116,22 +119,22 @@ class LoginScreen extends Component {
                             <Text style={[Texts.Font_17_600, {
                                 color: Colors.green,
                                 textAlign: "center"
-                            }]}>Login</Text>
+                            }]}>Register</Text>
                         </View>
                     </LockButton>
-                    <Text style={[Texts.Font_14_400, {
+
+                    <Text style={[Texts.Font_13_400, {
                         marginTop: 15,
-                        color: Colors.white,
-                        textAlign: "center",
-                        textDecorationLine: "underline"
-                    }]}
-                      onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}
-                    >Forgot your password?</Text>
+                        color: Colors.textWhite,
+                    }]}>
+                        By registering, you agree to our <Text style={{textDecorationLine: "underline"}} onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}>Terms & conditions</Text>
+                    </Text>
+
                 </View>
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        I don't have an account. <Text style={Texts.Font_14_900} onPress={() => this.props.navigate({routeName: Routes.Register})}>Register</Text>
+                        Already have an account? <Text style={Texts.Font_14_900} onPress={() => this.props.navigate({routeName: Routes.Login})}>Login</Text>
                     </Text>
                 </View>
             </View>
@@ -142,12 +145,12 @@ class LoginScreen extends Component {
 const mapStateToProps = state => ({
     isLoggedIn: state.Auth.isLoggedIn,
     isFetching: state.Auth.isFetching,
-    error: state.Auth.loginError,
+    error: state.Auth.registerError,
 });
 
 const mapDispatchToProps = dispatch => ({
-    login: ({email, password}) => dispatch(ReduxAuth.ActionCreator.login({email, password})),
+    register: ({email, password}) => dispatch(ReduxAuth.ActionCreator.register({email, password})),
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);

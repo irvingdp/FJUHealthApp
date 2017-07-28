@@ -30,7 +30,6 @@ class DashboardScreen extends Component {
     static propTypes = {
         isLoggedIn: PropTypes.bool.isRequired,
     };
-    //TODO: Ivan replace the cal img
     render() {
         DeviceStore.loadUserData().then(data => {
             this.setState({token: data.token})
@@ -38,7 +37,7 @@ class DashboardScreen extends Component {
         return (
             <View style={[Layouts.centerLayout]}>
                 <Image
-                    source={require('../res/images/cal.png')}
+                    source={require('../res/images/dashboard-calendar.png')}
                     resizeMode={"contain"}
                 />
                 <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>No Appointment Yet!</Text>
@@ -63,7 +62,8 @@ class DashboardScreen extends Component {
                         }]}>Book Now</Text>
                     </View>
                 </LockButton>
-                <Text style={{marginTop: 50}}>{this.state.token}</Text>
+                <Text style={{marginTop: 50}}>just for test</Text>
+                <Text>{this.state.token}</Text>
             </View>
         )
     }
