@@ -64,18 +64,18 @@ let Reducer = (state = initialState, action) => {
             break;
 
 
-        /*
+
         case ActionType.LOGOUT:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.reset({
                     index: 0,
                     actions: [
-                        NavigationActions.navigate({ routeName: 'Dashboard'}),
+                        NavigationActions.navigate({ routeName: Routes.Dashboard}),
                     ]
                 }),
                 state);
             break;
-        */
+
         default:
             nextState = TabBarNavigator.router.getStateForAction(action,
                 state);

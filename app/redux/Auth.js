@@ -128,8 +128,9 @@ let ActionCreator = {
     logout() {
         return function (dispatch) {
             DomainCommon.clearAPIToken();
-            dispatch({type: ActionType.LOGOUT});
-            return DeviceStore.saveUserData(null);
+            DeviceStore.saveUserData(null).then(()=>{
+                return dispatch({type: ActionType.LOGOUT})
+            })
         }
     },
 };

@@ -14,6 +14,7 @@ import {Layouts, Colors, Texts} from '../styles/BaseStyles'
 import DeviceStore from '../DeviceStore'
 
 import LockButton from '../componenets/LockButton';
+import LogoutButton from '../componenets/LogoutButton';
 import Spinner from '../componenets/Spinner'
 import ReduxAuth from '../redux/Auth'
 
@@ -23,10 +24,12 @@ class DashboardScreen extends Component {
         super(props);
         this.state = {
             initialized: false,
+            token: "",
         }
     }
     static navigationOptions = {
         title: AppLabels.DashboardScreen.title,
+        headerRight: <LogoutButton />
 
     };
     componentWillMount() {
@@ -43,7 +46,9 @@ class DashboardScreen extends Component {
             return(<Spinner />)
         }
         DeviceStore.loadUserData().then(data => {
-            this.setState({token: data.token})
+            if(data && data.token) {
+                this.setState({token: data.token})
+            }
         });
         return (
             <View style={[Layouts.centerLayout]}>
@@ -73,8 +78,8 @@ class DashboardScreen extends Component {
                         }]}>Book Now</Text>
                     </View>
                 </LockButton>
-                <Text style={{marginTop: 50}}>just for test</Text>
-                <Text>{this.state.token}</Text>
+                {this.state.token ? <Text style={{marginTop: 50}}>just for test</Text> : null}
+                {this.state.token ? <Text>{this.state.token}</Text> : null}
             </View>
         )
     }
