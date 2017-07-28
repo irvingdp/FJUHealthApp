@@ -9,7 +9,7 @@ let getNextNavigateRoute = (route, state) => {
     let nextRouteName = route && route.routeName;
     let nextRoute = {...route};
     switch (nextRouteName) {
-        case "Book":
+        case Routes.Book:
             if(!state.Auth.isLoggedIn) {
                 nextRoute = {
                     ...route,
@@ -31,11 +31,12 @@ let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
         case ActionType.NAVIGATE:
-            //let nextRoute = getNextNavigateRoute(action.data, action.state);
+            let nextRoute = getNextNavigateRoute(action.data, action.state);
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate(action.data),
+                NavigationActions.navigate(nextRoute),
                 state);
             break;
+
         case ActionType.BACK:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.back(),
@@ -43,17 +44,26 @@ let Reducer = (state = initialState, action) => {
             );
             break;
 
-        case ActionType.LOGIN_SUCCESS:
+        case ActionType.NAVIGATE_REPLACE:
+            //TODO: Is this a correct way to replace the route?
+            let currentTabNav = state.routes[state.index];
+            currentTabNav.routes.pop(); // pop the current route
+            currentTabNav.index = currentTabNav.index - 1;
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.back(),
-                state);
+                NavigationActions.navigate(action.data),
+                state
+            );
             break;
 
+        case ActionType.LOGIN_SUCCESS:
         case ActionType.REGISTER_SUCCESS:
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate({routeName: Routes.Dashboard}),
-                state);
+                NavigationActions.back(),
+                state
+            );
             break;
+
+
         /*
         case ActionType.LOGOUT:
             nextState = TabBarNavigator.router.getStateForAction(
@@ -75,6 +85,15 @@ let Reducer = (state = initialState, action) => {
 };
 
 let ActionCreator = {
+    replace(route) {
+        return function (dispatch, getState) {
+            return dispatch({
+                type: ActionType.NAVIGATE_REPLACE,
+                data: route,
+                state: getState(),
+            });
+        }
+    },
     navigate(route) {
         return function (dispatch, getState) {
             return dispatch({

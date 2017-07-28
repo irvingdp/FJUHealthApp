@@ -3,7 +3,6 @@ import ReduxNav from '../redux/Nav'
 import Routes from '../navigation/Routes';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
 import {
     Button,
     StyleSheet,
@@ -131,7 +130,7 @@ class LoginScreen extends Component {
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        I don't have an account. <Text style={Texts.Font_14_900} onPress={() => this.props.navigate({routeName: Routes.Register})}>Register</Text>
+                        I don't have an account. <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Register})}>Register</Text>
                     </Text>
                 </View>
             </View>
@@ -148,6 +147,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     login: ({email, password}) => dispatch(ReduxAuth.ActionCreator.login({email, password})),
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    replace: (route) => dispatch(ReduxNav.ActionCreator.replace(route)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

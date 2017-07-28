@@ -9,28 +9,39 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import Routes from '../navigation/Routes';
-import PropTypes from 'prop-types';
 import AppLabels from '../AppLabels';
 import {Layouts, Colors, Texts} from '../styles/BaseStyles'
 import DeviceStore from '../DeviceStore'
 
 import LockButton from '../componenets/LockButton';
+import Spinner from '../componenets/Spinner'
+import ReduxAuth from '../redux/Auth'
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
-
+        this.state = {
+            initialized: false,
+        }
     }
     static navigationOptions = {
         title: AppLabels.DashboardScreen.title,
 
     };
-    static propTypes = {
-        isLoggedIn: PropTypes.bool.isRequired,
-    };
+    componentWillMount() {
+        DeviceStore.loadUserData().then(data => {
+            if(data && data.token) {
+                return this.props.isValidToken(data.token);
+            }
+        }).then(() => {
+            this.setState({initialized: true})
+        })
+    }
     render() {
+        if(!this.state.initialized) {
+            return(<Spinner />)
+        }
         DeviceStore.loadUserData().then(data => {
             this.setState({token: data.token})
         });
@@ -74,6 +85,7 @@ const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken({token})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);

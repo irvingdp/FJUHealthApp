@@ -4,7 +4,6 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import ReduxNav from '../redux/Nav'
 import {connect} from 'react-redux';
 
-import PropTypes from 'prop-types';
 import Routes from '../navigation/Routes'
 import {Layouts, Colors} from '../styles/BaseStyles'
 

@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addNavigationHelpers, TabNavigator, TabBarBottom, } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import AppLabels from '../AppLabels';
+import {addNavigationHelpers, TabNavigator } from 'react-navigation';
 
 // Navigators
 import {DashboardStackNavigator} from './DashboardNav'
@@ -15,9 +13,6 @@ import {
 } from 'react-native';
 
 import {Colors} from '../styles/BaseStyles'
-import DeviceStore from '../DeviceStore'
-import ReduxAuth from '../redux/Auth'
-import Spinner from '../componenets/Spinner'
 
 const routeConfiguration = {
     Dashboard: {
@@ -97,32 +92,8 @@ const tabBarConfiguration = {
 }
 export const TabBarNavigator = TabNavigator(routeConfiguration,tabBarConfiguration);
 
-
-
 class TabNav extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            initialized: false
-        };
-    }
-    componentWillMount() {
-        DeviceStore.loadUserData().then(data => {
-            if(data && data.token) {
-                return this.props.isValidToken(data.token);
-            } else {
-                return DeviceStore.saveUserData(null);
-            }
-        }).then(() => {
-            this.setState({initialized: true})
-        }).catch(() => {
-            this.setState({initialized: true})
-        })
-    }
     render() {
-        if(!this.state.initialized) {
-            <Spinner />;
-        }
         const { dispatch, navigationState } = this.props;
         return (
             <TabBarNavigator
@@ -141,9 +112,5 @@ const mapStateToProps = state => ({
     navigationState: state.Nav,
 });
 
-const mapDispatchToProps = dispatch => ({
-    isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken({token})),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TabNav);
+export default connect(mapStateToProps, null)(TabNav);
 

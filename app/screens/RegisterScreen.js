@@ -42,7 +42,7 @@ class RegisterScreen extends Component {
         let valid = !!this.state.formData.email && !!this.state.formData.password;
 
         if(valid) {
-            this.props.register(this.state.formData)
+            this.props.register(this.state.formData);
         } else {
             this.setState({
                 validation:{
@@ -134,7 +134,7 @@ class RegisterScreen extends Component {
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        Already have an account? <Text style={Texts.Font_14_900} onPress={() => this.props.navigate({routeName: Routes.Login})}>Login</Text>
+                        Already have an account? <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Login})}>Login</Text>
                     </Text>
                 </View>
             </View>
@@ -151,6 +151,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     register: ({email, password}) => dispatch(ReduxAuth.ActionCreator.register({email, password})),
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    replace: (route) => dispatch(ReduxNav.ActionCreator.replace(route)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreen);
