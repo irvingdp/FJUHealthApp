@@ -93,12 +93,8 @@ let ActionCreator = {
             return UserService.isValidToken(token).then(() => {
                 return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: true}});
             }).catch(err => {
-                if(err.status === 499) {
-                    DeviceStore.saveUserData({token: err.token}); //set new token
-                    return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: true}});
-                } else {
-                    return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
-                }
+                DeviceStore.saveUserData(null);
+                return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
             })
         }
     },

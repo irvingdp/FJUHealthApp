@@ -24,12 +24,10 @@ const domainCommon = {
                 resolve(response.json().catch(()=> {
                         return {}
                 }));
-            } else if(response.status === 499) {
-                response.json().then(function (data) {
-                    apiToken = data.token;
-                    reject({...data, status: response.status});
-                })
             } else {
+                if(response.status === 401) {
+                    apiToken = undefined;
+                }
                 response.json().then(function (data) {
                     reject({...data, status: response.status});
                 }).catch(function () {
