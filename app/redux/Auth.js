@@ -87,16 +87,18 @@ let Reducer = (state = initialAuthState, action) => {
 };
 
 let ActionCreator = {
-    isValidToken({token}) {
+    isValidToken(token) {
         return function (dispatch) {
             dispatch({type: ActionType.TOKEN_CHECKING});
-            return UserService.isValidToken({token}).then(json => {
-                if(!json.valid){
-                    DeviceStore.saveUserData(null);
-                }
-                return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: json.valid}});
+            return UserService.isValidToken(token).then(() => {
+                return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: true}});
             }).catch(err => {
-                return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
+                if(err.status === 499) {
+                    DeviceStore.saveUserData({token: err.token}); //set new token
+                    return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: true}});
+                } else {
+                    return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
+                }
             })
         }
     },
@@ -104,7 +106,7 @@ let ActionCreator = {
         return function (dispatch) {
             dispatch({type: ActionType.LOGGING});
             return UserService.login({email, password}).then(json => {
-                return DeviceStore.saveUserData(json);
+                return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
                 return dispatch({type: ActionType.LOGIN_SUCCESS});
             }).catch(err => {
@@ -116,7 +118,7 @@ let ActionCreator = {
         return function (dispatch) {
             dispatch({type: ActionType.REGISTERING});
             return UserService.register({email, password}).then(json => {
-                return DeviceStore.saveUserData(json);
+                return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
                 return dispatch({type: ActionType.REGISTER_SUCCESS});
             }).catch(err => {

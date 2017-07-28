@@ -92,7 +92,7 @@ const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
-    isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken({token})),
+    isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken(token)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);

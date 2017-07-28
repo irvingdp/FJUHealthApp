@@ -6,7 +6,7 @@ const UserService = {
         return new Promise((resolve, reject) => {
             return DomainCommon.fetchPost(endPoint, {email, password}, resolve, reject);
         }).then((data) => {
-            DomainCommon.setAPIToken({token: data.token});
+            DomainCommon.setAPIToken(data.token);
             return data;
         });
     },
@@ -15,18 +15,16 @@ const UserService = {
         return new Promise((resolve, reject) => {
             return DomainCommon.fetchPost(endPoint, {email, password}, resolve, reject);
         }).then((data) => {
-            DomainCommon.setAPIToken({token: data.token});
+            DomainCommon.setAPIToken(data.token);
             return data;
         });
     },
-    isValidToken: ({token} = {}) => {
+    isValidToken: (token) => {
+        DomainCommon.setAPIToken(token);
         let endPoint = DomainCommon.buildAPIUrl() + "isValidToken";
         return new Promise((resolve, reject) => {
             return DomainCommon.fetchPost(endPoint, {token}, resolve, reject);
-        }).then((data) => {
-            data.valid && DomainCommon.setAPIToken({token});
-            return data;
-        });
+        })
     },
 };
 
