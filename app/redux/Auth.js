@@ -96,6 +96,7 @@ let ActionCreator = {
             }).then(() => {
                 return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS});
             }).catch(err => {
+                //TODO: Ivan: all failed action not return promise.reject , the view(caller) will not aware it(even catch).
                 return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
             })
         }
