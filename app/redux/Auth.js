@@ -18,7 +18,7 @@ let Reducer = (state = initialAuthState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                isLoggedIn: true,
+                isLoggedIn: action.data.isLoggedIn,
                 checkingTokenError: null,
             };
         case ActionType.TOKEN_CHECKING_FAIL:
@@ -28,6 +28,7 @@ let Reducer = (state = initialAuthState, action) => {
                 isLoggedIn: false,
                 checkingTokenError: action.error,
             };
+
 
         case ActionType.LOGGING:
             return {
@@ -90,13 +91,11 @@ let ActionCreator = {
         return function (dispatch) {
             dispatch({type: ActionType.TOKEN_CHECKING});
             return UserService.isValidToken({token}).then(json => {
-                if(!json.valid) {
-                    return DeviceStore.saveUserData(null);
+                if(!json.valid){
+                    DeviceStore.saveUserData(null);
                 }
-            }).then(() => {
-                return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS});
+                return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: json.valid}});
             }).catch(err => {
-                //TODO: Ivan: all failed action not return promise.reject , the view(caller) will not aware it(even catch).
                 return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
             })
         }

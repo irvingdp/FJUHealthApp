@@ -39,6 +39,8 @@ class DashboardScreen extends Component {
             }
         }).then(() => {
             this.setState({initialized: true})
+        }).catch(() => {
+            this.setState({initialized: true})
         })
     }
     render() {
