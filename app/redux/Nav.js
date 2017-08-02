@@ -5,11 +5,13 @@ import Routes from '../navigation/Routes'
 
 const initialState = null;
 
+//TODO: back button icon
+//TODO: where to put logout button?
 let getNextNavigateRoute = (route, state) => {
     let nextRouteName = route && route.routeName;
     let nextRoute = {...route};
     switch (nextRouteName) {
-        case Routes.Book:
+        case Routes.BookStep1:
             if(!state.Auth.isLoggedIn) {
                 nextRoute = {
                     ...route,
@@ -18,7 +20,7 @@ let getNextNavigateRoute = (route, state) => {
             } else {
                 nextRoute = {
                     ...route,
-                    routeName: Routes.Book,
+                    routeName: Routes.BookStep1,
                 }
             }
             break;

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton';
-import LabelTextInput from '../componenets/LabelTextInput';
+import LabelInput from '../componenets/LabelInput';
 import Spinner from '../componenets/Spinner'
 import ErrorMessage from "../componenets/ErrorMessage";
 import Header from "../componenets/Header";
@@ -69,7 +69,7 @@ class LoginScreen extends Component {
                     paddingTop: 40,
                     backgroundColor: Colors.lightGreen
                 }}>
-                    <LabelTextInput labelText={"Email Address"}
+                    <LabelInput labelText={"Email Address"}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -83,7 +83,7 @@ class LoginScreen extends Component {
                                     valid={this.state.validation.email}
                                     errorMsg={this.state.errorMsg.email}
                     />
-                    <LabelTextInput style={{marginTop: 25}}
+                    <LabelInput style={{marginTop: 25}}
                                     labelText={"Password"}
                                     textInputProps={{
                                         onChangeText: (text) => {

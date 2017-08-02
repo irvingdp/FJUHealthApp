@@ -8,8 +8,11 @@ const Routes = {
     Register: "Register",
     Login: "Login",
     Profile: "Profile",
-    Book: "Book",
-    ForgotPassword: "ForgotPassword"
+    ForgotPassword: "ForgotPassword",
+
+    BookStep1: "BookStep1",
+    BookStep2: "BookStep2",
+    BookStep3: "BookStep3",
 
 };
 

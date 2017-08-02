@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton';
-import LabelTextInput from '../componenets/LabelTextInput';
+import LabelInput from '../componenets/LabelInput';
 import Spinner from '../componenets/Spinner'
 import ErrorMessage from '../componenets/ErrorMessage';
 import Header from '../componenets/Header'
@@ -72,7 +72,7 @@ class RegisterScreen extends Component {
                         color: Colors.white,
                         marginTop: 12
                     }]}>Schedule an appointment, get reminders, see your check up report and more.</Text>
-                    <LabelTextInput style={{marginTop: 25}}
+                    <LabelInput style={{marginTop: 25}}
                                     labelText={"Email Address"}
                                     textInputProps={{
                                         onChangeText: (text) => {
@@ -87,7 +87,7 @@ class RegisterScreen extends Component {
                                     valid={this.state.validation.email}
                                     errorMsg={this.state.errorMsg.email}
                     />
-                    <LabelTextInput style={{marginTop: 25}}
+                    <LabelInput style={{marginTop: 25}}
                                     labelText={"Password"}
                                     textInputProps={{
                                         onChangeText: (text) => {

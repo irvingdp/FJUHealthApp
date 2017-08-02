@@ -1,5 +1,5 @@
 const currentLanguage = "en-us";
-//TODO: Ivan: make all const text into this file
+//TODO: complete localization , default language is tw
 const Common = {
     "zh-tw": {
         login: "登入",

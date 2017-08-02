@@ -4,6 +4,7 @@ export const Colors = {
 
     white: '#ffffff',
 
+    deepGrey: "#dddddd",
     lightGrey: "#8e8e93",
     grey: "#eeeeee",
 
@@ -18,6 +19,9 @@ export const Colors = {
     textBlack: "rgba(0, 0, 0, 0.87)",
     textGrey: "rgba(0, 0, 0, 0.54)",
     textWhite: "rgba(255, 255, 255, 0.8)",
+
+    inactivePackageGrid: "#F2F2F2",
+
 };
 
 
@@ -90,6 +94,10 @@ export const Texts = {
     Font_18_900: {
         fontSize: 18,
         fontWeight: '900',
+    },
+    Font_20_400: {
+        fontSize: 20,
+        fontWeight: '400',
     },
     Font_20_900: {
         fontSize: 20,

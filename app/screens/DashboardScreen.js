@@ -47,11 +47,7 @@ class DashboardScreen extends Component {
         if(!this.state.initialized) {
             return(<Spinner />)
         }
-        DeviceStore.loadUserData().then(data => {
-            if(data && data.token) {
-                this.setState({token: data.token})
-            }
-        });
+       
         return (
             <View style={[Layouts.centerLayout]}>
                 <Image
@@ -62,7 +58,7 @@ class DashboardScreen extends Component {
                 <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 12}]}>Schedule a medical checkup
                     with us.</Text>
                 <LockButton buttonStyle={{marginTop: 24}}
-                            onPress={() => this.props.navigate({routeName: Routes.Book})}
+                            onPress={() => this.props.navigate({routeName: Routes.BookStep1})}
                 >
                     <View style={{
                         width: 200,
@@ -80,8 +76,7 @@ class DashboardScreen extends Component {
                         }]}>Book Now</Text>
                     </View>
                 </LockButton>
-                {this.state.token ? <Text style={{marginTop: 50}}>just for test</Text> : null}
-                {this.state.token ? <Text>{this.state.token}</Text> : null}
+
             </View>
         )
     }

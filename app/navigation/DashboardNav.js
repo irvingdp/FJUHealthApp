@@ -6,14 +6,18 @@ import Routes from './Routes'
 import LoginScreen from '../screens/LoginScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import BookScreen from '../screens/BookScreen';
+import BookStep1Screen from '../screens/BookStep1Screen';
+import BookStep2Screen from '../screens/BookStep2Screen';
+import BookStep3Screen from '../screens/BookStep3Screen';
 import {Layouts, Colors} from '../styles/BaseStyles'
 
 const routeConfiguration = {
     Dashboard: {screen: DashboardScreen},
     Login: {screen: LoginScreen},
     Register: {screen: RegisterScreen},
-    Book: {screen: BookScreen}
+    BookStep1: {screen: BookStep1Screen},
+    BookStep2: {screen: BookStep2Screen},
+    BookStep3: {screen: BookStep3Screen}
 }
 const stackNavigatorConfiguration = {
     initialRouteName: Routes.Dashboard,
