@@ -13,7 +13,7 @@ const Routes = {
     BookStep1: "BookStep1",
     BookStep2: "BookStep2",
     BookStep3: "BookStep3",
-
+    BookSuccessScreen: "BookSuccessScreen",
 };
 
 export default Routes;

@@ -57,7 +57,6 @@ class LoginScreen extends Component {
     }
     render() {
         return (
-
             <View style={{flex: 1, justifyContent: "space-between"}}>
                 {this.props.isFetching ? <Spinner /> : null}
                 <Header/>

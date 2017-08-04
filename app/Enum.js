@@ -1,6 +1,8 @@
 const GENDER = {
-    MALE : 0,
-    FEMALE : 1,
+    MALE : "male",
+    FEMALE : "female",
 }
-
-export {GENDER}
+const PAYMENT_STATUS = {
+    PAYMENT_PENDING: "paymentPending",
+}
+export {GENDER, PAYMENT_STATUS}

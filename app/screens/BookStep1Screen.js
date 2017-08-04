@@ -1,5 +1,6 @@
-import ReduxAuth from '../redux/Auth'
+import ReduxPackage from '../redux/Package'
 import ReduxNav from '../redux/Nav'
+import ReduxReservation from '../redux/Reservation'
 import Routes from '../navigation/Routes';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -12,112 +13,69 @@ import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import OptionButton from '../componenets/OptionButton'
 import {GENDER} from '../Enum'
-
+import Spinner from '../componenets/Spinner'
 
 class BookStep1Screen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedPackage : "",
+            selectedItem : {},
+            validation: {
+                package: null,
+            }
         };
-        this._packages = [
-            {
-                key: "A1",
-                title: "菁英防癌健檢",
-                gender: GENDER.MALE,
-                price: "NT$100,000",
-                activeColor: "#BFE6F4",
-            },
-            {
-                key: "A2",
-                title: "菁英防癌健檢",
-                gender: GENDER.FEMALE,
-                price: "NT$116,000",
-                activeColor: "#BFE6F4",
-            },
-            {
-                key: "B1",
-                title: "防癌健檢",
-                gender: GENDER.MALE,
-                price: "NT$71,000",
-                activeColor: "#D7EEF7",
-            },
-            {
-                key: "B2",
-                title: "防癌健檢",
-                gender: GENDER.FEMALE,
-                price: "NT$73,000",
-                activeColor: "#D7EEF7",
-            },
-
-            {
-                key: "C1",
-                title: "精準健檢",
-                gender: GENDER.MALE,
-                price: "NT$24,000",
-                activeColor: "#CAE7E5",
-            },
-            {
-                key: "C2",
-                title: "精準健檢",
-                gender: GENDER.FEMALE,
-                price: "NT$27,000",
-                activeColor: "#CAE7E5",
-            },
-        ]
-
-
     }
     static navigationOptions = {
         title: 'Book Appointment',
         tabBarVisible: false,
     };
-
-    grids() {
-        let packages = {};
-        this._packages.forEach((p) => {
-            let priceItem = {
-                key: p.key,
-                price: p.price,
-                activeColor: p.activeColor,
-            };
-            if(!packages[p.title]) {
-                packages[p.title] = {};
-            }
-            packages[p.title][p.gender] = priceItem;
-        });
-
-
+    componentDidMount() {
+        this.props.listPackages();
+    }
+    _createGrids() {
         let grids = [];
-        for(let key in packages) {
-            let pge = packages[key];
-            let gridColor = (this.state.selectedPackage === pge[GENDER.MALE].key || this.state.selectedPackage === pge[GENDER.FEMALE].key) ? pge[GENDER.MALE].activeColor : Colors.inactivePackageGrid;
+        for(let key in this.props.gridData) {
+            let item = this.props.gridData[key];
+            let gridColor = (this.state.selectedItem.id === item[GENDER.MALE].id || this.state.selectedItem.id === item[GENDER.FEMALE].id) ? item[GENDER.MALE].activeColor : Colors.inactivePackageGrid;
             grids.push (
                 <View key={key} style={{flexDirection: "row", height: 173, borderBottomWidth: 1, borderColor: Colors.deepGrey}}>
-                    <View style={{padding: 16,justifyContent: "center", alignItems: "center" ,width: 125,backgroundColor: gridColor}}><Text style={Texts.Font_20_400}>{key}</Text></View>
+                    <View style={{padding: 16,justifyContent: "center", alignItems: "center" ,width: 125,backgroundColor: gridColor}}><Text style={Texts.Font_20_400}>{item[GENDER.MALE].title}</Text></View>
 
                     <View style={{flex: 1,flexDirection: "column", backgroundColor: Colors.white}}>
                         <View style={{flex: 1,flexDirection: "row", padding: 16, alignItems: "center", borderBottomWidth: 1, borderColor: Colors.grey}}>
-                            <OptionButton buttonStyle={{marginRight: 8}} id={pge[GENDER.MALE].key} isSelected={this.state.selectedPackage === pge[GENDER.MALE].key} onPress={id => this.setState({selectedPackage: id})} />
+                            <OptionButton buttonStyle={{marginRight: 8}} value={item[GENDER.MALE]} isSelected={this.state.selectedItem.id === item[GENDER.MALE].id} onPress={i => this.setState({selectedItem: i})} />
                             <Text style={{marginRight: 8}}>男</Text>
-                            <Text style={{marginRight: 8}}>{pge[GENDER.MALE].price}</Text>
+                            <Text style={{marginRight: 8}}>{item[GENDER.MALE].price}</Text>
                         </View>
                         <View style={{flex: 1,flexDirection: "row", padding: 16, alignItems: "center"}}>
-                            <OptionButton buttonStyle={{marginRight: 8}} id={pge[GENDER.FEMALE].key} isSelected={this.state.selectedPackage === pge[GENDER.FEMALE].key} onPress={id => this.setState({selectedPackage: id})} />
+                            <OptionButton buttonStyle={{marginRight: 8}} value={item[GENDER.FEMALE]} isSelected={this.state.selectedItem.id === item[GENDER.FEMALE].id} onPress={i => this.setState({selectedItem: i})} />
                             <Text style={{marginRight: 8}}>女</Text>
-                            <Text style={{marginRight: 8}}>{pge[GENDER.FEMALE].price}</Text>
+                            <Text style={{marginRight: 8}}>{item[GENDER.FEMALE].price}</Text>
                         </View>
                     </View>
-
                 </View>
             )
         }
         return grids;
     }
-
+    _doClientValidation() {
+        let selectedPackage = this.props.packages.find(p => p.id === this.state.selectedItem.id);
+        if(selectedPackage) {
+            this.props.setPackage(selectedPackage);
+            this.props.navigate({routeName: Routes.BookStep2});
+        } else {
+            this.setState({
+                validation:{
+                    package: false,
+                }
+            });
+        }
+    }
     render() {
+        console.log(this.state.selectedItem);
         return (
             <View style={{flex: 1}}>
+                {(this.props.isFetching) ? <Spinner /> : null}
                 <View style={{
                     padding: 16,
                     height: 36,
@@ -130,7 +88,7 @@ class BookStep1Screen extends Component {
                     }}>1. Select Package</Text>
                 </View>
                 <ScrollView style={{flex: 1, flexDirection: "column"}}>
-                    {this.grids()}
+                    {this._createGrids()}
                 </ScrollView>
 
                 <LockButton buttonStyle={{
@@ -138,7 +96,7 @@ class BookStep1Screen extends Component {
                     backgroundColor: Colors.green,
                     justifyContent: "center",
                     alignItems: "center"
-                }}  onPress={() => this.props.navigate({routeName: Routes.BookStep2})}
+                }}  onPress={() => this._doClientValidation()}
                 >
                     <Text  style={{
                         ...Texts.Font_17_600,
@@ -150,11 +108,39 @@ class BookStep1Screen extends Component {
     }
 }
 
+const viewDataTransformer = {
+    grids: (packages) => {
+        let result = {};
+        let colors = {
+            1: "#BFE6F4",
+            2: "#D7EEF7",
+            3: "#CAE7E5",
+        }
+        packages && packages.forEach((p) => {
+            if(!result[p.group]) {
+                result[p.group] = {};
+            }
+            result[p.group][p.gender] = {
+                id: p.id,
+                price: p.displayPrice,
+                activeColor: colors[p.group],
+                title: p.title,
+            };
+        });
+        return result;
+    }
+}
 const mapStateToProps = state => ({
+    isFetching: state.Package.isFetching,
+    packages: state.Package.data,
+    gridData: viewDataTransformer.grids(state.Package.data),
+    error: state.Package.fetchingPackageError,
 });
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    listPackages: () => dispatch(ReduxPackage.ActionCreator.listPackages()),
+    setPackage: (p) => dispatch(ReduxReservation.ActionCreator.setPackage(p)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStep1Screen);

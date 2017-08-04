@@ -1,13 +1,11 @@
 export const Colors = {
     pureBlack: '#000000',
     black: '#222222',
-
     white: '#ffffff',
 
-    deepGrey: "#dddddd",
     lightGrey: "#8e8e93",
     grey: "#eeeeee",
-
+    deepGrey: "#dddddd",
 
     lightGreen: "#51B9B3",
     green: '#3BA9A2',
@@ -19,9 +17,9 @@ export const Colors = {
     textBlack: "rgba(0, 0, 0, 0.87)",
     textGrey: "rgba(0, 0, 0, 0.54)",
     textWhite: "rgba(255, 255, 255, 0.8)",
+    textCalDisabled: "#d9e1e8",
 
     inactivePackageGrid: "#F2F2F2",
-
 };
 
 

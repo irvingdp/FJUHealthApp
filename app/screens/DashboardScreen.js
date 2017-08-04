@@ -38,6 +38,7 @@ class DashboardScreen extends Component {
                 return this.props.isValidToken(data.token);
             }
         }).then(() => {
+            //TODO: load profile data, and pre-fill to step3.
             this.setState({initialized: true})
         }).catch(() => {
             this.setState({initialized: true})

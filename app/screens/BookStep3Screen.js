@@ -1,5 +1,5 @@
-import ReduxAuth from '../redux/Auth'
 import ReduxNav from '../redux/Nav'
+import ReduxReservation from '../redux/Reservation'
 import Routes from '../navigation/Routes';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -12,7 +12,7 @@ import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import LabelInput from '../componenets/LabelInput';
 import OptionButton from '../componenets/OptionButton'
-import {GENDER} from '../Enum'
+import {GENDER, PAYMENT_STATUS} from '../Enum'
 
 class BookStep3Screen extends Component {
     constructor(props) {
@@ -45,15 +45,23 @@ class BookStep3Screen extends Component {
     };
 
     _doClientValidation() {
+        //TODO: back without unmount screen to avoid data input again.
         let valid = !!this.state.formData.name &&
             !!this.state.formData.birthday &&
             !!this.state.formData.phoneNumber &&
             !!this.state.formData.contactAddress;
 
         if(valid) {
-            //TODO: reservation api
-            //TODO: get gender by which package type.
-            //this.props.reservation(this.state.formData);
+            this.props.reserve({
+                name: this.state.formData.name,
+                birthday: this.state.formData.birthday,
+                phoneNumber: this.state.formData.phoneNumber,
+                contactAddress: this.state.formData.contactAddress,
+            }).then(() => {
+                this.props.navigate({routeName: Routes.BookSuccessScreen});
+            }).catch(error => {
+                console.log(error); //TODO: error handle
+            })
         } else {
             this.setState({
                 validation:{
@@ -227,6 +235,7 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    reserve: ({name, birthday, phoneNumber, contactAddress}) => dispatch(ReduxReservation.ActionCreator.reserve({name, birthday, phoneNumber, contactAddress})),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStep3Screen);

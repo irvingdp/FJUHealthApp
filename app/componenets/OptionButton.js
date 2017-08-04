@@ -11,7 +11,7 @@ export default class OptionButton extends Component {
     static propTypes = {
         buttonStyle: React.PropTypes.object,
         onPress: React.PropTypes.func,
-        id: React.PropTypes.any,
+        value: React.PropTypes.object,
     }
     static defaultProps = {
         buttonStyle: {},
@@ -21,7 +21,7 @@ export default class OptionButton extends Component {
         return (
             <TouchableOpacity style={this.props.buttonStyle}
                               onPress={() => {
-                                  this.props.onPress && this.props.onPress(this.props.id);
+                                  this.props.onPress && this.props.onPress(this.props.value);
                               }}
             >
                 {this.props.isSelected ?
