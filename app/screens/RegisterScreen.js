@@ -22,14 +22,17 @@ class RegisterScreen extends Component {
             formData: {
                 email: "",
                 password: "",
+                uid: "",
             },
             validation: {
                 email: true,
                 password: true,
+                uid: true,
             },
             errorMsg: {
                 email: "",
                 password: "",
+                uid: "",
             }
         }
     }
@@ -39,7 +42,7 @@ class RegisterScreen extends Component {
         header: null
     };
     _doClientValidation() {
-        let valid = !!this.state.formData.email && !!this.state.formData.password;
+        let valid = !!this.state.formData.email && !!this.state.formData.password && !!this.state.formData.uid;
 
         if(valid) {
             this.props.register(this.state.formData);
@@ -48,6 +51,7 @@ class RegisterScreen extends Component {
                 validation:{
                     email: !!this.state.formData.email,
                     password: !!this.state.formData.password,
+                    uid: !!this.state.formData.uid,
                 }
             });
         }
@@ -72,6 +76,22 @@ class RegisterScreen extends Component {
                         color: Colors.white,
                         marginTop: 12
                     }]}>Schedule an appointment, get reminders, see your check up report and more.</Text>
+
+                    <LabelInput style={{marginTop: 25}}
+                                labelText={"ID"}
+                                textInputProps={{
+                                    onChangeText: (text) => {
+                                        this.setState({
+                                            formData: {...this.state.formData ,uid: text},
+                                            validation: {...this.state.validation ,uid: !!text}
+                                        });
+                                    },
+                                    value: this.state.formData.uid,
+                                    autoCapitalize: "none",
+                                }}
+                                valid={this.state.validation.uid}
+                                errorMsg={this.state.errorMsg.uid}
+                    />
                     <LabelInput style={{marginTop: 25}}
                                     labelText={"Email Address"}
                                     textInputProps={{
@@ -149,7 +169,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    register: ({email, password}) => dispatch(ReduxAuth.ActionCreator.register({email, password})),
+    register: ({email, password, uid}) => dispatch(ReduxAuth.ActionCreator.register({email, password, uid})),
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     replace: (route) => dispatch(ReduxNav.ActionCreator.replace(route)),
 });

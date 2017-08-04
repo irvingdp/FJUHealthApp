@@ -10,10 +10,10 @@ const UserService = {
             return data;
         });
     },
-    register: ({email, password} = {}) => {
+    register: ({email, password, uid} = {}) => {
         let endPoint = DomainCommon.buildAPIUrl() + "register";
         return new Promise((resolve, reject) => {
-            return DomainCommon.fetchPost(endPoint, {email, password}, resolve, reject);
+            return DomainCommon.fetchPost(endPoint, {email, password, uid}, resolve, reject);
         }).then((data) => {
             DomainCommon.setAPIToken(data.token);
             return data;

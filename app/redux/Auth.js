@@ -110,10 +110,10 @@ let ActionCreator = {
             })
         }
     },
-    register({email, password}) {
+    register({email, password, uid}) {
         return function (dispatch) {
             dispatch({type: ActionType.REGISTERING});
-            return UserService.register({email, password}).then(json => {
+            return UserService.register({email, password, uid}).then(json => {
                 return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
                 return dispatch({type: ActionType.REGISTER_SUCCESS});
