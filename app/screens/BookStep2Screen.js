@@ -76,6 +76,7 @@ class BookStep2Screen extends Component {
                 <Calendar
                     minDate={moment().add(14, 'day').format()}
                     firstDay={1}
+
                     theme={{
                         calendarBackground: Colors.white,
                         textSectionTitleColor: Colors.textBlack,
@@ -85,6 +86,9 @@ class BookStep2Screen extends Component {
                         textDisabledColor: Colors.textCalDisabled,
                         arrowColor: Colors.green,
                         monthTextColor: Colors.green,
+                        textDayFontSize: 16,
+                        textMonthFontSize: 16,
+                        textDayHeaderFontSize: 16,
                     }}
 
                     markedDates={{
