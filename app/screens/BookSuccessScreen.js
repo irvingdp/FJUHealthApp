@@ -33,7 +33,7 @@ class BookSuccessScreen extends Component {
 
         return (
             <View style={{flex: 1,paddingTop: 50, backgroundColor: Colors.white}}>
-                <TouchableOpacity style={{position: "absolute"}} onPress={() => {this.props.navigate({routeName: Routes.Dashboard})}}>
+                <TouchableOpacity style={{position: "absolute"}} onPress={() => {this.props.reset({routeName: Routes.Dashboard})}}>
                     <Image style={{top: 31, left: 15}}
                            source={require('../res/images/green-close-icon.png')}
                            resizeMode={"contain"}/>
@@ -94,7 +94,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
+    reset: (route) => dispatch(ReduxNav.ActionCreator.reset(route)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookSuccessScreen);

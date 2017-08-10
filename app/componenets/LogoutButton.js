@@ -19,7 +19,7 @@ import {connect} from 'react-redux';
             return null
         } else {
             return (
-                <LockButton onPress={() => this.props.logout()}>
+                <LockButton onPress={() => this.props.logout()} buttonStyle={{marginRight: 10}} >
                     <Text>Logout</Text>
                 </LockButton>
             )

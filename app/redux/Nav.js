@@ -2,40 +2,16 @@ import ActionType from './ActionTypes'
 import {NavigationActions} from 'react-navigation';
 import {TabBarNavigator} from '../navigation/TabNav';
 import Routes from '../navigation/Routes'
-
+import NavLogic from '../navigation/NavLogic'
 const initialState = null;
 
-//TODO: back button icon
 //TODO: where to put logout button?
-let getNextNavigateRoute = (route, state) => {
-    let nextRouteName = route && route.routeName;
-    let nextRoute = {...route};
-    switch (nextRouteName) {
-        case Routes.BookStep1:
-            if(!state.Auth.isLoggedIn) {
-                nextRoute = {
-                    ...route,
-                    routeName: Routes.Login,
-                }
-            } else {
-                nextRoute = {
-                    ...route,
-                    routeName: Routes.BookStep1,
-                }
-            }
-            break;
-        default:
-            break;
-    }
-    return nextRoute;
-}
 let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
         case ActionType.NAVIGATE:
-            let nextRoute = getNextNavigateRoute(action.data, action.state);
             nextState = TabBarNavigator.router.getStateForAction(
-                NavigationActions.navigate(nextRoute),
+                NavigationActions.navigate(action.data),
                 state);
             break;
 
@@ -47,7 +23,6 @@ let Reducer = (state = initialState, action) => {
             break;
 
         case ActionType.NAVIGATE_REPLACE:
-            //TODO: Is this a correct way to replace the route?
             let currentTabNav = state.routes[state.index];
             currentTabNav.routes.pop(); // pop the current route
             currentTabNav.index = currentTabNav.index - 1;
@@ -65,14 +40,13 @@ let Reducer = (state = initialState, action) => {
             );
             break;
 
-
-
         case ActionType.LOGOUT:
+        case ActionType.NAVIGATE_RESET:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.reset({
                     index: 0,
                     actions: [
-                        NavigationActions.navigate({ routeName: Routes.Dashboard}),
+                        NavigationActions.navigate(action.data || {routeName: Routes.Dashboard}),
                     ]
                 }),
                 state);
@@ -87,33 +61,40 @@ let Reducer = (state = initialState, action) => {
 };
 
 let ActionCreator = {
+    reset(route) {
+        return function (dispatch) {
+            return dispatch({
+                type: ActionType.NAVIGATE_RESET,
+                data: route,
+            });
+        }
+    },
     replace(route) {
-        return function (dispatch, getState) {
+        return function (dispatch) {
             return dispatch({
                 type: ActionType.NAVIGATE_REPLACE,
                 data: route,
-                state: getState(),
             });
         }
     },
     navigate(route) {
         return function (dispatch, getState) {
+            let nextRoute = NavLogic.getNextNavigateRoute(route, getState());
             return dispatch({
                 type: ActionType.NAVIGATE,
-                data: route,
-                state: getState(),
+                data: nextRoute,
             });
         }
     },
     back() {
-        return function (dispatch, getState) {
+        return function (dispatch) {
             return dispatch({
                 type: ActionType.BACK,
-                state: getState(),
             });
         }
     },
 };
+
 
 export default {ActionCreator, Reducer};
 
