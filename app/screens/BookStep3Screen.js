@@ -7,6 +7,7 @@ import {
     Text,
     View,
     ScrollView,
+    Alert,
 } from 'react-native';
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
@@ -51,18 +52,7 @@ class BookStep3Screen extends Component {
             !!this.state.formData.phoneNumber &&
             !!this.state.formData.contactAddress;
 
-        if(valid) {
-            this.props.reserve({
-                name: this.state.formData.name,
-                birthday: this.state.formData.birthday,
-                phoneNumber: this.state.formData.phoneNumber,
-                contactAddress: this.state.formData.contactAddress,
-            }).then(() => {
-                this.props.navigate({routeName: Routes.BookSuccessScreen});
-            }).catch(error => {
-                console.log(error); //TODO: error handle
-            })
-        } else {
+        if(!valid) {
             this.setState({
                 validation:{
                     name: !!this.state.formData.name,
@@ -72,6 +62,22 @@ class BookStep3Screen extends Component {
                 }
             });
         }
+        return valid;
+    }
+
+    _submit() {
+        this.props.reserve({
+            name: this.state.formData.name,
+            birthday: this.state.formData.birthday,
+            phoneNumber: this.state.formData.phoneNumber,
+            contactAddress: this.state.formData.contactAddress,
+        }).then(() => {
+            if(this.props.reservationError) {
+                Alert.alert("ERROR",this.props.reservationError.message);
+            } else {
+                this.props.navigate({routeName: Routes.BookSuccessScreen});
+            }
+        })
     }
 
     render() {
@@ -219,7 +225,9 @@ class BookStep3Screen extends Component {
                     backgroundColor: Colors.green,
                     justifyContent: "center",
                     alignItems: "center"
-                }} onPress={() => this._doClientValidation()}
+                }} onPress={() => {
+                    this._doClientValidation() && this._submit()
+                }}
                 >
                     <Text style={{
                         ...Texts.Font_17_600,
@@ -231,7 +239,9 @@ class BookStep3Screen extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    reservationError:  state.Reservation.reservationError,
+});
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
