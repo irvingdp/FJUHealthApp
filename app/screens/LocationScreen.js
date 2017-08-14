@@ -36,18 +36,23 @@ class LocationScreen extends Component {
     _goDirection() {
         let googleMapUrl = 'comgooglemaps://?daddr=' + ADDRESS + '&directionsmode=driving';
         let appleMapUrl = 'http://maps.apple.com/?daddr=' + ADDRESS;
+        let webGoogleMapUrl = 'https://maps.google.com/maps?saddr=Current+Location&daddr=' + ADDRESS + '&dirflg=d';
 
-        //default map app prior : 1.google map 2.apple map
-
+        //map application prior : google map app > web google map > apple map app
         Linking.canOpenURL(googleMapUrl).then(supported => {
             if (supported)
                 Linking.openURL(googleMapUrl);
             else
-                return Linking.canOpenURL(appleMapUrl)
+                return Linking.canOpenURL(webGoogleMapUrl)
         }).then(supported => {
             if (supported)
+                Linking.openURL(webGoogleMapUrl);
+            else
+                return Linking.canOpenURL(appleMapUrl)
+        }).then((supported) => {
+            if (supported)
                 Linking.openURL(appleMapUrl);
-        }).catch(err => 0);
+        }).catch(() => 0)
     }
 
     render() {
