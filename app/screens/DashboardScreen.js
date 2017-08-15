@@ -17,6 +17,7 @@ import LockButton from '../componenets/LockButton';
 import LogoutButton from '../componenets/LogoutButton';
 import Spinner from '../componenets/Spinner'
 import ReduxAuth from '../redux/Auth'
+import ReduxDashboard from '../redux/Dashboard'
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
@@ -38,17 +39,12 @@ class DashboardScreen extends Component {
                 return this.props.isValidToken(data.token);
             }
         }).then(() => {
-            //TODO: load profile data, and pre-fill to step3.
             this.setState({initialized: true})
         }).catch(() => {
             this.setState({initialized: true})
         })
     }
-    render() {
-        if(!this.state.initialized) {
-            return(<Spinner />)
-        }
-       
+    createAppointmentView() {
         return (
             <View style={[Layouts.centerLayout]}>
                 <Image
@@ -81,6 +77,13 @@ class DashboardScreen extends Component {
             </View>
         )
     }
+    render() {
+        if(!this.state.initialized) {
+            return(<Spinner />)
+        }
+        return this.createAppointmentView();
+
+    }
 }
 
 
@@ -89,6 +92,7 @@ const mapStateToProps = state => ({isLoggedIn: state.Auth.isLoggedIn});
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken(token)),
+    loadDashboard: (token) => dispatch(ReduxDashboard.ActionCreator.loadDashboard()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);

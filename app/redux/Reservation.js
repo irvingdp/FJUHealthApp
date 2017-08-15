@@ -29,6 +29,7 @@ let Reducer = (state = initialState, action) => {
                 isFetching: false,
                 reservationError: null,
             };
+
         case ActionType.RESERVE_FAIL:
             return {
                 ...state,

@@ -2,6 +2,7 @@ import ActionType from './ActionTypes'
 import UserService from "../domain/User"
 import DomainCommon from '../domain/Common'
 import DeviceStore from '../DeviceStore'
+import ReduxDashboard from './Dashboard'
 
 const initialAuthState = {isLoggedIn: false};
 
@@ -28,8 +29,6 @@ let Reducer = (state = initialAuthState, action) => {
                 isLoggedIn: false,
                 checkingTokenError: action.error,
             };
-
-
         case ActionType.LOGGING:
             return {
                 ...state,
@@ -51,8 +50,6 @@ let Reducer = (state = initialAuthState, action) => {
                 isLoggedIn: false,
                 loginError: action.error,
             };
-
-
         case ActionType.REGISTERING:
             return {
                 ...state,
@@ -74,7 +71,6 @@ let Reducer = (state = initialAuthState, action) => {
                 isLoggedIn: false,
                 registerError: action.error,
             };
-
         case ActionType.LOGOUT:
             return {
                 ...state,
@@ -92,6 +88,8 @@ let ActionCreator = {
             dispatch({type: ActionType.TOKEN_CHECKING});
             return UserService.isValidToken(token).then(() => {
                 return dispatch({type: ActionType.TOKEN_CHECKING_SUCCESS, data: {isLoggedIn: true}});
+            }).then(() => {
+                return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
             }).catch(err => {
                 DeviceStore.saveUserData(null);
                 return dispatch({type: ActionType.TOKEN_CHECKING_FAIL, error: err})
@@ -105,6 +103,8 @@ let ActionCreator = {
                 return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
                 return dispatch({type: ActionType.LOGIN_SUCCESS});
+            }).then(() => {
+                return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
             }).catch(err => {
                 return dispatch({type: ActionType.LOGIN_FAIL, error: err})
             })
@@ -117,6 +117,8 @@ let ActionCreator = {
                 return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
                 return dispatch({type: ActionType.REGISTER_SUCCESS});
+            }).then(() => {
+                return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
             }).catch(err => {
                 return dispatch({type: ActionType.REGISTER_FAIL, error: err})
             })
@@ -125,7 +127,7 @@ let ActionCreator = {
     logout() {
         return function (dispatch) {
             DomainCommon.clearAPIToken();
-            DeviceStore.saveUserData(null).then(()=>{
+            DeviceStore.saveUserData(null).then(() => {
                 return dispatch({type: ActionType.LOGOUT})
             })
         }
