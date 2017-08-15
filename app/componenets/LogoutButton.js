@@ -10,10 +10,6 @@ import {connect} from 'react-redux';
     constructor(props) {
         super(props);
     }
-
-    static propTypes = {}
-    static defaultProps = {}
-
     render() {
         if (!this.props.isLoggedIn) {
             return null

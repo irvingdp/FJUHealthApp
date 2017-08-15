@@ -10,11 +10,8 @@ import {
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import ReduxNav from '../redux/Nav'
+import {GENDER} from '../Enum'
 
-const gender = {
-    female: "女",
-    male: "男",
-}
 class BookSuccessScreen extends Component {
     constructor(props) {
         super(props);
@@ -54,7 +51,7 @@ class BookSuccessScreen extends Component {
                         backgroundColor: Colors.greyf3,
                         borderRadius: 8,
                     }}>
-                        <Text style={[Texts.Font_20_400, {color: Colors.textBlack}]}>{selectedPackage.title + " (" + gender[selectedPackage.gender] + ")"}</Text>
+                        <Text style={[Texts.Font_20_400, {color: Colors.textBlack}]}>{selectedPackage.title + " (" + GENDER[selectedPackage.gender.toUpperCase()] + ")"}</Text>
                         <Text style={[Texts.Font_14_400, {color: Colors.textBlack, marginTop: 8}]}>{reservation.reserveDate.format("DD MMM YYYY, A hh:mm")}</Text>
                     </View>
                 </View>

@@ -4,7 +4,6 @@ import PackageService from "../domain/Package"
 const initialState = {data: null};
 
 let Reducer = (state = initialState, action) => {
-    let viewData = {};
     switch (action.type) {
         case ActionType.PACKAGE_FETCHING:
             return {
@@ -16,15 +15,20 @@ let Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                data: action.data,
+                data: {...action.data},
                 fetchingPackageError: null,
-                viewData,
             };
         case ActionType.PACKAGE_FETCHING:
             return {
                 ...state,
                 isFetching: false,
                 fetchingPackageError: action.error,
+            };
+
+        case ActionType.DASHBOARD_SUCCESS:
+            return {
+                ...state,
+                data: action.data.package
             };
         default:
             return state;

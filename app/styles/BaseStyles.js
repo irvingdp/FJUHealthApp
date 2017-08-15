@@ -7,16 +7,19 @@ export const Colors = {
     grey: "#eeeeee",
     deepGrey: "#dddddd",
     greyf3: "#f3f3f3",
+    greye7: "#e7e7e7",
 
     lightGreen: "#51B9B3",
     green: '#3BA9A2',
     deepGreen: '#328F88',
+    lineGreen: "#48b7b1",
 
     red: "#d00000",
     transparent: 'rgba(0, 0, 0, 0)',
 
     textBlack: "rgba(0, 0, 0, 0.87)",
     textGrey: "rgba(0, 0, 0, 0.54)",
+    textLightGrey: "rgba(0, 0, 0, 0.24)",
     textWhite: "rgba(255, 255, 255, 0.8)",
     textCalDisabled: "#d9e1e8",
 

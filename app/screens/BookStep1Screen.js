@@ -29,9 +29,6 @@ class BookStep1Screen extends Component {
         title: 'Book Appointment',
         tabBarVisible: false,
     };
-    componentDidMount() {
-        this.props.listPackages();
-    }
     _createGrids() {
         let grids = [];
         for(let key in this.props.gridData) {
@@ -75,7 +72,6 @@ class BookStep1Screen extends Component {
         console.log(this.state.selectedItem);
         return (
             <View style={{flex: 1}}>
-                {(this.props.isFetching) ? <Spinner /> : null}
                 <View style={{
                     padding: 16,
                     height: 36,
@@ -131,7 +127,6 @@ const viewDataTransformer = {
     }
 }
 const mapStateToProps = state => ({
-    isFetching: state.Package.isFetching,
     packages: state.Package.data,
     gridData: viewDataTransformer.grids(state.Package.data),
     error: state.Package.fetchingPackageError,
@@ -139,7 +134,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
-    listPackages: () => dispatch(ReduxPackage.ActionCreator.listPackages()),
     setPackage: (p) => dispatch(ReduxReservation.ActionCreator.setPackage(p)),
 });
 

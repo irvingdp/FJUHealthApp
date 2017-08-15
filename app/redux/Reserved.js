@@ -5,10 +5,16 @@ let Reducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionType.DASHBOARD_SUCCESS:
             return {
-                ...action.data.reservation
+                ...state,
+                data: action.data.reservation,
             };
+
         case ActionType.LOGOUT:
-            return {};
+            return {
+                ...state,
+                data: null,
+            };
+
         default:
             return state;
     }
