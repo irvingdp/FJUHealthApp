@@ -34,7 +34,6 @@ export default class DashboardCard extends Component {
     render() {
         let imageSource = null, topLineColor = null, bottomLineColor = null;
 
-        //TODO: the icon need Fera help to export.
         switch (this.props.type) {
             case DashboardCard.TYPE.FINISH:
                 imageSource = require('../../res/images/card-finish-icon.png');
@@ -62,7 +61,7 @@ export default class DashboardCard extends Component {
                         backgroundColor: topLineColor,
                         transform: [{translateX: 2}]
                     }}/>
-                    <Image style={{zIndex: 99, marginRight: 3, position: "absolute", top: 18}} resizeMode="contain" source={imageSource}/>
+                    <Image style={{zIndex: 99, marginRight: 3, position: "absolute", top: 22, transform: [{translateX: 1}]}} resizeMode="contain" source={imageSource}/>
                     <View style={{zIndex: 97, width: 2, backgroundColor: bottomLineColor}}/>
                 </View>
                 <View style={{
