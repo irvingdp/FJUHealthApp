@@ -16,9 +16,11 @@ export default class PaymentCard extends Component {
                 type={this.props.reminder.type}
                 title={this.props.reminder.title}
                 date={this.props.reminder.date}
+                dateFormat={"YYYY-MM-DD HH:MM"}
                 description={this.props.reminder.description}
                 buttonText={this.props.buttonText}
                 onButtonPress={this.props.onButtonPress}
+
             />
         )
     }

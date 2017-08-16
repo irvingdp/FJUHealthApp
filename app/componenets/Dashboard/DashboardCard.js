@@ -18,6 +18,7 @@ export default class DashboardCard extends Component {
         type: React.PropTypes.string,
         title: React.PropTypes.string,
         date: React.PropTypes.string,
+        dateFormat: React.PropTypes.string,
         description: React.PropTypes.string,
         buttonText: React.PropTypes.string,
         onButtonPress: React.PropTypes.func,
@@ -26,6 +27,7 @@ export default class DashboardCard extends Component {
         type: DashboardCard.TYPE.COMING,
         title: null,
         date: null,
+        dateFormat: "YYYY-MM-DD",
         description: null,
         buttonText: null,
         onButtonPress: null,
@@ -76,7 +78,7 @@ export default class DashboardCard extends Component {
                         <Text style={[{color: this.props.type === DashboardCard.TYPE.COMING ? Colors.textLightGrey : Colors.green}, Texts.Font_14_600]}>{this.props.title}</Text>
                         {this.props.date ?
                             <Text
-                                style={[{color: Colors.textLightGrey}, Texts.Font_14_600]}>{moment(this.props.date).format("YYYY-MM-DD")}</Text>
+                                style={[{color: Colors.textLightGrey}, Texts.Font_14_600]}>{moment(this.props.date).format(this.props.dateFormat)}</Text>
                             : null}
                     </View>
                     <View style={{marginTop: 6}}>

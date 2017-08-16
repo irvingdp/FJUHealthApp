@@ -117,43 +117,21 @@ class DashboardScreen extends Component {
                 <PackageCard
                     reserved={this.props.reserved}
                 />
-                <ReminderCard
-                    reminder={{
-                        title: "REMINDER 1",
-                        description: "Please read the Checkup Manual. We will also send you reminders via the app to guide you on pre-examination process.",
-                        type: DashboardCard.TYPE.COMING, //TODO: how to know the type
-                    }}
-                />
-                <ReminderCard
-                    reminder={{
-                        title: "REMINDER 2",
-                        description: "Please take your special meal 1.",
-                        type: DashboardCard.TYPE.COMING, //TODO: how to know the type
-                    }}
-                />
-                <ReminderCard
-                    reminder={{
-                        title: "REMINDER 3",
-                        description: "Please take your special meal 2.",
-                        type: DashboardCard.TYPE.COMING, //TODO: how to know the type
-                    }}
-                />
-                <ReminderCard
-                    reminder={{
-                        title: "REMINDER 4",
-                        description: "Please collect your body waste",
-                        type: DashboardCard.TYPE.COMING, //TODO: how to know the type
-                    }}
-                />
-                <ReminderCard
-                    reminder={{
-                        title: "REMINDER 5",
-                        description: "Please take your medicine at 3-5am to clean your colon. The hospital will give you a reminder call.",
-                        type: DashboardCard.TYPE.COMING, //TODO: how to know the type
-                    }}
-                    buttonText={"Set A Calendar Reminder"}
-                    onButtonPress={() => 0}
-                />
+                {(this.props.reserved.reminder || []).map(reminder => {
+                    return (
+                        <ReminderCard
+                            key={reminder.id}
+                            reminder={{
+                                title: reminder.title,
+                                description: reminder.description,
+                                type: DashboardCard.TYPE.COMING, //TODO: how to know the type
+                                date: reminder.notifyDate,
+                            }}
+                            buttonText= {reminder.title === "REMINDER 5" ? "Set A Calendar Reminder": null}
+                            onButtonPress={reminder.title === "REMINDER 5" ? (()=>{0}) : null} //TODO: how to know reminder 5
+                        />
+                    )
+                })}
                 <CompleteCard
                     reserved={this.props.reserved}
                     type={DashboardCard.TYPE.COMING} //TODO: how to know the type
