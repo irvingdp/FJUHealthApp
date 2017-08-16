@@ -91,7 +91,6 @@ class DashboardScreen extends Component {
     }
 
     createReservedView() {
-        let selectedPackage = this.props.packages[this.props.reserved.package_id_fk];
         return (
             <ScrollView style={{flex: 1, backgroundColor: Colors.white}}>
                 <View style={{backgroundColor: Colors.green, padding: 16}}>
@@ -101,7 +100,7 @@ class DashboardScreen extends Component {
                         textAlign: "center",
                         color: Colors.white,
                         marginTop: 12
-                    }]}>{selectedPackage.title + " (" + GENDER[selectedPackage.gender.toUpperCase()] + ")"}</Text>
+                    }]}>{this.props.reserved.package.title + " (" + GENDER[this.props.reserved.package.gender.toUpperCase()] + ")"}</Text>
                     <Text style={[Texts.Font_14_400, {
                         textAlign: "center",
                         color: Colors.white,

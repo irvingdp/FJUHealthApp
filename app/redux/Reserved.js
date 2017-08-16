@@ -6,7 +6,7 @@ let Reducer = (state = initialState, action) => {
         case ActionType.DASHBOARD_SUCCESS:
             return {
                 ...state,
-                data: action.data.reservation,
+                data: action.data.reserved,
             };
 
         case ActionType.LOGOUT:
