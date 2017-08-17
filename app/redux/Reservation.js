@@ -16,6 +16,11 @@ let Reducer = (state = initialState, action) => {
                 ...state,
                 ...action.data,
             };
+        case ActionType.RESERVATION_SET_FORM_DATA:
+            return {
+                ...state,
+                formData: {...action.data},
+            };
         case ActionType.RESERVING:
             return {
                 ...state,
@@ -52,15 +57,21 @@ let ActionCreator = {
             return dispatch({type: ActionType.RESERVATION_SET_DATE, data: {reserveDate}});
         }
     },
-    reserve({name, birthday, phoneNumber, contactAddress}) {
+    setFormData(formData) {
+        return function (dispatch) {
+            return dispatch({type: ActionType.RESERVATION_SET_FORM_DATA, data: formData});
+        }
+    },
+    reserve(formData) {
         return function (dispatch, getState) {
-            let state = getState();
+            dispatch({type: ActionType.RESERVATION_SET_FORM_DATA, data: formData});
             dispatch({type: ActionType.RESERVING});
+            let state = getState();
             let postData = {
-                name,
-                birthday,
-                phoneNumber,
-                contactAddress,
+                name: state.Reservation.formData.name,
+                birthday: state.Reservation.formData.birthday,
+                phoneNumber: state.Reservation.formData.phoneNumber,
+                contactAddress: state.Reservation.formData.contactAddress,
                 packageId: state.Reservation.packageId,
                 reserveDate: state.Reservation.reserveDate.toISOString(),
             }

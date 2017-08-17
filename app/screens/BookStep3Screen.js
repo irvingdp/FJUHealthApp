@@ -9,22 +9,19 @@ import {
     ScrollView,
     Alert,
 } from 'react-native';
-import {Texts, Layouts, Colors} from '../styles/BaseStyles'
+import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import LabelInput from '../componenets/LabelInput';
 import OptionButton from '../componenets/OptionButton'
-import {GENDER, PAYMENT_STATUS} from '../Enum'
+import {GENDER} from '../Enum'
+import moment from 'moment'
 
 class BookStep3Screen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            formData: {
-                name: "",
-                birthday: "",
-                phoneNumber: "",
-                contactAddress: "",
-            },
+            //load data from profile..
+
             validation: {
                 name: true,
                 birthday: true,
@@ -38,6 +35,19 @@ class BookStep3Screen extends Component {
                 contactAddress: "",
             }
         }
+        //pre-fill form data
+        if(this.props.formData) {
+            this.state.formData = {...this.props.formData}
+        } else if(this.props.profile){
+            this.state.formData = {
+                name:  this.props.profile.name,
+                birthday:  moment(this.props.profile.birthday).format("YYYY-MM-DD"),
+                phoneNumber:  this.props.profile.phoneNumber,
+                contactAddress:  this.props.profile.contactAddress,
+            }
+        } else {
+            this.state.formData = {}
+        }
     }
 
     static navigationOptions = {
@@ -45,8 +55,17 @@ class BookStep3Screen extends Component {
         tabBarVisible: false,
     };
 
+    componentWillUnmount() {
+        //save the user data to store. restore on constructor.
+        this.props.setFormData({
+            name: this.state.formData.name,
+            birthday: this.state.formData.birthday,
+            phoneNumber: this.state.formData.phoneNumber,
+            contactAddress: this.state.formData.contactAddress,
+        })
+    }
+
     _doClientValidation() {
-        //TODO: back without unmount screen to avoid data input again.
         let valid = !!this.state.formData.name &&
             !!this.state.formData.birthday &&
             !!this.state.formData.phoneNumber &&
@@ -79,6 +98,7 @@ class BookStep3Screen extends Component {
             }
         })
     }
+
 
     render() {
         return (
@@ -119,24 +139,6 @@ class BookStep3Screen extends Component {
                                     errorMsg={this.state.errorMsg.name}
                                     styleType={LabelInput.STYLE_TYPE.BLACK}
                     />
-                    { false &&
-                    <LabelInput labelText={"ID Number / Passport Number"}
-                                    textInputProps={{
-                                        onChangeText: (text) => {
-                                            this.setState({
-                                                formData: {...this.state.formData, uid: text},
-                                                validation: {...this.state.validation, uid: !!text}
-                                            });
-                                        },
-                                        value: this.state.formData.uid,
-                                        autoCapitalize: "none",
-                                    }}
-                                    valid={this.state.validation.uid}
-                                    errorMsg={this.state.errorMsg.uid}
-                                    styleType={LabelInput.STYLE_TYPE.BLACK}
-                                    style={{marginTop: 24}}
-                    />
-                    }
                     <LabelInput labelText={"Date of Birth"}
                                     valid={this.state.validation.birthday}
                                     errorMsg={this.state.errorMsg.birthday}
@@ -151,24 +153,6 @@ class BookStep3Screen extends Component {
                                     }}
                                     style={{marginTop: 24}}
                     />
-                    {false &&
-                    <LabelInput labelText={"Email Address"}
-                                    textInputProps={{
-                                        onChangeText: (text) => {
-                                            this.setState({
-                                                formData: {...this.state.formData, email: text},
-                                                validation: {...this.state.validation, email: !!text}
-                                            });
-                                        },
-                                        value: this.state.formData.email,
-                                        autoCapitalize: "none",
-                                    }}
-                                    valid={this.state.validation.email}
-                                    errorMsg={this.state.errorMsg.email}
-                                    styleType={LabelInput.STYLE_TYPE.BLACK}
-                                    style={{marginTop: 24}}
-                    />
-                    }
                     <LabelInput labelText={"Mobile Number"}
                                     textInputProps={{
                                         onChangeText: (text) => {
@@ -241,11 +225,14 @@ class BookStep3Screen extends Component {
 
 const mapStateToProps = state => ({
     reservationError:  state.Reservation.reservationError,
+    profile: state.Profile.data,
+    formData: state.Reservation.formData,
 });
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
-    reserve: ({name, birthday, phoneNumber, contactAddress}) => dispatch(ReduxReservation.ActionCreator.reserve({name, birthday, phoneNumber, contactAddress})),
+    setFormData: (formData) => dispatch(ReduxReservation.ActionCreator.setFormData(formData)),
+    reserve: (formData) => dispatch(ReduxReservation.ActionCreator.reserve(formData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStep3Screen);

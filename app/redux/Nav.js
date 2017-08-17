@@ -3,9 +3,11 @@ import {NavigationActions} from 'react-navigation';
 import {TabBarNavigator} from '../navigation/TabNav';
 import Routes from '../navigation/Routes'
 import NavLogic from '../navigation/NavLogic'
+import ReduxReservation from './Reservation'
+
 const initialState = null;
 
-//TODO: where to put logout button?
+//TODO: where is to put logout button?
 let Reducer = (state = initialState, action) => {
     let nextState;
     switch (action.type) {
@@ -51,7 +53,7 @@ let Reducer = (state = initialState, action) => {
                 }),
                 state);
             break;
-
+        
         default:
             nextState = TabBarNavigator.router.getStateForAction(action,
                 state);

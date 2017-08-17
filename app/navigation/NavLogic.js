@@ -9,7 +9,7 @@ const NavLogic = {
         let nextRoute = {...route};
         switch (nextRouteName) {
             case Routes.BookStep1:
-                if(!state.Auth.isLoggedIn) {
+                if (!state.Auth.isLoggedIn) {
                     nextRoute = {
                         ...route,
                         routeName: Routes.Login,
@@ -25,7 +25,6 @@ const NavLogic = {
                 break;
         }
         return nextRoute;
-    }
+    },
 }
-
 export default NavLogic

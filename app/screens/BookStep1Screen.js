@@ -1,4 +1,3 @@
-import ReduxPackage from '../redux/Package'
 import ReduxNav from '../redux/Nav'
 import ReduxReservation from '../redux/Reservation'
 import Routes from '../navigation/Routes';
@@ -13,7 +12,6 @@ import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import OptionButton from '../componenets/OptionButton'
 import {GENDER} from '../Enum'
-import Spinner from '../componenets/Spinner'
 
 class BookStep1Screen extends Component {
     constructor(props) {
@@ -134,7 +132,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
-    setPackage: (p) => dispatch(ReduxReservation.ActionCreator.setPackage(p)),
+    setPackage: (pkg) => dispatch(ReduxReservation.ActionCreator.setPackage(pkg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookStep1Screen);
