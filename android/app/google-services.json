@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "945569324673",
+    "firebase_url": "https://fju-health-app-dev.firebaseio.com",
+    "project_id": "fju-health-app-dev",
+    "storage_bucket": "fju-health-app-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945569324673:android:21ef0054f1f07381",
+        "android_client_info": {
+          "package_name": "com.fjuhealthapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945569324673-aq2os8kdb59ij9cutr52r3a6eu6fk0ho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fjuhealthapp",
+            "certificate_hash": "eb081cb68d342e4a5b4e6dee21036e416a3f1f17"
+          }
+        },
+        {
+          "client_id": "945569324673-9hlc3j52h38f6nhg4js1k33v7qgpf3b4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASlUrTBdU8u0si4scgJM1D1tDWJe_PphE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945569324673-9hlc3j52h38f6nhg4js1k33v7qgpf3b4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

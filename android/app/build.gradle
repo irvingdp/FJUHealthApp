@@ -133,8 +133,13 @@ android {
 }
 
 dependencies {
+    compile 'com.google.firebase:firebase-core:10.2.4' // this decides your firebase SDK version
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
+
     compile project(':react-native-maps')
+    compile project(':react-native-fcm')
     compile project(':react-native-vector-icons')
+
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
@@ -146,3 +151,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+apply plugin: 'com.google.gms.google-services'
