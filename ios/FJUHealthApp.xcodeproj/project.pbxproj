@@ -23,6 +23,19 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15BCD16F9BFE42FAB7D8ABBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF372635C1734FDE8EF33907 /* FontAwesome.ttf */; };
 		16E585CDB85541D1B1F7B879 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64E5E9709FCA4FBDA5D69B14 /* Octicons.ttf */; };
+		1E689BB01F501A0200D0A9AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E689BAF1F501A0200D0A9AF /* GoogleService-Info.plist */; };
+		1E689C021F50231B00D0A9AF /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E689C011F50231B00D0A9AF /* libsqlite3.tbd */; };
+		1E689C041F5023AE00D0A9AF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E689C031F5023AE00D0A9AF /* libz.tbd */; };
+		1EDBB4D81F53C28F007D3E53 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D11F53C28F007D3E53 /* FirebaseAnalytics.framework */; };
+		1EDBB4D91F53C28F007D3E53 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D21F53C28F007D3E53 /* FirebaseCore.framework */; };
+		1EDBB4DA1F53C28F007D3E53 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D31F53C28F007D3E53 /* FirebaseCoreDiagnostics.framework */; };
+		1EDBB4DB1F53C28F007D3E53 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D41F53C28F007D3E53 /* FirebaseInstanceID.framework */; };
+		1EDBB4DC1F53C28F007D3E53 /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D51F53C28F007D3E53 /* FirebaseNanoPB.framework */; };
+		1EDBB4DD1F53C28F007D3E53 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D61F53C28F007D3E53 /* GoogleToolboxForMac.framework */; };
+		1EDBB4DE1F53C28F007D3E53 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4D71F53C28F007D3E53 /* nanopb.framework */; };
+		1EDBB4E11F53C29C007D3E53 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4DF1F53C29C007D3E53 /* FirebaseMessaging.framework */; };
+		1EDBB4E21F53C29C007D3E53 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4E01F53C29C007D3E53 /* Protobuf.framework */; };
+		1EDBB5171F53C540007D3E53 /* libRNFIRMessaging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EDBB4E81F53C4E3007D3E53 /* libRNFIRMessaging.a */; };
 		267D14335C814A7CBEF98BE6 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2881737FFF364FD7B753D73D /* libAirMaps.a */; };
 		45F9349328D04809A0D141C5 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F13B8CF5C16A436A877BD852 /* MaterialIcons.ttf */; };
 		5D8BF00DA59F45A2BDA83CAF /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9462DF1194D74E0AB301B67C /* libRNVectorIcons.a */; };
@@ -134,6 +147,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
 			remoteInfo = AirMaps;
+		};
+		1EDBB4E71F53C4E3007D3E53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1EDBB4E31F53C4E3007D3E53 /* RNFIRMessaging.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFIRMessaging;
 		};
 		3DAD3E831DF850E9000B6D8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -277,6 +297,20 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FJUHealthApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FJUHealthApp/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		1E689BAF1F501A0200D0A9AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1E689BF11F501DDF00D0A9AF /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		1E689C011F50231B00D0A9AF /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		1E689C031F5023AE00D0A9AF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1EDBB4D11F53C28F007D3E53 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		1EDBB4D21F53C28F007D3E53 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		1EDBB4D31F53C28F007D3E53 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		1EDBB4D41F53C28F007D3E53 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		1EDBB4D51F53C28F007D3E53 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseNanoPB.framework; sourceTree = "<group>"; };
+		1EDBB4D61F53C28F007D3E53 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		1EDBB4D71F53C28F007D3E53 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		1EDBB4DF1F53C29C007D3E53 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
+		1EDBB4E01F53C29C007D3E53 /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
+		1EDBB4E31F53C4E3007D3E53 /* RNFIRMessaging.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFIRMessaging.xcodeproj; path = "../node_modules/react-native-fcm/ios/RNFIRMessaging.xcodeproj"; sourceTree = "<group>"; };
 		2881737FFF364FD7B753D73D /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		2B8C2FD555074DFD9934DD9D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -299,19 +333,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDBB5171F53C540007D3E53 /* libRNFIRMessaging.a in Frameworks */,
+				1EDBB4DD1F53C28F007D3E53 /* GoogleToolboxForMac.framework in Frameworks */,
+				1EDBB4D81F53C28F007D3E53 /* FirebaseAnalytics.framework in Frameworks */,
+				1EDBB4DE1F53C28F007D3E53 /* nanopb.framework in Frameworks */,
+				1E689C041F5023AE00D0A9AF /* libz.tbd in Frameworks */,
+				1E689C021F50231B00D0A9AF /* libsqlite3.tbd in Frameworks */,
+				1EDBB4DB1F53C28F007D3E53 /* FirebaseInstanceID.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
+				1EDBB4DC1F53C28F007D3E53 /* FirebaseNanoPB.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				1EDBB4D91F53C28F007D3E53 /* FirebaseCore.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				1EDBB4E11F53C29C007D3E53 /* FirebaseMessaging.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				1EDBB4DA1F53C28F007D3E53 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				5D8BF00DA59F45A2BDA83CAF /* libRNVectorIcons.a in Frameworks */,
 				267D14335C814A7CBEF98BE6 /* libAirMaps.a in Frameworks */,
+				1EDBB4E21F53C29C007D3E53 /* Protobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,11 +444,13 @@
 		13B07FAE1A68108700A75B9A /* FJUHealthApp */ = {
 			isa = PBXGroup;
 			children = (
+				1E689BF11F501DDF00D0A9AF /* Firebase.h */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				1E689BAF1F501A0200D0A9AF /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -444,6 +492,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1E689BDE1F501CCE00D0A9AF /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				1E689C031F5023AE00D0A9AF /* libz.tbd */,
+				1E689C011F50231B00D0A9AF /* libsqlite3.tbd */,
+				1EDBB4DF1F53C29C007D3E53 /* FirebaseMessaging.framework */,
+				1EDBB4E01F53C29C007D3E53 /* Protobuf.framework */,
+				1EDBB4D11F53C28F007D3E53 /* FirebaseAnalytics.framework */,
+				1EDBB4D21F53C28F007D3E53 /* FirebaseCore.framework */,
+				1EDBB4D31F53C28F007D3E53 /* FirebaseCoreDiagnostics.framework */,
+				1EDBB4D41F53C28F007D3E53 /* FirebaseInstanceID.framework */,
+				1EDBB4D51F53C28F007D3E53 /* FirebaseNanoPB.framework */,
+				1EDBB4D61F53C28F007D3E53 /* GoogleToolboxForMac.framework */,
+				1EDBB4D71F53C28F007D3E53 /* nanopb.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		1EDBB4E41F53C4E3007D3E53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1EDBB4E81F53C4E3007D3E53 /* libRNFIRMessaging.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +539,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1EDBB4E31F53C4E3007D3E53 /* RNFIRMessaging.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -494,6 +569,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				1E689BDE1F501CCE00D0A9AF /* Framework */,
 				13B07FAE1A68108700A75B9A /* FJUHealthApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FJUHealthAppTests */,
@@ -625,6 +701,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 1EDBB4E41F53C4E3007D3E53 /* Products */;
+					ProjectRef = 1EDBB4E31F53C4E3007D3E53 /* RNFIRMessaging.xcodeproj */;
+				},
+				{
 					ProductGroup = 1E5873C51F1C8FD200A924A7 /* Products */;
 					ProjectRef = 12B7E98167C247BEBEBC0E04 /* RNVectorIcons.xcodeproj */;
 				},
@@ -733,6 +813,13 @@
 			fileType = archive.ar;
 			path = libAirMaps.a;
 			remoteRef = 1E66243A1F3D51750049665C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1EDBB4E81F53C4E3007D3E53 /* libRNFIRMessaging.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFIRMessaging.a;
+			remoteRef = 1EDBB4E71F53C4E3007D3E53 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3DAD3E841DF850E9000B6D8A /* libRCTImage-tvOS.a */ = {
@@ -861,6 +948,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E689BB01F501A0200D0A9AF /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				9D5956A32DB04FAFB04614E2 /* Entypo.ttf in Resources */,
@@ -927,10 +1015,15 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = R9TLDN89V8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				INFOPLIST_FILE = FJUHealthApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -954,10 +1047,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R9TLDN89V8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-maps/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fcm/ios",
 				);
 				INFOPLIST_FILE = FJUHealthApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1012,6 +1110,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1046,6 +1148,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

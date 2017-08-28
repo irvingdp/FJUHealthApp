@@ -8,6 +8,7 @@ import {
     Image,
     ScrollView,
     Alert,
+    Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
 import Routes from '../navigation/Routes';
@@ -28,10 +29,7 @@ import PackageCard from "../componenets/Dashboard/PackageCard"
 import ReminderCard from "../componenets/Dashboard/ReminderCard"
 import CompleteCard from "../componenets/Dashboard/CompleteCard"
 import DashboardCard from "../componenets/Dashboard/DashboardCard"
-
-import {Platform} from 'react-native';
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
-
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
