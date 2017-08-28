@@ -10,7 +10,7 @@ export default class PaymentCard extends Component {
             return null;
 
         //TODO: payment finished wording?
-        let description = this.props.reserved.paymentDate ? "payment finished." : "Please proceed with making payment to complete your reservation.";
+        let description = this.props.reserved.paymentDate ? "Payment finished." : "Please proceed with making payment to complete your reservation.";
 
         return (
             <DashboardCard
@@ -18,7 +18,7 @@ export default class PaymentCard extends Component {
                 title={"PAYMENT"}
                 date={this.props.reserved.paymentDate && this.props.reserved.paymentDate}
                 description={description}
-                buttonText={"How To Make Payment"}
+                buttonText={this.props.reserved.paymentDate ? "" : "How To Make Payment"}
                 onButtonPress={() => 0}
             />
         )

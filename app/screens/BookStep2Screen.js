@@ -75,6 +75,7 @@ class BookStep2Screen extends Component {
                 </View>
                 <Calendar
                     minDate={moment().add(14, 'day').format()}
+                    current={moment().add(14, 'day').format()}
                     firstDay={1}
 
                     theme={{

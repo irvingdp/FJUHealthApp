@@ -20,7 +20,7 @@ export default class PackageCard extends Component {
 
         //TODO: package sent wording?
         let description = this.props.reserved.sentPackageDate ?
-            "package sent." : "We will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.";
+            "Package sent." : "We will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.";
         return (
             <DashboardCard
                 type={this._getType()}
