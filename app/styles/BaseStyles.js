@@ -1,3 +1,5 @@
+import {Platform} from 'react-native';
+
 export const Colors = {
     pureBlack: '#000000',
     black: '#222222',
@@ -24,6 +26,8 @@ export const Colors = {
     textCalDisabled: "#d9e1e8",
 
     inactivePackageGrid: "#F2F2F2",
+
+    tabBarGreen: "#2f9d96",
 };
 
 
@@ -80,6 +84,10 @@ export const Texts = {
         fontSize: 16,
         fontWeight: '400',
     },
+    Font_16_600: {
+        fontSize: 16,
+        fontWeight: '600',
+    },
     Font_16_900: {
         fontSize: 16,
         fontWeight: '900',
@@ -131,3 +139,5 @@ export const Layouts = {
         backgroundColor: Colors.grey
     },
 }
+
+export const NavBarHeight = Platform.OS == 'ios' ? 64 : 40;
