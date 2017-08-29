@@ -30,6 +30,7 @@ import ReminderCard from "../componenets/Dashboard/ReminderCard"
 import CompleteCard from "../componenets/Dashboard/CompleteCard"
 import DashboardCard from "../componenets/Dashboard/DashboardCard"
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
+import {REMINDER_KEYS} from '../Enum'
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
@@ -49,7 +50,7 @@ class DashboardScreen extends Component {
     componentDidMount() {
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(token => {
-            Alert.alert(token);
+            //Alert.alert(token);
             console.log(token)
             // store fcm token in your server
         });
@@ -124,8 +125,6 @@ class DashboardScreen extends Component {
         }).catch(() => {
             this.setState({initialized: true})
         })
-
-
     }
     componentWillUnmount() {
         // stop listening for events
@@ -167,6 +166,7 @@ class DashboardScreen extends Component {
     }
 
     createReservedView() {
+        let totalSentReminderCount = 0;
         return (
             <ScrollView style={{flex: 1, backgroundColor: Colors.white}}>
                 <View style={{backgroundColor: Colors.green, padding: 16}}>
@@ -194,23 +194,25 @@ class DashboardScreen extends Component {
                     reserved={this.props.reserved}
                 />
                 {(this.props.reserved.reminder || []).map(reminder => {
+                    reminder.isSent && (totalSentReminderCount++);
+                    let needShowButton = false;//reminder.key  === REMINDER_KEYS.CATHARTIC && !reminder.isSent;
                     return (
                         <ReminderCard
                             key={reminder.id}
                             reminder={{
                                 title: reminder.title,
                                 description: reminder.description,
-                                type: DashboardCard.TYPE.COMING, //TODO: how to know the type
+                                type: reminder.isSent ? DashboardCard.TYPE.FINISH : DashboardCard.TYPE.COMING,
                                 date: reminder.notifyDate,
                             }}
-                            buttonText= {reminder.title === "REMINDER 5" ? "Set A Calendar Reminder": null}
-                            onButtonPress={reminder.title === "REMINDER 5" ? (()=>{0}) : null} //TODO: how to know reminder 5
+                            buttonText= {needShowButton ? "Set A Calendar Reminder": null}
+                            onButtonPress={needShowButton ? (()=>{0}) : null}
                         />
                     )
                 })}
                 <CompleteCard
                     reserved={this.props.reserved}
-                    type={DashboardCard.TYPE.COMING} //TODO: how to know the type
+                    type={totalSentReminderCount === this.props.reserved.reminder.length ? DashboardCard.TYPE.FINISH : DashboardCard.TYPE.COMING}
                 />
             </ScrollView>
         )
