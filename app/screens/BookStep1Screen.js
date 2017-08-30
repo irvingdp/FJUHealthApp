@@ -7,8 +7,9 @@ import {
     Text,
     View,
     ScrollView,
+    TouchableOpacity,
 } from 'react-native';
-import {Texts, Layouts, Colors} from '../styles/BaseStyles'
+import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import OptionButton from '../componenets/OptionButton'
 import {GENDER} from '../Enum'
@@ -27,15 +28,17 @@ class BookStep1Screen extends Component {
         title: 'Book Appointment',
         tabBarVisible: false,
     };
+    _gridOnPress(group) {
+        this.props.navigate({routeName: Routes.Package, props: {group: parseInt(group)}});
+    }
     _createGrids() {
         let grids = [];
-        for(let key in this.props.gridData) {
-            let item = this.props.gridData[key];
+        for(let group in this.props.gridData) {
+            let item = this.props.gridData[group];
             let gridColor = (this.state.selectedItem.id === item[GENDER.MALE].id || this.state.selectedItem.id === item[GENDER.FEMALE].id) ? item[GENDER.MALE].activeColor : Colors.inactivePackageGrid;
             grids.push (
-                <View key={key} style={{flexDirection: "row", height: 173, borderBottomWidth: 1, borderColor: Colors.deepGrey}}>
+                <TouchableOpacity key={group} style={{flexDirection: "row", height: 173, borderBottomWidth: 1, borderColor: Colors.deepGrey}} onPress={() => this._gridOnPress(group)}>
                     <View style={{padding: 16,justifyContent: "center", alignItems: "center" ,width: 125,backgroundColor: gridColor}}><Text style={Texts.Font_20_400}>{item[GENDER.MALE].title}</Text></View>
-
                     <View style={{flex: 1,flexDirection: "column", backgroundColor: Colors.white}}>
                         <View style={{flex: 1,flexDirection: "row", padding: 16, alignItems: "center", borderBottomWidth: 1, borderColor: Colors.grey}}>
                             <OptionButton buttonStyle={{marginRight: 8}} value={item[GENDER.MALE]} isSelected={this.state.selectedItem.id === item[GENDER.MALE].id} onPress={i => this.setState({selectedItem: i})} />
@@ -48,7 +51,7 @@ class BookStep1Screen extends Component {
                             <Text style={{marginRight: 8}}>{item[GENDER.FEMALE].price}</Text>
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
             )
         }
         return grids;

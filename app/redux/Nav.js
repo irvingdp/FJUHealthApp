@@ -59,6 +59,11 @@ let Reducer = (state = initialState, action) => {
                 state);
             break;
     }
+    if(action.data && action.data.props) {
+        nextState.props = {...action.data.props}
+    } else {
+        nextState.props = undefined;
+    }
     return nextState || state;
 };
 

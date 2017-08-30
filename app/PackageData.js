@@ -1,6 +1,6 @@
 export const PackageData = [
     {
-        key: 0,
+        group: 3,
         title: "精準健檢",
         content: [
             {
@@ -51,7 +51,7 @@ export const PackageData = [
         ]
     },
     {
-        key: 1,
+        group: 2,
         title: "防癌健檢",
         content: [
             {
@@ -102,7 +102,7 @@ export const PackageData = [
         ]
     },
     {
-        key: 2,
+        group: 1,
         title: "菁英防癌健檢",
         content: [
             {

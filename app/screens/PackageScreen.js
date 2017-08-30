@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {
     View,
     Text,
@@ -10,30 +11,34 @@ import {Texts, Colors} from '../styles/BaseStyles'
 import TabView from '../componenets/TabView'
 import PackageCard from '../componenets/PackageCard'
 import {PackageData} from '../PackageData'
+import arrayUtils from '../utils/Array'
 
 class PackageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {};
         this.navigation = {
-            index: 0,
-            routes: [
-                {
-                    key: '0',
-                    title: PackageData.find(p => p.key === 0).title,
-                    content: this.createTabContent(0)
-                },
-                {
-                    key: '1',
-                    title: PackageData.find(p => p.key === 1).title,
-                    content: this.createTabContent(1)
-                },
-                {
-                    key: '2',
-                    title: PackageData.find(p => p.key === 2).title,
-                    content: this.createTabContent(2)
-                }
-            ],
+                index: 0,
+                routes: [
+                    {
+                        key: '1',
+                        group: 3,
+                        title: PackageData.find(p => p.group === 3).title,
+                        content: this.createTabContent(3)
+                    },
+                    {
+                        key: '2',
+                        group: 2,
+                        title: PackageData.find(p => p.group === 2).title,
+                        content: this.createTabContent(2)
+                    },
+                    {
+                        key: '3',
+                        group: 1,
+                        title: PackageData.find(p => p.group === 1).title,
+                        content: this.createTabContent(1)
+                    }
+                ],
         };
     }
 
@@ -41,8 +46,8 @@ class PackageScreen extends Component {
         title: AppLabels.PackageScreen.title,
     };
 
-    createTabContent(key) {
-        let data = PackageData.find(p => p.key === key);
+    createTabContent(group) {
+        let data = PackageData.find(p => p.group === group);
         return (
             (data.content).map((content, index) =>
                 <PackageCard key={index} data={content}/>
@@ -59,12 +64,20 @@ class PackageScreen extends Component {
         )
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.navProps && nextProps.navProps.group) {
+            var index = arrayUtils.findIndexInData(PackageData, "group", nextProps.navProps.group);
+            this._tabView._swipePage(index);
+            this._scrollView.scrollTo({y: this._tabY})
+        }
+    }
+
     render() {
         return (
-            <ScrollView style={{
-                flex: 1,
-                backgroundColor: Colors.grey,
-            }}>
+            <ScrollView
+                style={{flex: 1, backgroundColor: Colors.grey}}
+                ref={ref => this._scrollView = ref}
+            >
                 <View style={{backgroundColor: Colors.white, paddingTop: 28, paddingBottom: 20}}>
                     <View style={{paddingRight: 32, paddingLeft: 32}}>
                         <Text style={[Texts.Font_17_600, {color: Colors.textBlack, textAlign: 'center'}]}>Our Screening
@@ -119,12 +132,13 @@ class PackageScreen extends Component {
 
                 {this.createDividers()}
 
+                <View onLayout={(e)=> {this._tabY = e.nativeEvent.layout.y}}/>
                 <TabView
+                    ref={ref => this._tabView = ref}
                     navigation={this.navigation}
                     parentIsScrollView={true}
                     pageStyle={{backgroundColor: Colors.white}}
                 />
-
                 {this.createDividers()}
 
             </ScrollView>
@@ -132,5 +146,8 @@ class PackageScreen extends Component {
     }
 }
 
-export default PackageScreen;
+const mapStateToProps = state => ({
+    navProps: state.Nav.props,
+});
 
+export default connect(mapStateToProps, null)(PackageScreen);
