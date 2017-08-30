@@ -22,9 +22,6 @@ const _appLabels = {
         PackageScreen: {
             title: "Package",
         },
-        InstructionScreen: {
-            title: "Instruction",
-        },
         LocationScreen: {
             title: "Location",
         },

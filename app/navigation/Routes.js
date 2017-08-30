@@ -1,7 +1,6 @@
 const Routes = {
     Dashboard: "Dashboard",
     Package: "Package",
-    Instruction: "Instruction",
     Location: "Location",
     Setting: "Setting",
 

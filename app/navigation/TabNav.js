@@ -5,7 +5,6 @@ import {addNavigationHelpers, TabNavigator } from 'react-navigation';
 // Navigators
 import {DashboardStackNavigator} from './DashboardNav'
 import {PackageStackNavigator} from './PackageNav'
-import {InstructionStackNavigator} from './InstructionNav'
 import {LocationStackNavigator} from './LocationNav'
 import {SettingStackNavigator} from './SettingNav'
 import {
@@ -32,16 +31,6 @@ const routeConfiguration = {
             tabBarIcon: ({ tintColor, focused }) => {
             return focused ? <Image source={require('../res/images/package-tabbar-active-icon.png')}/> :
                 <Image resizeMode="contain" source={require('../res/images/package-tabbar-icon.png')}/>
-            },
-        },
-    },
-    Instruction: {
-        screen: InstructionStackNavigator,
-        navigationOptions: {
-            tabBarLabel: 'Instruction',
-            tabBarIcon: ({ tintColor, focused }) => {
-                return focused ? <Image source={require('../res/images/instruction-tabbar-active-icon.png')}/> :
-                    <Image resizeMode="contain" source={require('../res/images/instruction-tabbar-icon.png')}/>
             },
         },
     },
