@@ -1,22 +1,18 @@
 import React, {Component} from 'react';
-import ReduxNav from '../redux/Nav'
+
 import {
     View,
-    Button,
     Text,
     TouchableOpacity,
     Image,
     ScrollView,
-    Alert,
     Platform,
 } from 'react-native';
 import {connect} from 'react-redux';
-import Routes from '../navigation/Routes';
 import AppLabels from '../AppLabels';
-import {Layouts, Colors, Texts} from '../styles/BaseStyles'
+import {Colors, Texts} from '../styles/BaseStyles'
 import DeviceStore from '../DeviceStore'
 
-import LockButton from '../componenets/LockButton';
 import LogoutButton from '../componenets/LogoutButton';
 import Spinner from '../componenets/Spinner'
 import ReduxAuth from '../redux/Auth'
@@ -30,7 +26,8 @@ import ReminderCard from "../componenets/Dashboard/ReminderCard"
 import CompleteCard from "../componenets/Dashboard/CompleteCard"
 import DashboardCard from "../componenets/Dashboard/DashboardCard"
 import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType} from 'react-native-fcm';
-import {REMINDER_KEYS} from '../Enum'
+import ReservationButton from '../componenets/ReservationButton'
+import ReportCard from '../componenets/ReportCard'
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
@@ -142,44 +139,12 @@ class DashboardScreen extends Component {
                     <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>No Appointment Yet!</Text>
                     <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 12}]}>Schedule a medical checkup
                         with us.</Text>
-                    <LockButton buttonStyle={{marginTop: 24}}
-                                onPress={() => this.props.navigate({routeName: Routes.BookStep1})}
-                    >
-                        <View style={{
-                            width: 200,
-                            height: 50,
-                            borderRadius: 100,
-                            backgroundColor: Colors.green,
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}>
-                            <Text style={[Texts.Font_17_600, {
-                                marginRight: 10,
-                                marginLeft: 10,
-                                color: Colors.white,
-                                textAlign: "center"
-                            }]}>Book Now</Text>
-                        </View>
-                    </LockButton>
+                    <ReservationButton/>
                 </View>
                 {this.props.latestReport ?
                     <View style={{height: 153, backgroundColor: Colors.green, padding: 16}}>
                         <Text style={[Texts.Font_14_400, {color: Colors.textWhite}]}>我的健檢紀錄</Text>
-                        <TouchableOpacity style={{height: 82, backgroundColor: Colors.white, paddingTop: 16, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, borderRadius: 8, marginTop: 12, flexDirection: "row", justifyContent: "space-between",alignItems:"center"}}>
-                            <View>
-                                <Text style={[Texts.Font_20_400, {color: Colors.textBlack,}]}>{this.props.latestReport.reservation.package.title}</Text>
-                                <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 8}]}>{moment(this.props.latestReport.reservation.reserveDate).format("YYYY-MM-DD")}</Text>
-                            </View>
-                            <View style={{flexDirection: 'row',alignItems:"center"}}>
-                                <View style={{width: 43,paddingLeft: 5, paddingRight: 5, paddingTop: 2,paddingBottom: 2, backgroundColor: Colors.green, borderRadius: 5, marginRight: 12}}>
-                                    <Text style={[Texts.Font_14_400, {color: Colors.white}]}>NEW</Text>
-                                </View>
-                                <Image
-                                    source={require('../res/images/right-arrow.png')}
-                                    resizeMode={"contain"}
-                                />
-                            </View>
-                        </TouchableOpacity>
+                        <ReportCard report={this.props.latestReport}/>
                     </View>
                     : null
                 }
@@ -260,7 +225,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken(token)),
     loadDashboard: (token) => dispatch(ReduxDashboard.ActionCreator.loadDashboard()),
 });
