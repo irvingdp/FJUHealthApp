@@ -4,7 +4,8 @@ import {
     View,
     Text,
     ScrollView,
-    Image
+    Image,
+    ImageBackground,
 } from 'react-native';
 import AppLabels from '../AppLabels';
 import {Texts, Colors} from '../styles/BaseStyles'

@@ -7,6 +7,7 @@ import Reservation from './Reservation';
 import Reserved from './Reserved';
 import Profile from './Profile';
 import Dashboard from './Dashboard';
+import Report from './Report';
 
 const AppReducer = combineReducers({
     Nav: Nav.Reducer,
@@ -16,6 +17,7 @@ const AppReducer = combineReducers({
     Reserved: Reserved.Reducer,
     Profile: Profile.Reducer,
     Dashboard: Dashboard.Reducer,
+    Report: Report.Reducer,
 });
 
 export default AppReducer;

@@ -133,34 +133,56 @@ class DashboardScreen extends Component {
     }
     createAppointmentView() {
         return (
-            <View style={[Layouts.centerLayout]}>
-                <Image
-                    source={require('../res/images/dashboard-calendar.png')}
-                    resizeMode={"contain"}
-                />
-                <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>No Appointment Yet!</Text>
-                <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 12}]}>Schedule a medical checkup
-                    with us.</Text>
-                <LockButton buttonStyle={{marginTop: 24}}
-                            onPress={() => this.props.navigate({routeName: Routes.BookStep1})}
-                >
-                    <View style={{
-                        width: 200,
-                        height: 50,
-                        borderRadius: 100,
-                        backgroundColor: Colors.green,
-                        justifyContent: "center",
-                        alignItems: "center"
-                    }}>
-                        <Text style={[Texts.Font_17_600, {
-                            marginRight: 10,
-                            marginLeft: 10,
-                            color: Colors.white,
-                            textAlign: "center"
-                        }]}>Book Now</Text>
+            <View style={{flex: 1}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.grey}}>
+                    <Image
+                        source={require('../res/images/dashboard-calendar.png')}
+                        resizeMode={"contain"}
+                    />
+                    <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>No Appointment Yet!</Text>
+                    <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 12}]}>Schedule a medical checkup
+                        with us.</Text>
+                    <LockButton buttonStyle={{marginTop: 24}}
+                                onPress={() => this.props.navigate({routeName: Routes.BookStep1})}
+                    >
+                        <View style={{
+                            width: 200,
+                            height: 50,
+                            borderRadius: 100,
+                            backgroundColor: Colors.green,
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                            <Text style={[Texts.Font_17_600, {
+                                marginRight: 10,
+                                marginLeft: 10,
+                                color: Colors.white,
+                                textAlign: "center"
+                            }]}>Book Now</Text>
+                        </View>
+                    </LockButton>
+                </View>
+                {this.props.latestReport ?
+                    <View style={{height: 153, backgroundColor: Colors.green, padding: 16}}>
+                        <Text style={[Texts.Font_14_400, {color: Colors.textWhite}]}>我的健檢紀錄</Text>
+                        <TouchableOpacity style={{height: 82, backgroundColor: Colors.white, paddingTop: 16, paddingBottom: 10, paddingLeft: 16, paddingRight: 16, borderRadius: 8, marginTop: 12, flexDirection: "row", justifyContent: "space-between",alignItems:"center"}}>
+                            <View>
+                                <Text style={[Texts.Font_20_400, {color: Colors.textBlack,}]}>{this.props.latestReport.reservation.package.title}</Text>
+                                <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 8}]}>{moment(this.props.latestReport.reservation.reserveDate).format("YYYY-MM-DD")}</Text>
+                            </View>
+                            <View style={{flexDirection: 'row',alignItems:"center"}}>
+                                <View style={{width: 43,paddingLeft: 5, paddingRight: 5, paddingTop: 2,paddingBottom: 2, backgroundColor: Colors.green, borderRadius: 5, marginRight: 12}}>
+                                    <Text style={[Texts.Font_14_400, {color: Colors.white}]}>NEW</Text>
+                                </View>
+                                <Image
+                                    source={require('../res/images/right-arrow.png')}
+                                    resizeMode={"contain"}
+                                />
+                            </View>
+                        </TouchableOpacity>
                     </View>
-                </LockButton>
-
+                    : null
+                }
             </View>
         )
     }
@@ -233,14 +255,14 @@ class DashboardScreen extends Component {
 const mapStateToProps = state => ({
     isLoggedIn: state.Auth.isLoggedIn,
     reserved: state.Reserved.data,
-    packages: state.Package.data
+    packages: state.Package.data,
+    latestReport: state.Report.data ? state.Report.data[0] : null, //report should order by date desc
 });
 
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken(token)),
     loadDashboard: (token) => dispatch(ReduxDashboard.ActionCreator.loadDashboard()),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);

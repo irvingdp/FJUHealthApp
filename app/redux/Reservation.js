@@ -41,6 +41,8 @@ let Reducer = (state = initialState, action) => {
                 isFetching: false,
                 reservationError: action.error,
             };
+        case ActionType.LOGOUT:
+            return initialState;
         default:
             return state;
     }
