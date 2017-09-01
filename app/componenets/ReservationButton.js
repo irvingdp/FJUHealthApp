@@ -28,7 +28,7 @@ class ReservationButton extends Component {
                         marginLeft: 10,
                         color: Colors.white,
                         textAlign: "center"
-                    }]}>Book Now</Text>
+                    }]}>立即預約</Text>
                 </View>
             </LockButton>
         )

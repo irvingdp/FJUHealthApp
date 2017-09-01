@@ -2,7 +2,7 @@ const Routes = {
     Dashboard: "Dashboard",
     Package: "Package",
     Location: "Location",
-    Setting: "Setting",
+    Profile: "Profile",
 
     Register: "Register",
     Login: "Login",

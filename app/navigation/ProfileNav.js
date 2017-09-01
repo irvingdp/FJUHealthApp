@@ -1,17 +1,17 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
 import Routes from './Routes'
-import SettingScreen from '../screens/SettingScreen';
-import {Layouts, Colors} from '../styles/BaseStyles'
+import ProfileScreen from '../screens/ProfileScreen';
+import {Colors} from '../styles/BaseStyles'
 
 const routeConfiguration = {
-    Setting: {screen: SettingScreen},
+    Profile: {screen: ProfileScreen},
 }
 const stackNavigatorConfiguration = {
-    initialRouteName: Routes.Setting,
+    initialRouteName: Routes.Profile,
     navigationOptions: {
         headerStyle: {backgroundColor: Colors.white},
         headerTitleStyle: {color: Colors.green},
     }
 }
-export const SettingStackNavigator = StackNavigator(routeConfiguration,stackNavigatorConfiguration);
+export const ProfileStackNavigator = StackNavigator(routeConfiguration,stackNavigatorConfiguration);

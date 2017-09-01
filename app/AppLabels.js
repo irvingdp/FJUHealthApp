@@ -25,8 +25,8 @@ const _appLabels = {
         LocationScreen: {
             title: "Location",
         },
-        SettingScreen: {
-            title: "Settings",
+        ProfileScreen: {
+            title: "Profile",
             logout: _common.logout,
         },
         Solution: {

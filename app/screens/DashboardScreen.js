@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {
     View,
     Text,
-    TouchableOpacity,
     Image,
     ScrollView,
     Platform,
@@ -144,7 +143,7 @@ class DashboardScreen extends Component {
                 {this.props.latestReport ?
                     <View style={{height: 153, backgroundColor: Colors.green, padding: 16}}>
                         <Text style={[Texts.Font_14_400, {color: Colors.textWhite}]}>我的健檢紀錄</Text>
-                        <ReportCard report={this.props.latestReport}/>
+                        <ReportCard report={this.props.latestReport} showNew={true}/>
                     </View>
                     : null
                 }

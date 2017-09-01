@@ -6,7 +6,7 @@ import {addNavigationHelpers, TabNavigator } from 'react-navigation';
 import {DashboardStackNavigator} from './DashboardNav'
 import {PackageStackNavigator} from './PackageNav'
 import {LocationStackNavigator} from './LocationNav'
-import {SettingStackNavigator} from './SettingNav'
+import {ProfileStackNavigator} from './ProfileNav'
 import {
     Image,
 } from 'react-native';
@@ -44,13 +44,13 @@ const routeConfiguration = {
             },
         },
     },
-    Setting: {
-        screen: SettingStackNavigator,
+    Profile: {
+        screen: ProfileStackNavigator,
         navigationOptions: {
-            tabBarLabel: 'Settings',
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ tintColor, focused }) => {
-                return focused ? <Image source={require('../res/images/settings-tabbar-active-icon.png')}/> :
-                    <Image resizeMode="contain" source={require('../res/images/settings-tabbar-icon.png')}/>
+                return focused ? <Image source={require('../res/images/profile-tabbar-active-icon.png')}/> :
+                    <Image resizeMode="contain" source={require('../res/images/profile-tabbar-icon.png')}/>
             },
         },
     },
