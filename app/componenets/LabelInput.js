@@ -3,10 +3,12 @@ import {
     TextInput,
     Text,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native'
 import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import DatePicker from 'react-native-datepicker'
+import Dash from 'react-native-dash'
 
 export default class LabelInput extends Component {
     constructor(props) {
@@ -16,10 +18,14 @@ export default class LabelInput extends Component {
     static STYLE_TYPE = {
         BLACK: 0,
         WHITE: 1,
+        GREY: 2,
+        DISABLED: 3,
     }
     static INPUT_TYPE = {
         INPUT: 0,
         PICKER: 1,
+        TEXT: 2,
+        RADIO: 3,
     }
     static propTypes = {
         labelText: React.PropTypes.string,
@@ -29,6 +35,7 @@ export default class LabelInput extends Component {
         styleType: React.PropTypes.number,
         inputType: React.PropTypes.number,
         onPickerDone: React.PropTypes.func,
+        radioData: React.PropTypes.array,
     }
     static defaultProps = {
         labelProps: {},
@@ -37,6 +44,7 @@ export default class LabelInput extends Component {
         errorMsg: "",
         styleType: LabelInput.STYLE_TYPE.WHITE,
         inputType: LabelInput.INPUT_TYPE.INPUT,
+        radioData: [],
         onPickerDone: () => {
         }
     }
@@ -50,53 +58,121 @@ export default class LabelInput extends Component {
 
     render() {
         let {labelProps, textInputProps, labelText, valid, errorMsg, style, styleType, inputType, date, onPickerDone} = this.props;
-        let baseColor = LabelInput.STYLE_TYPE.WHITE === styleType ? Colors.white : Colors.textGrey;
+        let labelColor, bottomBorderColor, inputTextColor, bottomBorderWidth;
+        switch (styleType) {
+            case LabelInput.STYLE_TYPE.WHITE:
+                labelColor = Colors.white;
+                bottomBorderColor = Colors.white;
+                inputTextColor = Colors.white;
+                bottomBorderWidth = .5;
+                break;
+            case LabelInput.STYLE_TYPE.BLACK:
+                labelColor = Colors.textGrey;
+                bottomBorderColor = Colors.textGrey;
+                inputTextColor = Colors.textGrey;
+                bottomBorderWidth = .5;
+                break;
+            case LabelInput.STYLE_TYPE.GREY:
+                labelColor = Colors.textGrey;
+                bottomBorderColor = Colors.textLightGrey;
+                inputTextColor = Colors.textGrey;
+                bottomBorderWidth = 1;
+                break;
+            case LabelInput.STYLE_TYPE.DISABLED:
+                labelColor = Colors.textLightGrey;
+                bottomBorderColor = Colors.textLightGrey;
+                inputTextColor = Colors.textLightGrey;
+                bottomBorderWidth = 1;
+                break;
+        }
 
 
-        return (
-            <View style={style}>
-                <Text style={[Texts.Font_14_400, {color: valid ? baseColor : Colors.red}]}
-                      {...labelProps}>
-                    {labelText}
-                </Text>
-
-                {inputType === LabelInput.INPUT_TYPE.PICKER ?
-                    <TouchableOpacity onPress={this._onTextInputPress.bind(this)} style={[
-                        {
-                            borderBottomWidth: 0.5,
-                            borderBottomColor: valid ? baseColor : Colors.red,
-                            marginTop: 12,
-                            paddingBottom: 5,
-                        }
-                    ]}>
-                        <Text style={[Texts.Font_16_400, {color: baseColor}]}>{date}</Text>
-                    </TouchableOpacity>
-                    :
+        let inputContent;
+        switch (inputType) {
+            case LabelInput.INPUT_TYPE.INPUT:
+                inputContent = (
                     <TextInput
                         style={
                             [
                                 Texts.Font_16_400,
                                 {
-                                    borderBottomWidth: 0.5,
-                                    borderBottomColor: valid ? baseColor : Colors.red,
+                                    borderBottomWidth: bottomBorderWidth,
+                                    borderBottomColor: valid ? bottomBorderColor : Colors.red,
                                     marginTop: 12,
                                     paddingBottom: 5,
-                                    color: baseColor,
+                                    color: inputTextColor,
                                 }
                             ]}
                         {...textInputProps}
                     />
-                }
+                );
+                break;
+            case LabelInput.INPUT_TYPE.PICKER:
+                inputContent = (
+                    <TouchableOpacity onPress={this._onTextInputPress.bind(this)} style={[
+                        {
+                            borderBottomWidth: bottomBorderWidth,
+                            borderBottomColor: valid ? bottomBorderColor : Colors.red,
+                            marginTop: 12,
+                            paddingBottom: 5,
+                        }
+                    ]}>
+                        <Text style={[Texts.Font_16_400, {color: inputTextColor}]}>{date}</Text>
+                    </TouchableOpacity>
+                )
+                break;
+            case LabelInput.INPUT_TYPE.TEXT:
+                inputContent = (
+                    <View>
+                        <Text
+                            style={
+                                [
+                                    Texts.Font_16_400,
+                                    {
+                                        marginTop: 12,
+                                        paddingBottom: 5,
+                                        color: inputTextColor,
+                                    }
+                                ]}
+                        >{textInputProps.value}</Text>
+                        <Dash style={{flex: 1, height: 1}} dashColor={bottomBorderColor} dashThickness={1}/>
+                    </View>
+                );
+                break;
+            case LabelInput.INPUT_TYPE.RADIO:
+                inputContent = (
+                    <View style={{marginTop: 12, flexDirection: "row"}}>
+                        {this.props.radioData.map((data, index) =>
+                            <View style={{flex: 1, flexDirection: "row", alignItems: "center"}} key={index}>
+                                <Image resizeMode="contain"
+                                       style={{marginRight: 8}}
+                                       source={data.isChecked ? require('../res/images/radio-checked-disabled.png') : require('../res/images/radio-uncheck-disabled.png')}/>
+                                <Text style={[Texts.Font_16_400, {color: inputTextColor}]}>{data.label}</Text>
+                            </View>
+                        )}
+                    </View>
+                );
+                break;
+        }
+
+        return (
+            <View style={style}>
+                <Text style={[Texts.Font_14_400, {color: valid ? labelColor : Colors.red}]}
+                      {...labelProps}>
+                    {labelText}
+                </Text>
+
+                {inputContent}
 
                 {(!valid && errorMsg) ?
                     <Text style={[Texts.Font_14_400, {color: Colors.red}]}>
                         {errorMsg}
                     </Text>
-                : null}
+                    : null}
 
                 {inputType === LabelInput.INPUT_TYPE.PICKER ?
                     <DatePicker
-                        style={{width: 0, height: 0, backgroundColor:"red"}}
+                        style={{width: 0, height: 0, backgroundColor: "red"}}
                         ref={"datePicker"}
                         hideText={true}
                         date={date}

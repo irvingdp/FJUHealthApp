@@ -7,6 +7,7 @@ const Routes = {
     Register: "Register",
     Login: "Login",
     Profile: "Profile",
+    ProfileDetail: "ProfileDetail",
     ForgotPassword: "ForgotPassword",
 
     BookStep1: "BookStep1",

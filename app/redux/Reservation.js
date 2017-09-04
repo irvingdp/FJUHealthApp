@@ -1,5 +1,4 @@
 import ActionType from './ActionTypes'
-import {GENDER, PAYMENT_STATUS} from '../Enum'
 import ReservationService from '../domain/Reservation'
 const initialState = {};
 
@@ -43,6 +42,7 @@ let Reducer = (state = initialState, action) => {
             };
         case ActionType.LOGOUT:
             return initialState;
+
         default:
             return state;
     }

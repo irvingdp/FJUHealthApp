@@ -36,7 +36,7 @@ class ProfileScreen extends Component {
                     borderColor: Colors.textWhite,
                     borderWidth: 1,
                 }}
-                            onPress={() => 0}
+                            onPress={() => this.props.navigate({routeName: Routes.ProfileDetail})}
                 >
 
                     <Text style={[Texts.Font_14_600, {
@@ -50,6 +50,7 @@ class ProfileScreen extends Component {
 
         let emptyContent =(
             <View style={{flex: 1, backgroundColor: Colors.grey, justifyContent: "center", alignItems: "center"}}>
+                {header}
                 <Image
                     source={require('../res/images/report.png')}
                     resizeMode={"contain"}
@@ -63,21 +64,19 @@ class ProfileScreen extends Component {
             </View>
         );
         let reportList =(
-            <View style={{flex: 1, backgroundColor: Colors.grey,paddingLeft:16,paddingRight:16,paddingTop:20,paddingBottom:20}}>
-                <Text style={[Texts.Font_14_600, {
-                    color: Colors.textBlack,
-                }]}>健檢報告</Text>
-                {(this.props.report||[]).map((report,index) =>
-                    <ReportCard key={index} report={report} showNew={index === 0}/>
-                )}
-            </View>
-        );
-        return (
-            <ScrollView style={{flex: 1}}>
+            <ScrollView style={{flex: 1,backgroundColor: Colors.grey}}>
                 {header}
-                {this.props.report ? reportList : emptyContent}
+                <View style={{flex: 1, backgroundColor: Colors.grey,paddingLeft:16,paddingRight:16,paddingTop:20,paddingBottom:20}}>
+                    <Text style={[Texts.Font_14_600, {
+                        color: Colors.textBlack,
+                    }]}>健檢報告</Text>
+                    {(this.props.report||[]).map((report,index) =>
+                        <ReportCard key={index} report={report} showNew={index === 0}/>
+                    )}
+                </View>
             </ScrollView>
-        )
+        );
+        return this.props.report ? reportList : emptyContent
     }
 }
 const mapStateToProps = state => ({
