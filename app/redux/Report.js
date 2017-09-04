@@ -10,6 +10,9 @@ let Reducer = (state = initialState, action) => {
                 data: action.data.report
             };
 
+        case ActionType.LOGOUT:
+            return initialState;
+
         default:
             return state;
     }

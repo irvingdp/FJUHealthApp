@@ -14,10 +14,7 @@ let Reducer = (state = initialState, action) => {
             };
 
         case ActionType.LOGOUT:
-            return {
-                ...state,
-                data: null,
-            };
+            return initialState;
 
         default:
             return state;

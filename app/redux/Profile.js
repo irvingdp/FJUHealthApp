@@ -13,11 +13,7 @@ let Reducer = (state = initialState, action) => {
             };
 
         case ActionType.LOGOUT:
-            return {
-                ...state,
-                data: null,
-                Error: action.error,
-            };
+            return initialState;
 
         case ActionType.UPDATING_PROFILE:
             return {
