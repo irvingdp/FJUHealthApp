@@ -11,7 +11,7 @@ import moment from 'moment'
 export default class ReportCard extends Component {
     static propTypes = {
         report: React.PropTypes.object,
-        showNew: React.PropTypes.boolean,
+        showNew: React.PropTypes.bool,
     };
     static defaultProps = {
         report: {},

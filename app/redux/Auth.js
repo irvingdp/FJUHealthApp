@@ -1,8 +1,11 @@
 import ActionType from './ActionTypes'
 import UserService from "../domain/User"
+
 import DomainCommon from '../domain/Common'
 import DeviceStore from '../DeviceStore'
+
 import ReduxDashboard from './Dashboard'
+import ReduxDevice from "./Device"
 
 const initialAuthState = {isLoggedIn: false};
 
@@ -105,6 +108,8 @@ let ActionCreator = {
                 return dispatch({type: ActionType.LOGIN_SUCCESS});
             }).then(() => {
                 return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
+            }).then(() => {
+                return dispatch(ReduxDevice.ActionCreator.relateDeviceToUser());
             }).catch(err => {
                 return dispatch({type: ActionType.LOGIN_FAIL, error: err})
             })
@@ -119,6 +124,8 @@ let ActionCreator = {
                 return dispatch({type: ActionType.REGISTER_SUCCESS});
             }).then(() => {
                 return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
+            }).then(() => {
+                return dispatch(ReduxDevice.ActionCreator.relateDeviceToUser());
             }).catch(err => {
                 return dispatch({type: ActionType.REGISTER_FAIL, error: err})
             })

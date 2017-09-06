@@ -51,9 +51,9 @@ let ActionCreator = {
                 contactAddress: formData.contactAddress,
             }
             return ProfileService.updateProfile(postData).then((result) => {
-                return dispatch({type: ActionType.UPDATING_PROFILE_SUCCESS, data: result});
+                return dispatch({type: ActionType.UPDATE_PROFILE_SUCCESS, data: result});
             }).catch(err => {
-                return dispatch({type: ActionType.UPDATING_PROFILE_FAIL, error: err})
+                return dispatch({type: ActionType.UPDATE_PROFILE_FAIL, error: err})
             })
         }
     },

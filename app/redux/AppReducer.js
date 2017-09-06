@@ -8,6 +8,7 @@ import Reserved from './Reserved';
 import Profile from './Profile';
 import Dashboard from './Dashboard';
 import Report from './Report';
+import Device from './Device';
 
 const AppReducer = combineReducers({
     Nav: Nav.Reducer,
@@ -18,6 +19,7 @@ const AppReducer = combineReducers({
     Profile: Profile.Reducer,
     Dashboard: Dashboard.Reducer,
     Report: Report.Reducer,
+    Device: Device.Reducer,
 });
 
 export default AppReducer;
