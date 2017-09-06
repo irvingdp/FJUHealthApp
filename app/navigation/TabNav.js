@@ -109,10 +109,12 @@ class TabNav extends Component {
     componentDidMount() {
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(fcm_token => {
-            this.props.createDevice(fcm_token); // store fcm token in your server
+            this.props.dispatch(ReduxDevice.ActionCreator.createDevice(fcm_token))
+            //fix navigation bug if connect TabNav with 'mapDispatchToProps'
         });
         this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (fcm_token) => {
-            this.props.createDevice(fcm_token); // fcm token may not be available on first load, catch it here
+            this.props.dispatch(ReduxDevice.ActionCreator.createDevice(fcm_token))
+            //fix navigation bug if connect TabNav with 'mapDispatchToProps'
         });
 
         this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
@@ -157,9 +159,5 @@ const mapStateToProps = state => ({
     navigationState: state.Nav,
 });
 
-const mapDispatchToProps = dispatch => ({
-    createDevice: (fcm_token) => dispatch(ReduxDevice.ActionCreator.createDevice(fcm_token)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TabNav);
+export default connect(mapStateToProps, null)(TabNav);
 
