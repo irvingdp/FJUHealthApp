@@ -139,11 +139,12 @@ class PackageScreen extends Component {
                     navigation={this.navigation}
                     parentIsScrollView={true}
                     pageStyle={{backgroundColor: Colors.white}}
+                    adjustPageHeightMode={TabView.AdjustPageHeightMode.FIT_CONTENT}
                 />
                 {this.createDividers()}
 
             </ScrollView>
-        )
+        )   
     }
 }
 

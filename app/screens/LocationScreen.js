@@ -81,7 +81,7 @@ class LocationScreen extends Component {
                 </MapView>
                 <View style={{backgroundColor: Colors.white, margin: 16}}>
                     <View style={{padding: 20}}>
-                        <Text style={[{textAlign: 'center'},Texts.Font_16_400]}>輔大醫院 15樓 健康管理中心</Text>
+                        <Text style={[{textAlign: 'center'},Texts.Font_16_400]}>輔大醫院 15樓 聖路加健康管理中心</Text>
                         <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>新北市泰山區貴子路69號</Text>
                     </View>
                     <LockButton buttonStyle={{flexDirection: 'row', backgroundColor: Colors.green, height: 44, padding:12, justifyContent:'center', alignItems:'center'}}
@@ -96,14 +96,14 @@ class LocationScreen extends Component {
                         <Image style={{marginRight: 3}} resizeMode="contain" source={require('../res/images/train.png')}/>
                         <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>捷運</Text>
                     </View>
-                    <Text style={[{textAlign: 'center', marginTop: 10},Texts.Font_16_400]}>台北捷運新莊線輔大站、</Text>
-                    <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>機捷A5 站轉乘輔大接駁車</Text>
+                    <Text style={[{textAlign: 'center', marginTop: 10},Texts.Font_16_400]}>台北捷運新莊線輔大站 1號出口、</Text>
+                    <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>機捷A6泰山貴和站轉乘輔大接駁車</Text>
 
                     <View style={{marginTop: 24,justifyContent: 'center', alignItems: 'center', flexDirection: "row"}}>
                         <Image style={{marginRight: 3}} resizeMode="contain" source={require('../res/images/bus.png')}/>
                         <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>公車</Text>
                     </View>
-                    <Text style={[{marginTop: 20,textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>藍2、橘21、99、111、235、635、363、637、638、639、663、801、802、810、842、845、藍2、1501、1502、1503、1508、1510、1515、1803、5009、5075、5675、9102、513 299、615、618</Text>
+                    <Text style={[{marginTop: 20,textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503</Text>
                 </View>
             </View>
         )
