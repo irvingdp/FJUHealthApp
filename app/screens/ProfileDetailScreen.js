@@ -15,14 +15,14 @@ import {GENDER} from '../Enum'
 class ProfileDetailScreen extends Component {
     constructor(props) {
         super(props);
-        let {profile} = this.props;
+        let {profile, user} = this.props;
         this.state = {
             formData: {
                 name: profile.name,
-                id: profile.id,
+                uid: user.uid,
                 birthday: profile.birthday,
                 gender: profile.gender,
-                email: profile.email,
+                email: user.email,
                 phoneNumber: profile.phoneNumber,
                 contactAddress: profile.contactAddress,
             },
@@ -109,7 +109,7 @@ class ProfileDetailScreen extends Component {
                     />
                     <LabelInput labelText={"身分證字號 / 護照號碼"}
                                 textInputProps={{
-                                    value: this.state.formData.id,
+                                    value: this.state.formData.uid,
                                 }}
                                 inputType={LabelInput.INPUT_TYPE.TEXT}
                                 styleType={LabelInput.STYLE_TYPE.DISABLED}
@@ -196,6 +196,7 @@ class ProfileDetailScreen extends Component {
 const mapStateToProps = state => ({
     isLoggedIn: state.Auth.isLoggedIn,
     profile: state.Profile ? state.Profile.data : {},
+    user: state.User ? state.User.data : {},
     updateProfileError:  state.Profile.updateProfileError,
 });
 
