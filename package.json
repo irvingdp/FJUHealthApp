@@ -21,7 +21,7 @@
 		"react-native-show-hide-toggle-box": "git+https://github.com/irvingdp/react-native-show-hide-toggle-box.git#1.0.4",
 		"react-native-tab-view": "0.0.69",
 		"react-native-vector-icons": "^4.2.0",
-		"react-navigation": "^1.0.0-beta.12",
+		"react-navigation": "https://github.com/irvingdp/react-navigation.git#p1.0.0-beta.12",
 		"react-redux": "^5.0.5",
 		"redux": "^3.7.2",
 		"redux-logger": "^3.0.6",
