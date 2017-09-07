@@ -14,70 +14,60 @@ let Reducer = (state = initialAuthState, action) => {
         case ActionType.TOKEN_CHECKING:
             return {
                 ...state,
-                isFetching: true,
                 isLoggedIn: false,
                 checkingTokenError: null,
             };
         case ActionType.TOKEN_CHECKING_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: action.data.isLoggedIn,
                 checkingTokenError: null,
             };
         case ActionType.TOKEN_CHECKING_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: false,
                 checkingTokenError: action.error,
             };
         case ActionType.LOGGING:
             return {
                 ...state,
-                isFetching: true,
                 isLoggedIn: false,
                 loginError: null,
             };
         case ActionType.LOGIN_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: true,
                 loginError: null,
             };
         case ActionType.LOGIN_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: false,
                 loginError: action.error,
             };
         case ActionType.REGISTERING:
             return {
                 ...state,
-                isFetching: true,
                 isLoggedIn: false,
                 registerError: null,
             };
         case ActionType.REGISTER_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: true,
                 registerError: null,
             };
         case ActionType.REGISTER_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: false,
                 registerError: action.error,
             };
         case ActionType.LOGOUT:
             return {
                 ...state,
-                isFetching: false,
                 isLoggedIn: false,
             };
         default:
@@ -105,11 +95,11 @@ let ActionCreator = {
             return UserService.login({email, password}).then(json => {
                 return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
-                return dispatch({type: ActionType.LOGIN_SUCCESS});
-            }).then(() => {
                 return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
             }).then(() => {
                 return dispatch(ReduxDevice.ActionCreator.relateDeviceToUser());
+            }).then(() => {
+                return dispatch({type: ActionType.LOGIN_SUCCESS});
             }).catch(err => {
                 return dispatch({type: ActionType.LOGIN_FAIL, error: err})
             })
@@ -121,11 +111,11 @@ let ActionCreator = {
             return UserService.register({email, password, uid}).then(json => {
                 return DeviceStore.saveUserData({token: json.token});
             }).then(() => {
-                return dispatch({type: ActionType.REGISTER_SUCCESS});
-            }).then(() => {
                 return dispatch(ReduxDashboard.ActionCreator.loadDashboard());
             }).then(() => {
                 return dispatch(ReduxDevice.ActionCreator.relateDeviceToUser());
+            }).then(() => {
+                return dispatch({type: ActionType.REGISTER_SUCCESS});
             }).catch(err => {
                 return dispatch({type: ActionType.REGISTER_FAIL, error: err})
             })

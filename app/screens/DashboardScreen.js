@@ -33,7 +33,6 @@ class DashboardScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            initialized: false,
             token: "",
         }
     }
@@ -76,10 +75,6 @@ class DashboardScreen extends Component {
             if (data && data.token) {
                 return this.props.isValidToken(data.token);
             }
-        }).then(() => {
-            this.setState({initialized: true})
-        }).catch(() => {
-            this.setState({initialized: true})
         })
     }
 
@@ -161,9 +156,6 @@ class DashboardScreen extends Component {
     }
 
     render() {
-        if (!this.state.initialized) {
-            return (<Spinner />)
-        }
         if (this.props.reserved)
             return this.createReservedView();
         else
@@ -181,7 +173,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     isValidToken: (token) => dispatch(ReduxAuth.ActionCreator.isValidToken(token)),
-    loadDashboard: (token) => dispatch(ReduxDashboard.ActionCreator.loadDashboard()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen);

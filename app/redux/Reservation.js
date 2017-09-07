@@ -23,23 +23,21 @@ let Reducer = (state = initialState, action) => {
         case ActionType.RESERVING:
             return {
                 ...state,
-                isFetching: true,
                 reservationError: null,
             };
 
         case ActionType.RESERVE_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 reservationError: null,
             };
 
         case ActionType.RESERVE_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 reservationError: action.error,
             };
+
         case ActionType.LOGOUT:
             return initialState;
 

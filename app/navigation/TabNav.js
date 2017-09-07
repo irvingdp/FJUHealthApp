@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     Image,
     Platform,
+    View,
 } from 'react-native';
 import {connect} from 'react-redux';
 import ReduxDevice from '../redux/Device'
@@ -21,6 +22,9 @@ import {LocationStackNavigator} from './LocationNav'
 import {ProfileStackNavigator} from './ProfileNav'
 
 import {Colors} from '../styles/BaseStyles'
+import Spinner from '../componenets/Spinner'
+
+
 const routeConfiguration = {
     Dashboard: {
         screen: DashboardStackNavigator,
@@ -94,6 +98,8 @@ class TabNav extends Component {
     render() {
         const { dispatch, navigationState } = this.props;
         return (
+        <View style={{flex: 1}}>
+            <Spinner isShow={this.props.isShowGlobalSpinner}/>
             <TabBarNavigator
                 navigation={
                     addNavigationHelpers({
@@ -102,10 +108,9 @@ class TabNav extends Component {
                     })
                 }
             />
+        </View>
         )
     }
-
-
     componentDidMount() {
         FCM.requestPermissions(); // for iOS
         FCM.getFCMToken().then(fcm_token => {
@@ -157,6 +162,8 @@ class TabNav extends Component {
 
 const mapStateToProps = state => ({
     navigationState: state.Nav,
+
+    isShowGlobalSpinner: state.GlobalView.isShowGlobalSpinner,
 });
 
 export default connect(mapStateToProps, null)(TabNav);

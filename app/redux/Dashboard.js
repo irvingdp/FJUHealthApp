@@ -7,20 +7,17 @@ let Reducer = (state = initialState, action) => {
         case ActionType.DASHBOARD_FETCHING:
             return {
                 ...state,
-                isFetching: true,
                 error: null,
             };
 
         case ActionType.DASHBOARD_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 error: null,
             };
         case ActionType.DASHBOARD_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 error: action.error,
             };
         default:

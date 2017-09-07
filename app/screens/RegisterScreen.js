@@ -59,7 +59,6 @@ class RegisterScreen extends Component {
     render() {
         return (
             <View style={{flex: 1, justifyContent: "space-between"}}>
-                {this.props.isFetching ? <Spinner /> : null}
                 <Header/>
                 <View style={{
                     flex: 1,
@@ -164,7 +163,6 @@ class RegisterScreen extends Component {
 
 const mapStateToProps = state => ({
     isLoggedIn: state.Auth.isLoggedIn,
-    isFetching: state.Auth.isFetching,
     error: state.Auth.registerError,
 });
 

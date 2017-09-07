@@ -8,14 +8,12 @@ let Reducer = (state = initialState, action) => {
         case ActionType.CREATING_DEVICE:
             return {
                 ...state,
-                isFetching: true,
                 createDeviceError: null,
             };
 
         case ActionType.CREATE_DEVICE_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 createDeviceError: null,
                 data: action.data,
             };
@@ -23,7 +21,6 @@ let Reducer = (state = initialState, action) => {
         case ActionType.CREATE_DEVICE_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 createDeviceError: action.error,
             };
 

@@ -12,30 +12,27 @@ let Reducer = (state = initialState, action) => {
                 data: action.data.profile
             };
 
-        case ActionType.LOGOUT:
-            return initialState;
-
         case ActionType.UPDATING_PROFILE:
             return {
                 ...state,
-                isFetching: true,
                 updateProfileError: null,
             };
 
-        case ActionType.RESERVE_SUCCESS:
+        case ActionType.UPDATE_PROFILE_SUCCESS:
             return {
                 ...state,
-                isFetching: false,
                 data: action.data,
                 updateProfileError: null,
             };
 
-        case ActionType.RESERVE_FAIL:
+        case ActionType.UPDATE_PROFILE_FAIL:
             return {
                 ...state,
-                isFetching: false,
                 updateProfileError: action.error,
             };
+
+        case ActionType.LOGOUT:
+            return initialState;
 
         default:
             return state;

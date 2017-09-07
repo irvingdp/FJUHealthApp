@@ -9,6 +9,8 @@ import Profile from './Profile';
 import Dashboard from './Dashboard';
 import Report from './Report';
 import Device from './Device';
+import GlobalView from './GlobalView';
+import User from './User';
 
 const AppReducer = combineReducers({
     Nav: Nav.Reducer,
@@ -20,6 +22,8 @@ const AppReducer = combineReducers({
     Dashboard: Dashboard.Reducer,
     Report: Report.Reducer,
     Device: Device.Reducer,
+    GlobalView: GlobalView.Reducer,
+    User:  User.Reducer,
 });
 
 export default AppReducer;
