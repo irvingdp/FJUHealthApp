@@ -6,9 +6,10 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native'
-import {Texts, Layouts, Colors} from '../styles/BaseStyles'
+import {Texts, Colors} from '../styles/BaseStyles'
 import DatePicker from 'react-native-datepicker'
 import Dash from 'react-native-dash'
+import AppLabels from '../AppLabels'
 
 export default class LabelInput extends Component {
     constructor(props) {
@@ -178,9 +179,9 @@ export default class LabelInput extends Component {
                         date={date}
                         mode="date"
                         androidMode="spinner"
-                        format="YYYY-MM-DD"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
+                        format="YYYY-MM-DD" //TODO: localization the date
+                        confirmBtnText={AppLabels.Common.confirm}
+                        cancelBtnText={AppLabels.Common.cancel}
                         showIcon={false}
                         onDateChange={onPickerDone}
                     />

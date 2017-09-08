@@ -11,6 +11,7 @@ import {Texts, Layouts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import ReduxNav from '../redux/Nav'
 import {GENDER} from '../Enum'
+import AppLabels from '../AppLabels'
 
 class BookSuccessScreen extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class BookSuccessScreen extends Component {
     }
 
     static navigationOptions = {
-        title: 'Book Success',
+        title: AppLabels.BookScreen.bookSuccess,
         tabBarVisible: false,
         header: null
     };
@@ -37,10 +38,8 @@ class BookSuccessScreen extends Component {
                 </TouchableOpacity>
                 <View style={[{flex: 1, padding: 32, backgroundColor: Colors.white, alignItems: "center"}]}>
                     <Image source={require('../res/images/calendar-book-success.png')} resizeMode={"contain"}/>
-                    <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>Appointment
-                        Submitted!</Text>
-                    <Text style={[Texts.Font_14_400, {color: Colors.textBlack, marginTop: 12}]}>You have booked an
-                        appointment for:</Text>
+                    <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>{AppLabels.BookScreen.appointmentSubmitted}</Text>
+                    <Text style={[Texts.Font_14_400, {color: Colors.textBlack, marginTop: 12}]}>{AppLabels.BookScreen.appointmentFor}</Text>
                     <View style={{
                         flex: 1,
                         padding: 16,
@@ -51,14 +50,12 @@ class BookSuccessScreen extends Component {
                         backgroundColor: Colors.greyf3,
                         borderRadius: 8,
                     }}>
-                        <Text style={[Texts.Font_20_400, {color: Colors.textBlack}]}>{selectedPackage.title + " (" + GENDER[selectedPackage.gender.toUpperCase()] + ")"}</Text>
-                        <Text style={[Texts.Font_14_400, {color: Colors.textBlack, marginTop: 8}]}>{reservation.reserveDate.format("DD MMM YYYY, A hh:mm")}</Text>
+                        <Text style={[Texts.Font_20_400, {color: Colors.textBlack}]}>{selectedPackage.title + " (" + AppLabels.Common[selectedPackage.gender].toLocaleUpperCase() + ")"}</Text>
+                        <Text style={[Texts.Font_14_400, {color: Colors.textBlack, marginTop: 8}]}>{reservation.reserveDate.format(AppLabels.Common.dateTimeFormat)}</Text>
                     </View>
                 </View>
                 <View style={[Layouts.centerLayout, {flex: 1, padding: 32, backgroundColor: Colors.deepGreen}]}>
-                    <Text style={[Texts.Font_16_400, {textAlign: "center",color: Colors.white}]}>
-                        Please proceed with making payment to complete your reservation.
-                    </Text>
+                    <Text style={[Texts.Font_16_400, {textAlign: "center",color: Colors.white}]}>{AppLabels.BookScreen.proceedPayment}</Text>
                     <LockButton buttonStyle={{marginTop: 24}}
                                 onPress={() => 0} //TODO: payment screen
                     >
@@ -73,11 +70,11 @@ class BookSuccessScreen extends Component {
                             <Text style={[Texts.Font_17_600, {
                                 color: Colors.green,
                                 textAlign: "center"
-                            }]}>How To Make Payment</Text>
+                            }]}>{AppLabels.Common.howToMakePayment}</Text>
                         </View>
                     </LockButton>
-                    <Text style={[Texts.Font_14_400, {textAlign: "center",color: Colors.white, marginTop: 26}]}>
-                        Once payment is received, we will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.
+                    <Text style={[Texts.Font_14_400, {textAlign: "center",color: Colors.white, marginTop: 26, lineHeight: 20}]}>
+                        {AppLabels.BookScreen.paymentFinishedDescription}
                     </Text>
                 </View>
             </View>

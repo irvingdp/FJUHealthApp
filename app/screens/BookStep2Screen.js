@@ -13,15 +13,11 @@ import LockButton from '../componenets/LockButton'
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
+import AppLabels from '../AppLabels'
 
 
-LocaleConfig.locales['tw'] = {
-    monthNames: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    monthNamesShort: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    dayNames: [,'星期日', '星期一','星期二','星期三','星期四','星期五','星期六'],
-    dayNamesShort: ['日','一','二','三','四','五','六']
-};
-LocaleConfig.defaultLocale = 'tw';
+LocaleConfig.locales[AppLabels.Common.calendarDefaultLocale] = AppLabels.Common.calendarLocaleConfig;
+LocaleConfig.defaultLocale = AppLabels.Common.calendarDefaultLocale;
 
 class BookStep2Screen extends Component {
     constructor(props) {
@@ -34,7 +30,7 @@ class BookStep2Screen extends Component {
         };
     }
     static navigationOptions = {
-        title: 'Book Appointment',
+        title: AppLabels.Common.reservation,
         tabBarVisible: false,
     };
     _doClientValidation() {
@@ -66,7 +62,7 @@ class BookStep2Screen extends Component {
                     <Text style={{
                         ...Texts.Font_14_600,
                         color: Colors.white,
-                    }}>2. Select Date</Text>
+                    }}>{AppLabels.BookScreen.selectDate}</Text>
                     <Text style={{
                         ...Texts.Font_14_600,
                         color: Colors.white,
@@ -115,7 +111,7 @@ class BookStep2Screen extends Component {
                     <Text  style={{
                         ...Texts.Font_17_600,
                         color: Colors.white,
-                    }}>Continue</Text>
+                    }}>{AppLabels.Common.continue}</Text>
                 </LockButton>
             </View>
         )
@@ -123,30 +119,13 @@ class BookStep2Screen extends Component {
 }
 
 const viewDataTransformer = {
-    /*
-    selectedDay: (date) => {
-        if(date) {
-            return {
-                timestamp:  moment(date).unix(),
-                dateString:  moment(date).format('YYYY-MM-DD'),
-            };
-        } else {
-            return null;
-        }
-
-    },
-    */
     formatSelectedDay: (date) => {
         return date ? moment(date.timestamp).format('YYYY-MM-DD') : "";
     }
-}
-const mapStateToProps = state => ({
-    //selectedDay: viewDataTransformer.selectedDay(state.Reservation.reserveDate),
-});
-
+};
 const mapDispatchToProps = dispatch => ({
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     setDate: ({reserveDate}) => dispatch(ReduxReservation.ActionCreator.setDate({reserveDate})),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookStep2Screen);
+export default connect(null, mapDispatchToProps)(BookStep2Screen);

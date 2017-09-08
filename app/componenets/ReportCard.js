@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import {Texts, Colors} from '../styles/BaseStyles'
 import moment from 'moment'
+import AppLabels from '../AppLabels'
 
 export default class ReportCard extends Component {
     static propTypes = {
@@ -57,7 +58,7 @@ export default class ReportCard extends Component {
                             borderRadius: 5,
                             marginRight: 12
                         }}>
-                            <Text style={[Texts.Font_14_400, {color: Colors.white}]}>NEW</Text>
+                            <Text style={[Texts.Font_14_400, {color: Colors.white}]}>{AppLabels.Common.new}</Text>
                         </View>
                         : null}
                     <Image

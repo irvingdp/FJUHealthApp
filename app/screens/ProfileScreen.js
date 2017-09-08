@@ -9,7 +9,7 @@ import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from "../componenets/LockButton"
 import ReservationButton from "../componenets/ReservationButton"
 import ReportCard from '../componenets/ReportCard'
-
+import AppLabels from '../AppLabels'
 
 class ProfileScreen extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class ProfileScreen extends Component {
     }
 
     static navigationOptions = {
-        title: 'Profile',
+        title: AppLabels.ProfileScreen.title,
     }
 
     render() {
@@ -36,13 +36,12 @@ class ProfileScreen extends Component {
                     borderColor: Colors.textWhite,
                     borderWidth: 1,
                 }}
-                            onPress={() => this.props.navigate({routeName: Routes.ProfileDetail})}
-                >
+                    onPress={() => this.props.navigate({routeName: Routes.ProfileDetail})}>
 
                     <Text style={[Texts.Font_14_600, {
                         color: Colors.white,
                         textAlign: "center"
-                    }]}>修改個人資料</Text>
+                    }]}>{AppLabels.ProfileScreen.editProfile}</Text>
 
                 </LockButton>
             </View>
@@ -59,7 +58,7 @@ class ProfileScreen extends Component {
                     color: Colors.textBlack,
                     textAlign: "center",
                     marginTop: 22,
-                }]}>尚未有健檢報告</Text>
+                }]}>{AppLabels.ProfileScreen.noReport}</Text>
                 <ReservationButton />
             </View>
         );
@@ -69,7 +68,7 @@ class ProfileScreen extends Component {
                 <View style={{flex: 1, backgroundColor: Colors.grey,paddingLeft:16,paddingRight:16,paddingTop:20,paddingBottom:20}}>
                     <Text style={[Texts.Font_14_600, {
                         color: Colors.textBlack,
-                    }]}>健檢報告</Text>
+                    }]}>{AppLabels.ProfileScreen.report}</Text>
                     {(this.props.report||[]).map((report,index) =>
                         <ReportCard key={index} report={report} showNew={index === 0}/>
                     )}

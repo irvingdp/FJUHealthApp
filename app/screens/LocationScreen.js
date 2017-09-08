@@ -22,9 +22,8 @@ const MARK_REGION = {
     longitude : 121.428477,
 }
 
-const ADDRESS = '新北市泰山區貴子路69號';
+const ADDRESS = AppLabels.LocationScreen.address;
 
-//TODO: react-native-maps .. set a google API KEY on android
 class LocationScreen extends Component {
     constructor(props) {
         super(props);
@@ -81,29 +80,29 @@ class LocationScreen extends Component {
                 </MapView>
                 <View style={{backgroundColor: Colors.white, margin: 16}}>
                     <View style={{padding: 20}}>
-                        <Text style={[{textAlign: 'center'},Texts.Font_16_400]}>輔大醫院 15樓 聖路加健康管理中心</Text>
-                        <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>新北市泰山區貴子路69號</Text>
+                        <Text style={[{textAlign: 'center'},Texts.Font_16_400]}>{AppLabels.LocationScreen.hospitalName}</Text>
+                        <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>{AppLabels.LocationScreen.address}</Text>
                     </View>
                     <LockButton buttonStyle={{flexDirection: 'row', backgroundColor: Colors.green, height: 44, padding:12, justifyContent:'center', alignItems:'center'}}
                                 onPress={() => this._goDirection()}>
                         <Image style={{marginRight: 5}} resizeMode="contain" source={require('../res/images/peach.png')}/>
-                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.white}, Texts.Font_17_600]}>規劃路線</Text>
+                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.white}, Texts.Font_17_600]}>{AppLabels.LocationScreen.navigation}</Text>
                     </LockButton>
                 </View>
 
                 <View style={{backgroundColor: Colors.white,margin: 16, marginTop: 0,padding: 20}}>
                     <View style={{justifyContent: 'center', alignItems: 'center', flexDirection: "row"}}>
                         <Image style={{marginRight: 3}} resizeMode="contain" source={require('../res/images/train.png')}/>
-                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>捷運</Text>
+                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>{AppLabels.LocationScreen.mrt}</Text>
                     </View>
-                    <Text style={[{textAlign: 'center', marginTop: 10},Texts.Font_16_400]}>台北捷運新莊線輔大站 1號出口、</Text>
-                    <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>機捷A6泰山貴和站轉乘輔大接駁車</Text>
+                    <Text style={[{textAlign: 'center', marginTop: 10},Texts.Font_16_400]}>{AppLabels.LocationScreen.mrtInfo1}</Text>
+                    <Text style={[{textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>{AppLabels.LocationScreen.mrtInfo2}</Text>
 
                     <View style={{marginTop: 24,justifyContent: 'center', alignItems: 'center', flexDirection: "row"}}>
                         <Image style={{marginRight: 3}} resizeMode="contain" source={require('../res/images/bus.png')}/>
-                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>公車</Text>
+                        <Text style={[{textAlign: 'center',textAlignVertical: 'center', color: Colors.green}, Texts.Font_17_600]}>{AppLabels.LocationScreen.bus}</Text>
                     </View>
-                    <Text style={[{marginTop: 20,textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503</Text>
+                    <Text style={[{marginTop: 20,textAlign: 'center', marginTop: 5},Texts.Font_16_400]}>{AppLabels.LocationScreen.busInfo}</Text>
                 </View>
             </View>
         )

@@ -12,9 +12,8 @@ import {
 import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import LabelInput from '../componenets/LabelInput';
-import OptionButton from '../componenets/OptionButton'
-import {GENDER} from '../Enum'
 import moment from 'moment'
+import AppLabels from '../AppLabels'
 
 class BookStep3Screen extends Component {
     constructor(props) {
@@ -51,7 +50,7 @@ class BookStep3Screen extends Component {
     }
 
     static navigationOptions = {
-        title: 'Book Appointment',
+        title: AppLabels.Common.reservation,
         tabBarVisible: false,
     };
 
@@ -92,7 +91,7 @@ class BookStep3Screen extends Component {
             contactAddress: this.state.formData.contactAddress,
         }).then(() => {
             if(this.props.reservationError) {
-                Alert.alert("ERROR",this.props.reservationError.message);
+                Alert.alert(AppLabels.Common.error.toLocaleUpperCase(),this.props.reservationError.message);
             } else {
                 this.props.navigate({routeName: Routes.BookSuccessScreen});
             }
@@ -112,7 +111,7 @@ class BookStep3Screen extends Component {
                     <Text style={{
                         ...Texts.Font_14_600,
                         color: Colors.white,
-                    }}>3. Personal Details</Text>
+                    }}>{AppLabels.BookScreen.personalDetails}</Text>
                 </View>
                 <ScrollView
                     //TODO: Ivan: use Aware kb scroll view
@@ -124,7 +123,7 @@ class BookStep3Screen extends Component {
                         paddingBottom: 40,
                         backgroundColor: Colors.white
                     }}>
-                    <LabelInput labelText={"Name"}
+                    <LabelInput labelText={AppLabels.Common.name}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -139,7 +138,7 @@ class BookStep3Screen extends Component {
                                     errorMsg={this.state.errorMsg.name}
                                     styleType={LabelInput.STYLE_TYPE.BLACK}
                     />
-                    <LabelInput labelText={"Date of Birth"}
+                    <LabelInput labelText={AppLabels.Common.birthday}
                                     valid={this.state.validation.birthday}
                                     errorMsg={this.state.errorMsg.birthday}
                                     styleType={LabelInput.STYLE_TYPE.BLACK}
@@ -153,7 +152,7 @@ class BookStep3Screen extends Component {
                                     }}
                                     style={{marginTop: 24}}
                     />
-                    <LabelInput labelText={"Mobile Number"}
+                    <LabelInput labelText={AppLabels.Common.mobileNumber}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -169,7 +168,7 @@ class BookStep3Screen extends Component {
                                     styleType={LabelInput.STYLE_TYPE.BLACK}
                                     style={{marginTop: 24}}
                     />
-                    <LabelInput labelText={"Address"}
+                    <LabelInput labelText={AppLabels.Common.address}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -185,23 +184,6 @@ class BookStep3Screen extends Component {
                                     styleType={LabelInput.STYLE_TYPE.BLACK}
                                     style={{marginTop: 24}}
                     />
-
-                    { false && <Text style={[{marginTop: 24, color: Colors.textGrey}, Texts.Font_14_400]}>Gender</Text>}
-                    { false && <View style={{marginTop: 14, marginBottom: 50, flex: 1, flexDirection: "row"}}>
-                        <View style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
-                            <OptionButton buttonStyle={{marginRight: 8}} id={GENDER.MALE}
-                                          isSelected={this.state.gender === GENDER.MALE}
-                                          onPress={id => this.setState({...this.state.formData, gender: id})}/>
-                            <Text style={[{marginRight: 8, color: Colors.textGrey}, Texts.Font_14_400]}>Male</Text>
-                        </View>
-                        <View style={{flex: 1, flexDirection: "row", alignItems: "center"}}>
-                            <OptionButton buttonStyle={{marginRight: 8}} id={GENDER.FEMALE}
-                                          isSelected={this.state.gender === GENDER.FEMALE}
-                                          onPress={id => this.setState({...this.state.formData, gender: id})}/>
-                            <Text style={[{marginRight: 8, color: Colors.textGrey}, Texts.Font_14_400]}>Female</Text>
-                        </View>
-                    </View>
-                    }
                 </ScrollView>
 
                 <LockButton buttonStyle={{
@@ -216,7 +198,7 @@ class BookStep3Screen extends Component {
                     <Text style={{
                         ...Texts.Font_17_600,
                         color: Colors.white,
-                    }}>Submit</Text>
+                    }}>{AppLabels.Common.submit}</Text>
                 </LockButton>
             </View>
         )

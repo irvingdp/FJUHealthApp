@@ -5,6 +5,7 @@ import {
 import LockButton from '../componenets/LockButton';
 import ReduxAuth from '../redux/Auth'
 import {connect} from 'react-redux';
+import AppLabels from '../AppLabels'
 
  class LogoutButton extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ import {connect} from 'react-redux';
         } else {
             return (
                 <LockButton onPress={() => this.props.logout()} buttonStyle={{marginRight: 10}} >
-                    <Text>Logout</Text>
+                    <Text>{AppLabels.Common.logout}</Text>
                 </LockButton>
             )
         }

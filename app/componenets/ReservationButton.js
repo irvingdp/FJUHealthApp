@@ -8,6 +8,7 @@ import LockButton from '../componenets/LockButton';
 import {connect} from 'react-redux';
 import Routes from '../navigation/Routes';
 import ReduxNav from '../redux/Nav'
+import AppLabels from '../AppLabels'
 
 class ReservationButton extends Component {
     render() {
@@ -28,7 +29,7 @@ class ReservationButton extends Component {
                         marginLeft: 10,
                         color: Colors.white,
                         textAlign: "center"
-                    }]}>立即預約</Text>
+                    }]}>{AppLabels.DashboardScreen.appointmentImm}</Text>
                 </View>
             </LockButton>
         )

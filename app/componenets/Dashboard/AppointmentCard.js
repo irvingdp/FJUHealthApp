@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DashboardCard from './DashboardCard'
 import moment from 'moment'
+import AppLabels from '../../AppLabels'
 
 export default class AppointmentCard extends Component {
     static propTypes = {
@@ -12,12 +13,13 @@ export default class AppointmentCard extends Component {
             return null;
 
         let selectedPackage = this.props.packages[this.props.reserved.package_id_fk];
-        let description = "You have booked an appointment for " + moment(this.props.reserved.reserveDate).format("DD MMM YYYY") + "(" + selectedPackage.title + ").";
+        let description = AppLabels.DashboardScreen.bookFor.replace("$date", moment(this.props.reserved.reserveDate).format(AppLabels.Common.dateFormat))
+            + "(" + selectedPackage.title + ").";
 
         return (
             <DashboardCard
                 type={DashboardCard.TYPE.FINISH}
-                title={"APPOINTMENT"}
+                title={AppLabels.Common.appointment.toLocaleUpperCase()}
                 date={this.props.reserved.createdAt}
                 description={description}
             />

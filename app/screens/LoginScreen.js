@@ -4,19 +4,15 @@ import Routes from '../navigation/Routes';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {
-    Button,
-    StyleSheet,
     Text,
     View,
-    Image,
-    ActivityIndicator
 } from 'react-native';
-import {Texts, Layouts, Colors} from '../styles/BaseStyles'
+import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton';
 import LabelInput from '../componenets/LabelInput';
-import Spinner from '../componenets/Spinner'
 import ErrorMessage from "../componenets/ErrorMessage";
 import Header from "../componenets/Header";
+import AppLabels from "../AppLabels";
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -37,7 +33,7 @@ class LoginScreen extends Component {
         }
     }
     static navigationOptions = {
-        title: 'Login',
+        title: AppLabels.LoginScreen.title,
         tabBarVisible: false,
         header: null
     };
@@ -67,7 +63,7 @@ class LoginScreen extends Component {
                     paddingTop: 40,
                     backgroundColor: Colors.lightGreen
                 }}>
-                    <LabelInput labelText={"Email Address"}
+                    <LabelInput labelText={AppLabels.LoginScreen.email}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -82,7 +78,7 @@ class LoginScreen extends Component {
                                     errorMsg={this.state.errorMsg.email}
                     />
                     <LabelInput style={{marginTop: 25}}
-                                    labelText={"Password"}
+                                    labelText={AppLabels.LoginScreen.password}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -113,7 +109,7 @@ class LoginScreen extends Component {
                             <Text style={[Texts.Font_17_600, {
                                 color: Colors.green,
                                 textAlign: "center"
-                            }]}>Login</Text>
+                            }]}>{AppLabels.LoginScreen.login}</Text>
                         </View>
                     </LockButton>
                     <Text style={[Texts.Font_14_400, {
@@ -123,12 +119,12 @@ class LoginScreen extends Component {
                         textDecorationLine: "underline"
                     }]}
                       onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}
-                    >Forgot your password?</Text>
+                    >{AppLabels.LoginScreen.forgetPassword}</Text>
                 </View>
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        I don't have an account. <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Register})}>Register</Text>
+                        {AppLabels.LoginScreen.noAccount} <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Register})}>{AppLabels.LoginScreen.register}</Text>
                     </Text>
                 </View>
             </View>

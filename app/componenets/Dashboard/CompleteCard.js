@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import DashboardCard from './DashboardCard'
 import moment from 'moment'
+import AppLabels from '../../AppLabels'
 
 export default class CompleteCard extends Component {
     static propTypes = {
@@ -11,9 +12,9 @@ export default class CompleteCard extends Component {
         return (
             <DashboardCard
                 type={this.props.type}
-                title={"COMPLETE"}
+                title={AppLabels.Common.complete}
                 date={moment(this.props.reserved.reserveDate).format("YYYY-MM-DD")}
-                description={"You are ready for your examination today. Please come on time. See you!"}
+                description={AppLabels.DashboardScreen.comeOnTime}
             />
         )
     }

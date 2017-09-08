@@ -11,6 +11,7 @@ import LockButton from "../componenets/LockButton"
 import LabelInput from '../componenets/LabelInput';
 import moment from 'moment'
 import {GENDER} from '../Enum'
+import AppLabels from '../AppLabels'
 
 class ProfileDetailScreen extends Component {
     constructor(props) {
@@ -186,7 +187,7 @@ class ProfileDetailScreen extends Component {
                     <Text style={{
                         ...Texts.Font_17_600,
                         color: Colors.white,
-                    }}>儲存</Text>
+                    }}>{AppLabels.Common.save}</Text>
                 </LockButton>
             </View>
 

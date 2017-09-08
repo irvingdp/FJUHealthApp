@@ -7,15 +7,12 @@ import {
     ScrollView,
 } from 'react-native';
 import {connect} from 'react-redux';
-import AppLabels from '../AppLabels';
 import {Colors, Texts} from '../styles/BaseStyles'
 import DeviceStore from '../DeviceStore'
 
 import LogoutButton from '../componenets/LogoutButton';
-import Spinner from '../componenets/Spinner'
 
 import ReduxAuth from '../redux/Auth'
-import ReduxDashboard from '../redux/Dashboard'
 
 import {GENDER} from '../Enum'
 import moment from 'moment';
@@ -27,6 +24,7 @@ import CompleteCard from "../componenets/Dashboard/CompleteCard"
 import DashboardCard from "../componenets/Dashboard/DashboardCard"
 import ReservationButton from '../componenets/ReservationButton'
 import ReportCard from '../componenets/ReportCard'
+import AppLabels from '../AppLabels'
 
 //TODO: Ivan use aware kb scroll in registered form.
 class DashboardScreen extends Component {
@@ -86,14 +84,12 @@ class DashboardScreen extends Component {
                         source={require('../res/images/dashboard-calendar.png')}
                         resizeMode={"contain"}
                     />
-                    <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>No Appointment Yet!</Text>
-                    <Text style={[Texts.Font_14_400, {color: Colors.textGrey, marginTop: 12}]}>Schedule a medical checkup
-                        with us.</Text>
+                    <Text style={[Texts.Font_17_600, {color: Colors.textBlack, marginTop: 12}]}>{AppLabels.DashboardScreen.notYetAppointment}</Text>
                     <ReservationButton/>
                 </View>
                 {this.props.latestReport ?
                     <View style={{height: 153, backgroundColor: Colors.green, padding: 16}}>
-                        <Text style={[Texts.Font_14_400, {color: Colors.textWhite}]}>我的健檢紀錄</Text>
+                        <Text style={[Texts.Font_14_400, {color: Colors.textWhite}]}>{AppLabels.DashboardScreen.myReports}</Text>
                         <ReportCard report={this.props.latestReport} showNew={true}/>
                     </View>
                     : null
@@ -107,18 +103,17 @@ class DashboardScreen extends Component {
         return (
             <ScrollView style={{flex: 1, backgroundColor: Colors.white}}>
                 <View style={{backgroundColor: Colors.green, padding: 16}}>
-                    <Text style={[Texts.Font_14_600, {textAlign: "center", color: Colors.white}]}>Your
-                        Appointment</Text>
+                    <Text style={[Texts.Font_14_600, {textAlign: "center", color: Colors.white}]}>{AppLabels.DashboardScreen.yourAppointment}</Text>
                     <Text style={[Texts.Font_20_400, {
                         textAlign: "center",
                         color: Colors.white,
                         marginTop: 12
-                    }]}>{this.props.reserved.package.title + " (" + GENDER[this.props.reserved.package.gender.toUpperCase()] + ")"}</Text>
+                    }]}>{this.props.reserved.package.title + " (" + AppLabels.Common[this.props.reserved.package.gender].toLocaleUpperCase() + ")"}</Text>
                     <Text style={[Texts.Font_14_400, {
                         textAlign: "center",
                         color: Colors.white,
                         marginTop: 3
-                    }]}>{moment(this.props.reserved.reserveDate).format("DD MMM YYYY, A hh:mm")}</Text>
+                    }]}>{moment(this.props.reserved.reserveDate).format(AppLabels.Common.dateTimeFormat)}</Text>
                 </View>
                 <AppointmentCard
                     reserved={this.props.reserved}

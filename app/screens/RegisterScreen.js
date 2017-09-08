@@ -6,14 +6,13 @@ import {connect} from 'react-redux';
 import {
     Text,
     View,
-    Image,
 } from 'react-native';
-import {Texts, Layouts, Colors} from '../styles/BaseStyles'
+import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton';
 import LabelInput from '../componenets/LabelInput';
-import Spinner from '../componenets/Spinner'
 import ErrorMessage from '../componenets/ErrorMessage';
 import Header from '../componenets/Header'
+import AppLabels from '../AppLabels'
 
 class RegisterScreen extends Component {
     constructor(props) {
@@ -37,7 +36,7 @@ class RegisterScreen extends Component {
         }
     }
     static navigationOptions = {
-        title: 'Register',
+        title: AppLabels.RegisterScreen.title,
         tabBarVisible: false,
         header: null
     };
@@ -70,14 +69,15 @@ class RegisterScreen extends Component {
                 }}>
                     <Text style={[Texts.Font_17_600, {
                         color: Colors.white,
-                    }]}>Create A New Account</Text>
+                    }]}>{AppLabels.RegisterScreen.newAccount}</Text>
                     <Text style={[Texts.Font_14_400, {
                         color: Colors.white,
-                        marginTop: 12
-                    }]}>Schedule an appointment, get reminders, see your check up report and more.</Text>
+                        marginTop: 12,
+                        lineHeight: 20,
+                    }]}>{AppLabels.RegisterScreen.newAccountDescription}</Text>
 
                     <LabelInput style={{marginTop: 25}}
-                                labelText={"ID"}
+                                labelText={AppLabels.RegisterScreen.id}
                                 textInputProps={{
                                     onChangeText: (text) => {
                                         this.setState({
@@ -92,7 +92,7 @@ class RegisterScreen extends Component {
                                 errorMsg={this.state.errorMsg.uid}
                     />
                     <LabelInput style={{marginTop: 25}}
-                                    labelText={"Email Address"}
+                                    labelText={AppLabels.RegisterScreen.email}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -107,7 +107,7 @@ class RegisterScreen extends Component {
                                     errorMsg={this.state.errorMsg.email}
                     />
                     <LabelInput style={{marginTop: 25}}
-                                    labelText={"Password"}
+                                    labelText={AppLabels.RegisterScreen.password}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -138,7 +138,7 @@ class RegisterScreen extends Component {
                             <Text style={[Texts.Font_17_600, {
                                 color: Colors.green,
                                 textAlign: "center"
-                            }]}>Register</Text>
+                            }]}>{AppLabels.RegisterScreen.register}</Text>
                         </View>
                     </LockButton>
 
@@ -146,14 +146,14 @@ class RegisterScreen extends Component {
                         marginTop: 15,
                         color: Colors.textWhite,
                     }]}>
-                        By registering, you agree to our <Text style={{textDecorationLine: "underline"}} onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}>Terms & conditions</Text>
+                        {AppLabels.RegisterScreen.termsDescription} <Text style={{textDecorationLine: "underline"}} onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}>{AppLabels.RegisterScreen.termsConditions}</Text>
                     </Text>
 
                 </View>
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        Already have an account? <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Login})}>Login</Text>
+                        {AppLabels.RegisterScreen.alreadyHaveAccount} <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Login})}>{AppLabels.RegisterScreen.login}</Text>
                     </Text>
                 </View>
             </View>

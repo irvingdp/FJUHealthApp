@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DashboardCard from './DashboardCard'
+import AppLabels from '../../AppLabels'
 
 export default class PackageCard extends Component {
     static propTypes = {
@@ -20,11 +21,11 @@ export default class PackageCard extends Component {
 
         //TODO: package sent wording?
         let description = this.props.reserved.sentPackageDate ?
-            "Package sent." : "We will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.";
+            AppLabels.DashboardScreen.packageSent : AppLabels.DashboardScreen.packageWillSend;
         return (
             <DashboardCard
                 type={this._getType()}
-                title={"PACKAGE"}
+                title={AppLabels.Common.package.toLocaleUpperCase()}
                 date={this.props.reserved.sentPackageDate && this.props.reserved.sentPackageDate}
                 description={description}
             />

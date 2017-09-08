@@ -5,7 +5,6 @@ import {
     Text,
     ScrollView,
     Image,
-    ImageBackground,
 } from 'react-native';
 import AppLabels from '../AppLabels';
 import {Texts, Colors} from '../styles/BaseStyles'
@@ -81,13 +80,8 @@ class PackageScreen extends Component {
             >
                 <View style={{backgroundColor: Colors.white, paddingTop: 28, paddingBottom: 20}}>
                     <View style={{paddingRight: 32, paddingLeft: 32}}>
-                        <Text style={[Texts.Font_17_600, {color: Colors.textBlack, textAlign: 'center'}]}>Our Screening
-                            Solutions</Text>
-                        <Text
-                            style={[Texts.Font_16_400, {marginTop: 12, color: Colors.textBlack, textAlign: 'center'}]}>Complete
-                            with a
-                            personal
-                            consultation, lifestyle counselling, medical review, medical report and much more.</Text>
+                        <Text style={[Texts.Font_17_600, {color: Colors.textBlack, textAlign: 'center'}]}>{AppLabels.PackageScreen.ourPackages}</Text>
+                        <Text style={[Texts.Font_16_400, {marginTop: 12, color: Colors.textBlack, textAlign: 'center'}]}>{AppLabels.PackageScreen.packageDescription}</Text>
                     </View>
 
                 </View>
@@ -99,7 +93,7 @@ class PackageScreen extends Component {
                             textAlign: 'center',
                             backgroundColor: "transparent",
                             marginTop: 25
-                        }]}>菁英</Text>
+                        }]}>{"菁英"/* //TODO: how to localization package data */}</Text>
                         <Text style={[Texts.Font_20_400, {
                             color: Colors.textBlack,
                             textAlign: 'center',
@@ -128,7 +122,7 @@ class PackageScreen extends Component {
                         color: Colors.textBlack,
                         textAlign: 'center',
                         backgroundColor: "transparent"
-                    }]}>〈輔大校友、教友和教職員、新五泰的鄰居及企業客戶，享有專案特惠安排〉</Text>
+                    }]}>{AppLabels.PackageScreen.promotion}</Text>
                 </View>
 
                 {this.createDividers()}

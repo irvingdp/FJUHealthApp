@@ -1,3 +1,4 @@
+//TODO: localization this file.
 export const PackageData = [
     {
         group: 3,

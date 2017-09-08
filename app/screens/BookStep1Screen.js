@@ -13,6 +13,7 @@ import {Texts, Colors} from '../styles/BaseStyles'
 import LockButton from '../componenets/LockButton'
 import OptionButton from '../componenets/OptionButton'
 import {GENDER} from '../Enum'
+import AppLabels from '../AppLabels'
 
 class BookStep1Screen extends Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class BookStep1Screen extends Component {
         };
     }
     static navigationOptions = {
-        title: 'Book Appointment',
+        title: AppLabels.Common.reservation,
         tabBarVisible: false,
     };
     _gridOnPress(group) {
@@ -42,12 +43,12 @@ class BookStep1Screen extends Component {
                     <View style={{flex: 1,flexDirection: "column", backgroundColor: Colors.white}}>
                         <View style={{flex: 1,flexDirection: "row", padding: 16, alignItems: "center", borderBottomWidth: 1, borderColor: Colors.grey}}>
                             <OptionButton buttonStyle={{marginRight: 8}} value={item[GENDER.MALE]} isSelected={this.state.selectedItem.id === item[GENDER.MALE].id} onPress={i => this.setState({selectedItem: i})} />
-                            <Text style={{marginRight: 8}}>男</Text>
+                            <Text style={{marginRight: 8}}>{AppLabels.Common.male}</Text>
                             <Text style={{marginRight: 8}}>{item[GENDER.MALE].price}</Text>
                         </View>
                         <View style={{flex: 1,flexDirection: "row", padding: 16, alignItems: "center"}}>
                             <OptionButton buttonStyle={{marginRight: 8}} value={item[GENDER.FEMALE]} isSelected={this.state.selectedItem.id === item[GENDER.FEMALE].id} onPress={i => this.setState({selectedItem: i})} />
-                            <Text style={{marginRight: 8}}>女</Text>
+                            <Text style={{marginRight: 8}}>{AppLabels.Common.female}</Text>
                             <Text style={{marginRight: 8}}>{item[GENDER.FEMALE].price}</Text>
                         </View>
                     </View>
@@ -82,7 +83,7 @@ class BookStep1Screen extends Component {
                     <Text style={{
                         ...Texts.Font_14_600,
                         color: Colors.white,
-                    }}>1. Select Package</Text>
+                    }}>{AppLabels.BookScreen.selectPackage}</Text>
                 </View>
                 <ScrollView style={{flex: 1, flexDirection: "column"}}>
                     {this._createGrids()}
@@ -98,7 +99,7 @@ class BookStep1Screen extends Component {
                     <Text  style={{
                         ...Texts.Font_17_600,
                         color: Colors.white,
-                    }}>Continue</Text>
+                    }}>{AppLabels.Common.continue}</Text>
                 </LockButton>
             </View>
         )
