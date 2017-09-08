@@ -8,6 +8,13 @@ const PackageService = {
 
         })
     },
+    getPackageDetails: () => {
+        let endPoint = DomainCommon.buildAPIUrl() + "package/details";
+        return new Promise((resolve, reject) => {
+            return DomainCommon.fetch(endPoint, resolve, reject, 'GET');
+
+        })
+    },
 };
 
 export default PackageService;

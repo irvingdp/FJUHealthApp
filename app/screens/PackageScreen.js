@@ -10,44 +10,21 @@ import AppLabels from '../AppLabels';
 import {Texts, Colors} from '../styles/BaseStyles'
 import TabView from '../componenets/TabView'
 import PackageCard from '../componenets/PackageCard'
-import {PackageData} from '../PackageData'
+import ReduxPackage from '../redux/Package'
 import arrayUtils from '../utils/Array'
 
 class PackageScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.navigation = {
-                index: 0,
-                routes: [
-                    {
-                        key: '1',
-                        group: 3,
-                        title: PackageData.find(p => p.group === 3).title,
-                        content: this.createTabContent(3)
-                    },
-                    {
-                        key: '2',
-                        group: 2,
-                        title: PackageData.find(p => p.group === 2).title,
-                        content: this.createTabContent(2)
-                    },
-                    {
-                        key: '3',
-                        group: 1,
-                        title: PackageData.find(p => p.group === 1).title,
-                        content: this.createTabContent(1)
-                    }
-                ],
-        };
     }
 
     static navigationOptions = {
         title: AppLabels.PackageScreen.title,
     };
 
-    createTabContent(group) {
-        let data = PackageData.find(p => p.group === group);
+    createTabContent(group, packageDetails) {
+        let data = packageDetails.find(p => p.group === group);
         return (
             (data.content).map((content, index) =>
                 <PackageCard key={index} data={content}/>
@@ -64,15 +41,46 @@ class PackageScreen extends Component {
         )
     }
 
+    componentDidMount() {
+        this.props.getPackageDetails();
+    }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.navProps && nextProps.navProps.group) {
-            var index = arrayUtils.findIndexInData(PackageData, "group", nextProps.navProps.group);
+        if(nextProps.navProps && nextProps.navProps.group && this.props.packageDetails) {
+            var index = arrayUtils.findIndexInData(this.props.packageDetails, "group", nextProps.navProps.group);
             this._tabView._swipePage(index);
             this._scrollView.scrollTo({y: this._tabY})
         }
     }
 
     render() {
+        let navigation = {};
+        if(!this.props.packageDetails){
+            return null
+        } else {
+            navigation = {
+                index: 0,
+                routes: [
+                    {
+                        key: '1',
+                        group: 3,
+                        title: this.props.packageDetails.find(p => p.group === 3).title,
+                        content: this.createTabContent(3, this.props.packageDetails)
+                    },
+                    {
+                        key: '2',
+                        group: 2,
+                        title: this.props.packageDetails.find(p => p.group === 2).title,
+                        content: this.createTabContent(2, this.props.packageDetails)
+                    },
+                    {
+                        key: '3',
+                        group: 1,
+                        title: this.props.packageDetails.find(p => p.group === 1).title,
+                        content: this.createTabContent(1, this.props.packageDetails)
+                    }
+                ],
+            };
+        }
         return (
             <ScrollView
                 style={{flex: 1, backgroundColor: Colors.grey}}
@@ -130,7 +138,7 @@ class PackageScreen extends Component {
                 <View onLayout={(e)=> {this._tabY = e.nativeEvent.layout.y}}/>
                 <TabView
                     ref={ref => this._tabView = ref}
-                    navigation={this.navigation}
+                    navigation={navigation}
                     parentIsScrollView={true}
                     pageStyle={{backgroundColor: Colors.white}}
                     adjustPageHeightMode={TabView.AdjustPageHeightMode.FIT_CONTENT}
@@ -144,6 +152,15 @@ class PackageScreen extends Component {
 
 const mapStateToProps = state => ({
     navProps: state.Nav.props,
+    packageDetails: state.Package.details,
 });
+const mapDispatchToProps = dispatch => ({
+    getPackageDetails: () => dispatch(ReduxPackage.ActionCreator.getPackageDetails()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(PackageScreen);
 
-export default connect(mapStateToProps, null)(PackageScreen);
+
+
+
+
+

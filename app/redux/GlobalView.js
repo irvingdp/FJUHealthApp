@@ -11,6 +11,7 @@ let Reducer = (state = initialState, action) => {
         case ActionType.REGISTERING:
         case ActionType.UPDATING_PROFILE:
         case ActionType.RESERVING:
+        case ActionType.PACKAGE_DETAILS_FETCHING:
             return {
                 ...state,
                 isShowGlobalSpinner: true,
@@ -21,6 +22,7 @@ let Reducer = (state = initialState, action) => {
         case ActionType.REGISTER_SUCCESS:
         case ActionType.UPDATE_PROFILE_SUCCESS:
         case ActionType.RESERVE_SUCCESS:
+        case ActionType.PACKAGE_DETAILS_SUCCESS:
             return {
                 ...state,
                 isShowGlobalSpinner: false,
@@ -31,6 +33,7 @@ let Reducer = (state = initialState, action) => {
         case ActionType.REGISTER_FAIL:
         case ActionType.UPDATE_PROFILE_FAIL:
         case ActionType.RESERVE_FAIL:
+        case ActionType.PACKAGE_DETAILS_FAIL:
             return {
                 ...state,
                 isShowGlobalSpinner: false,
