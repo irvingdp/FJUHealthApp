@@ -26,9 +26,7 @@ class BookSuccessScreen extends Component {
     };
 
     render() {
-        let {pkg, reservation} = this.props;
-        let selectedPackage = pkg.data[reservation.packageId];
-
+        let {selectedPackage, reservation} = this.props;
         return (
             <View style={{flex: 1,paddingTop: 50, backgroundColor: Colors.white}}>
                 <TouchableOpacity style={{position: "absolute"}} onPress={() => {this.props.reset({routeName: Routes.Dashboard})}}>
@@ -84,7 +82,7 @@ class BookSuccessScreen extends Component {
 
 const mapStateToProps = state => ({
     reservation: state.Reservation,
-    pkg: state.Package,
+    selectedPackage: state.Package.data.find(p => p.id === state.Reservation.packageId)
 });
 
 const mapDispatchToProps = dispatch => ({
