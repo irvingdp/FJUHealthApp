@@ -1,7 +1,6 @@
 /**
  * <%= constant.warning %>
  */
-
 const config = {
     API_URL: "<%= apiURL %>",
 };

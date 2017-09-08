@@ -14,7 +14,6 @@ import LogoutButton from '../componenets/LogoutButton';
 
 import ReduxAuth from '../redux/Auth'
 
-import {GENDER} from '../Enum'
 import moment from 'moment';
 import AppointmentCard from "../componenets/Dashboard/AppointmentCard"
 import PaymentCard from "../componenets/Dashboard/PaymentCard"

@@ -1,6 +1,7 @@
-import config from '../../config'
+import Config from '../../config'
 
 let apiToken;
+let defaultLocale = "zh-tw";
 
 function getApiTokenHeader() {
     return apiToken ? {Authorization: apiToken} : {}
@@ -17,6 +18,7 @@ const domainCommon = {
         options.headers = Object.assign({
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'locale': defaultLocale,
         }, getApiTokenHeader());
 
         return fetch(url, options).then((response) => {
@@ -54,8 +56,11 @@ const domainCommon = {
         apiToken = undefined;
     },
     buildAPIUrl: () => {
-        return config.API_URL + "/";
+        return Config.API_URL + "/";
     },
+    setLocale: (locale) => {
+        defaultLocale = locale;
+    }
 }
 
 export default domainCommon;

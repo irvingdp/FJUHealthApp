@@ -1,6 +1,6 @@
-const currentLanguage = "zh-tw";
-//TODO: complete localization , default language is tw
-const Common = {
+let defaultLocale = 'zh-tw';
+
+let _common = {
     "zh-tw": {
         login: "登入",
         logout: "登出",
@@ -71,169 +71,175 @@ const Common = {
         register: "Register",
         save: "Save",
     }
-}
-const _common = Common[currentLanguage];
-const _appLabels = {
-    "zh-tw": {
-        TabBar: {
-            dashboard: _common.reservation,
-            package: "健檢套餐",
-            location: "交通位置",
-            profile: "個人檔案",
-        },
-        DashboardScreen: {
-            title: _common.reservation,
-            notYetAppointment: "目前尚未預約健檢",
-            appointmentImm: "立即預約",
-            myReports: "我的健檢紀錄",
-            bookFor: "您預定於$date進行",
-            proceedPayment: "請參照付款說明以完成預約。",
-            paymentFinished: "付款完成。",
-            yourAppointment: "我的預約",
-            packageSent: "包裏己寄出",
-            packageWillSend: "您將收到健檢說明書、採檢檢體盒、清腸藥物及低渣飲食餐包。",
-            comeOnTime: "健檢前準備已完成，請於8AM至健檢中心報到。",
-        },
-        BookScreen: {
-            title: _common.reservation,
-            selectPackage: "1. 選擇套組",
-            selectDate: "2. 選擇檢查日期",
-            personalDetails: "3. 基本資料輸入",
-            bookSuccess: "預約完成",
-            appointmentSubmitted: "預約申請完成",
-            appointmentFor: "您已預約以下健康檢查套組",
-            proceedPayment: "請參照付款說明以完成預約",
-            paymentFinishedDescription: "付款完成後，您將收到健檢說明書、採檢檢體盒、清腸藥物及低渣飲食餐包。"
-        },
-        PackageScreen: {
-            title: _common.reservation,
-            ourPackages: "Our Screening Solutions",
-            packageDescription: "Complete with a personal consultation, lifestyle counselling, medical review, medical report and much more.",
-            promotion: "〈輔大校友、教友和教職員、新五泰的鄰居及企業客戶，享有專案特惠安排〉"
-        },
-        LocationScreen: {
-            title: "位置與交通",
-            address: "新北市泰山區貴子路69號",
-            hospitalName: "輔大醫院 15樓 聖路加健康管理中心",
-            navigation: "規劃路線",
-            mrt: "捷運",
-            mrtInfo1: "台北捷運新莊線輔大站 1號出口、",
-            mrtInfo2: "機捷A6泰山貴和站轉乘輔大接駁車",
-            bus: "巴士",
-            busInfo: "藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503",
-        },
-        ProfileScreen: {
-            title: "個人檔案",
-            editProfile: "修改個人資料",
-            noReport: "尚未有健檢報告",
-            report: "健檢報告",
-            logout: _common.logout,
-        },
-        RegisterScreen: {
-            title: "註冊",
-            newAccount: "註冊帳號",
-            newAccountDescription: "預約健康檢查、收到檢查提醒通知、即時收到健檢報告及更多。",
-            id: _common.id,
-            email: _common.email,
-            password: _common.password,
-            register: _common.register,
-            termsDescription: "By registering, you agree to our",
-            termsConditions: "Terms & Conditions",
-            alreadyHaveAccount: "已有帳號?",
-            login: "立即登入",
-        },
-        LoginScreen: {
-            id: _common.id,
-            email: _common.email,
-            password: _common.password,
-            forgetPassword: "忘記密碼?",
-            login: _common.login,
-            noAccount: "尚未有帳號",
-            register: "立即註冊",
-        },
-        Common: _common,
-    },
-    "en-us": {
-        TabBar: {
-            dashboard: "Dashboard",
-            package: "Package",
-            location: "Location",
-            profile: "Profile",
-        },
-        DashboardScreen: {
-            title: "Dashboard",
-            notYetAppointment: "Not Yet Appointment!",
-            appointmentImm: "Appointment",
-            myReports: "My Reports",
-            bookFor: "You have booked an appointment for $date ",
-            proceedPayment: "Please proceed with making payment to complete your reservation.",
-            paymentFinished: "Payment finished.",
-            yourAppointment: "Your Appointment",
-            packageSent: "Package sent",
-            packageWillSend: "We will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.",
-            comeOnTime: "You are ready for your examination today. Please come on time. See you!",
-        },
-        BookScreen: {
-            title: _common.reservation,
-            selectPackage: "1. Select Package",
-            selectDate: "2. Select Date",
-            personalDetails: "3. Personal Details",
-            bookSuccess: "Reservation Success",
-            appointmentSubmitted: "Appointment Submitted!",
-            appointmentFor: "You have booked an appointment for:",
-            proceedPayment: "Please proceed with making payment to complete your reservation.",
-            paymentFinishedDescription: "Once payment is received, we will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet."
-        },
-        PackageScreen: {
-            title: _common.reservation,
-            ourPackages: "Our Screening Solutions",
-            packageDescription: "Complete with a personal consultation, lifestyle counselling, medical review, medical report and much more.",
-            promotion: "〈輔大校友、教友和教職員、新五泰的鄰居及企業客戶，享有專案特惠安排〉"
-        },
-        LocationScreen: {
-            title: "Location",
-            address: "No.69, Guizi Rd., Taishan Dist., New Taipei City 243",
-            hospitalName: "輔大醫院 15樓 聖路加健康管理中心",
-            navigation: "Navigation",
-            mrt: "MRT",
-            mrtInfo1: "台北捷運新莊線輔大站 1號出口、",
-            mrtInfo2: "機捷A6泰山貴和站轉乘輔大接駁車",
-            bus: "巴士",
-            busInfo: "藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503",
+};
+let Common = _common[defaultLocale];
 
-        },
-        ProfileScreen: {
-            title: "Profile",
-            editProfile: "Edit Profile",
-            noReport: "No Report",
-            report: "Report",
-            logout: _common.logout,
-        },
-        RegisterScreen: {
-            title: "Register",
-            newAccount: "Create A New Account",
-            newAccountDescription: "Schedule an appointment, get reminders, see your check up report and more",
-            id: _common.id,
-            email: _common.email,
-            password: _common.password,
-            register: _common.register,
-            termsDescription: "By registering, you agree to our",
-            termsConditions: "Terms & Conditions",
-            alreadyHaveAccount: "Already have an account?",
-            login: _common.login,
-        },
-        LoginScreen: {
-            title: _common.login,
-            id: _common.id,
-            email: _common.email,
-            password: _common.password,
-            forgetPassword: "Forgot your password?",
-            login: _common.login,
-            noAccount: "I don't have an account.",
-            register: "Register",
-        },
-        Common: _common,
-    }
-}
-const AppLabels = _appLabels[currentLanguage];
+let _appLabels = {
+       "zh-tw": {
+           TabBar: {
+               dashboard: Common.reservation,
+               package: "健檢套餐",
+               location: "交通位置",
+               profile: "個人檔案",
+           },
+           DashboardScreen: {
+               title: Common.reservation,
+               notYetAppointment: "目前尚未預約健檢",
+               appointmentImm: "立即預約",
+               myReports: "我的健檢紀錄",
+               bookFor: "您預定於$date進行",
+               proceedPayment: "請參照付款說明以完成預約。",
+               paymentFinished: "付款完成。",
+               yourAppointment: "我的預約",
+               packageSent: "包裏己寄出",
+               packageWillSend: "您將收到健檢說明書、採檢檢體盒、清腸藥物及低渣飲食餐包。",
+               comeOnTime: "健檢前準備已完成，請於8AM至健檢中心報到。",
+           },
+           BookScreen: {
+               title: Common.reservation,
+               selectPackage: "1. 選擇套組",
+               selectDate: "2. 選擇檢查日期",
+               personalDetails: "3. 基本資料輸入",
+               bookSuccess: "預約完成",
+               appointmentSubmitted: "預約申請完成",
+               appointmentFor: "您已預約以下健康檢查套組",
+               proceedPayment: "請參照付款說明以完成預約",
+               paymentFinishedDescription: "付款完成後，您將收到健檢說明書、採檢檢體盒、清腸藥物及低渣飲食餐包。"
+           },
+           PackageScreen: {
+               title: Common.reservation,
+               ourPackages: "Our Screening Solutions",
+               packageDescription: "Complete with a personal consultation, lifestyle counselling, medical review, medical report and much more.",
+               promotion: "〈輔大校友、教友和教職員、新五泰的鄰居及企業客戶，享有專案特惠安排〉"
+           },
+           LocationScreen: {
+               title: "位置與交通",
+               address: "新北市泰山區貴子路69號",
+               hospitalName: "輔大醫院 15樓 聖路加健康管理中心",
+               navigation: "規劃路線",
+               mrt: "捷運",
+               mrtInfo1: "台北捷運新莊線輔大站 1號出口、",
+               mrtInfo2: "機捷A6泰山貴和站轉乘輔大接駁車",
+               bus: "巴士",
+               busInfo: "藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503",
+           },
+           ProfileScreen: {
+               title: "個人檔案",
+               editProfile: "修改個人資料",
+               noReport: "尚未有健檢報告",
+               report: "健檢報告",
+               logout: Common.logout,
+           },
+           RegisterScreen: {
+               title: "註冊",
+               newAccount: "註冊帳號",
+               newAccountDescription: "預約健康檢查、收到檢查提醒通知、即時收到健檢報告及更多。",
+               id: Common.id,
+               email: Common.email,
+               password: Common.password,
+               register: Common.register,
+               termsDescription: "By registering, you agree to our",
+               termsConditions: "Terms & Conditions",
+               alreadyHaveAccount: "已有帳號?",
+               login: "立即登入",
+           },
+           LoginScreen: {
+               id: Common.id,
+               email: Common.email,
+               password: Common.password,
+               forgetPassword: "忘記密碼?",
+               login: Common.login,
+               noAccount: "尚未有帳號",
+               register: "立即註冊",
+           },
+           Common: Common,
+       },
+       "en-us": {
+           TabBar: {
+               dashboard: "Dashboard",
+               package: "Package",
+               location: "Location",
+               profile: "Profile",
+           },
+           DashboardScreen: {
+               title: "Dashboard",
+               notYetAppointment: "Not Yet Appointment!",
+               appointmentImm: "Appointment",
+               myReports: "My Reports",
+               bookFor: "You have booked an appointment for $date ",
+               proceedPayment: "Please proceed with making payment to complete your reservation.",
+               paymentFinished: "Payment finished.",
+               yourAppointment: "Your Appointment",
+               packageSent: "Package sent",
+               packageWillSend: "We will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet.",
+               comeOnTime: "You are ready for your examination today. Please come on time. See you!",
+           },
+           BookScreen: {
+               title: Common.reservation,
+               selectPackage: "1. Select Package",
+               selectDate: "2. Select Date",
+               personalDetails: "3. Personal Details",
+               bookSuccess: "Reservation Success",
+               appointmentSubmitted: "Appointment Submitted!",
+               appointmentFor: "You have booked an appointment for:",
+               proceedPayment: "Please proceed with making payment to complete your reservation.",
+               paymentFinishedDescription: "Once payment is received, we will send you a package with Checkup Manual, Speciment Collector and Complimentary Diet."
+           },
+           PackageScreen: {
+               title: Common.reservation,
+               ourPackages: "Our Screening Solutions",
+               packageDescription: "Complete with a personal consultation, lifestyle counselling, medical review, medical report and much more.",
+               promotion: "〈輔大校友、教友和教職員、新五泰的鄰居及企業客戶，享有專案特惠安排〉"
+           },
+           LocationScreen: {
+               title: "Location",
+               address: "No.69, Guizi Rd., Taishan Dist., New Taipei City 243",
+               hospitalName: "輔大醫院 15樓 聖路加健康管理中心",
+               navigation: "Navigation",
+               mrt: "MRT",
+               mrtInfo1: "台北捷運新莊線輔大站 1號出口、",
+               mrtInfo2: "機捷A6泰山貴和站轉乘輔大接駁車",
+               bus: "巴士",
+               busInfo: "藍2、橘21、橘22、99、111、235、299、513、615、635、636、637、638、639、663、797、801、802、810、842、845、1501、1503",
+
+           },
+           ProfileScreen: {
+               title: "Profile",
+               editProfile: "Edit Profile",
+               noReport: "No Report",
+               report: "Report",
+               logout: Common.logout,
+           },
+           RegisterScreen: {
+               title: "Register",
+               newAccount: "Create A New Account",
+               newAccountDescription: "Schedule an appointment, get reminders, see your check up report and more",
+               id: Common.id,
+               email: Common.email,
+               password: Common.password,
+               register: Common.register,
+               termsDescription: "By registering, you agree to our",
+               termsConditions: "Terms & Conditions",
+               alreadyHaveAccount: "Already have an account?",
+               login: Common.login,
+           },
+           LoginScreen: {
+               title: Common.login,
+               id: Common.id,
+               email: Common.email,
+               password: Common.password,
+               forgetPassword: "Forgot your password?",
+               login: Common.login,
+               noAccount: "I don't have an account.",
+               register: "Register",
+           },
+           Common: Common,
+       }
+};
+let AppLabels = _appLabels[defaultLocale]
+
 export default AppLabels;
+
+export const changLocale = (locale) => {
+    defaultLocale = locale;
+}
