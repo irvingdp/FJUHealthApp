@@ -14,39 +14,34 @@ import ErrorMessage from "../componenets/ErrorMessage";
 import Header from "../componenets/Header";
 import AppLabels from "../AppLabels";
 
-class LoginScreen extends Component {
+class ForgetPasswordScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             formData: {
                 email: "",
-                password: "",
             },
             validation: {
                 email: true,
-                password: true,
             },
             errorMsg: {
                 email: "",
-                password: "",
             }
         }
     }
     static navigationOptions = {
-        title: AppLabels.LoginScreen.title,
         tabBarVisible: false,
         header: null
     };
     _doClientValidation() {
-        let valid = !!this.state.formData.email && !!this.state.formData.password;
+        let valid = !!this.state.formData.email;
 
         if(valid) {
-            this.props.login(this.state.formData)
+            this.props.forgetPassword(this.state.formData)
         } else {
             this.setState({
                 validation:{
                     email: !!this.state.formData.email,
-                    password: !!this.state.formData.password,
                 }
             });
         }
@@ -63,7 +58,17 @@ class LoginScreen extends Component {
                     paddingTop: 40,
                     backgroundColor: Colors.lightGreen
                 }}>
-                    <LabelInput labelText={AppLabels.LoginScreen.email}
+                    <Text style={[Texts.Font_17_900, {
+                        marginTop: 15,
+                        color: Colors.white,
+                    }]}>{AppLabels.ForgetPasswordScreen.forgetPassword}</Text>
+                    <Text style={[Texts.Font_14_400, {
+                        marginTop: 11,
+                        color: Colors.white,
+                        lineHeight: 18,
+                    }]}>{AppLabels.ForgetPasswordScreen.description}</Text>
+
+                    <LabelInput labelText={AppLabels.ForgetPasswordScreen.email}
                                     textInputProps={{
                                         onChangeText: (text) => {
                                             this.setState({
@@ -76,22 +81,7 @@ class LoginScreen extends Component {
                                     }}
                                     valid={this.state.validation.email}
                                     errorMsg={this.state.errorMsg.email}
-                    />
-                    <LabelInput style={{marginTop: 25}}
-                                    labelText={AppLabels.LoginScreen.password}
-                                    textInputProps={{
-                                        onChangeText: (text) => {
-                                            this.setState({
-                                                formData: {...this.state.formData ,password: text},
-                                                validation: {...this.state.validation ,password: !!text}
-                                            });
-                                        },
-                                        value: this.state.formData.password,
-                                        secureTextEntry: true,
-                                        autoCapitalize: "none",
-                                    }}
-                                    valid={this.state.validation.password}
-                                    errorMsg={this.state.errorMsg.password}
+                                    style={{marginTop: 25}}
                     />
                     <ErrorMessage error={this.props.error}/>
 
@@ -109,22 +99,15 @@ class LoginScreen extends Component {
                             <Text style={[Texts.Font_17_600, {
                                 color: Colors.green,
                                 textAlign: "center"
-                            }]}>{AppLabels.LoginScreen.login}</Text>
+                            }]}>{AppLabels.ForgetPasswordScreen.continue}</Text>
                         </View>
                     </LockButton>
-                    <Text style={[Texts.Font_14_400, {
-                        marginTop: 15,
-                        color: Colors.white,
-                        textAlign: "center",
-                        textDecorationLine: "underline"
-                    }]}
-                      onPress={() => this.props.navigate({routeName: Routes.ForgetPassword})}
-                    >{AppLabels.LoginScreen.forgetPassword}</Text>
+
                 </View>
 
                 <View style={{height: 55, backgroundColor: Colors.deepGreen, justifyContent: "center"}}>
                     <Text style={[Texts.Font_14_400, {color: Colors.textWhite, textAlign: "center"}]}>
-                        {AppLabels.LoginScreen.noAccount} <Text style={Texts.Font_14_900} onPress={() => this.props.replace({routeName: Routes.Register})}>{AppLabels.LoginScreen.register}</Text>
+                        {AppLabels.ForgetPasswordScreen.justRemembered} <Text style={Texts.Font_14_900} onPress={() => this.props.back()}>{AppLabels.ForgetPasswordScreen.reLogin}</Text>
                     </Text>
                 </View>
             </View>
@@ -133,14 +116,14 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.Auth.isLoggedIn,
-    error: state.Auth.loginError,
+    error: state.Auth.forgetPasswordError,
 });
 
 const mapDispatchToProps = dispatch => ({
-    login: ({email, password}) => dispatch(ReduxAuth.ActionCreator.login({email, password})),
+    forgetPassword: ({email}) => dispatch(ReduxAuth.ActionCreator.forgetPassword({email})),
     navigate: (route) => dispatch(ReduxNav.ActionCreator.navigate(route)),
     replace: (route) => dispatch(ReduxNav.ActionCreator.replace(route)),
+    back: () => dispatch(ReduxNav.ActionCreator.back()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ForgetPasswordScreen);

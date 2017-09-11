@@ -146,7 +146,7 @@ class RegisterScreen extends Component {
                         marginTop: 15,
                         color: Colors.textWhite,
                     }]}>
-                        {AppLabels.RegisterScreen.termsDescription} <Text style={{textDecorationLine: "underline"}} onPress={() => this.props.navigate({routeName: Routes.ForgotPassword})}>{AppLabels.RegisterScreen.termsConditions}</Text>
+                        {AppLabels.RegisterScreen.termsDescription} <Text style={{textDecorationLine: "underline"}} onPress={() => this.props.navigate({routeName: Routes.ForgetPassword})}>{AppLabels.RegisterScreen.termsConditions}</Text>
                     </Text>
 
                 </View>

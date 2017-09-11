@@ -10,6 +10,7 @@ const initialState = null;
 //TODO: where is to put logout button?
 let Reducer = (state = initialState, action) => {
     let nextState;
+    let currentTabNav;
     switch (action.type) {
         case ActionType.NAVIGATE:
             nextState = TabBarNavigator.router.getStateForAction(
@@ -25,7 +26,7 @@ let Reducer = (state = initialState, action) => {
             break;
 
         case ActionType.NAVIGATE_REPLACE:
-            let currentTabNav = state.routes[state.index];
+            currentTabNav = state.routes[state.index];
             currentTabNav.routes.pop(); // pop the current route
             currentTabNav.index = currentTabNav.index - 1;
             nextState = TabBarNavigator.router.getStateForAction(
@@ -38,6 +39,16 @@ let Reducer = (state = initialState, action) => {
         case ActionType.REGISTER_SUCCESS:
             nextState = TabBarNavigator.router.getStateForAction(
                 NavigationActions.back(),
+                state
+            );
+            break;
+
+        case ActionType.FORGET_PASSWORD_SUCCESS:
+            currentTabNav = state.routes[state.index];
+            currentTabNav.routes.pop(); // pop the current route
+            currentTabNav.index = currentTabNav.index - 1;
+            nextState = TabBarNavigator.router.getStateForAction(
+                NavigationActions.navigate({routeName: Routes.ForgetPasswordSuccess}),
                 state
             );
             break;

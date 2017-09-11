@@ -8,12 +8,13 @@ const Routes = {
     Login: "Login",
     Profile: "Profile",
     ProfileDetail: "ProfileDetail",
-    ForgotPassword: "ForgotPassword",
+    ForgetPassword: "ForgetPassword",
+    ForgetPasswordSuccess: "ForgetPasswordSuccess",
 
     BookStep1: "BookStep1",
     BookStep2: "BookStep2",
     BookStep3: "BookStep3",
-    BookSuccessScreen: "BookSuccessScreen",
+    BookSuccess: "BookSuccessScreen",
 };
 
 export default Routes;

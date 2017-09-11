@@ -65,6 +65,24 @@ let Reducer = (state = initialAuthState, action) => {
                 isLoggedIn: false,
                 registerError: action.error,
             };
+        case ActionType.FORGET_PASSWORD:
+            return {
+                ...state,
+                forgetPasswordError: null,
+                resetEmail: null,
+            };
+        case ActionType.FORGET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                forgetPasswordError: null,
+                resetEmail: action.data.email,
+            };
+        case ActionType.FORGET_PASSWORD_FAIL:
+            return {
+                ...state,
+                forgetPasswordError: action.error,
+                resetEmail: null,
+            };
         case ActionType.LOGOUT:
             return {
                 ...state,
@@ -126,6 +144,16 @@ let ActionCreator = {
             DomainCommon.clearAPIToken();
             DeviceStore.saveUserData(null).then(() => {
                 return dispatch({type: ActionType.LOGOUT})
+            })
+        }
+    },
+    forgetPassword({email}) {
+        return function (dispatch) {
+            dispatch({type: ActionType.FORGET_PASSWORD});
+            UserService.forgetPassword({email}).then(() => {
+                return dispatch({type: ActionType.FORGET_PASSWORD_SUCCESS, data: {email}});
+            }).catch(err => {
+                return dispatch({type: ActionType.FORGET_PASSWORD_FAIL, error: err})
             })
         }
     },

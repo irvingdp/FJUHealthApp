@@ -93,7 +93,7 @@ class BookStep3Screen extends Component {
             if(this.props.reservationError) {
                 Alert.alert(AppLabels.Common.error.toLocaleUpperCase(),this.props.reservationError.message);
             } else {
-                this.props.navigate({routeName: Routes.BookSuccessScreen});
+                this.props.navigate({routeName: Routes.BookSuccess});
             }
         })
     }

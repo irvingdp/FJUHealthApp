@@ -152,6 +152,21 @@ let _appLabels = {
                noAccount: "尚未有帳號",
                register: "立即註冊",
            },
+           ForgetPasswordScreen: {
+               forgetPassword: "忘記密碼?",
+               description : "請填寫入註冊的電子郵件，我們將寄給您一個臨時代碼。",
+               email: Common.email,
+               continue: Common.continue,
+               justRemembered: "還記得密碼?",
+               reLogin: "重新登入"
+           },
+           ForgetPasswordSuccessScreen: {
+               mailSent: "郵件寄出",
+               alreadySent : "我們已 email 到:",
+               description: "點擊 email 的連結重設密碼。若您沒收到 email 請檢查您的垃圾信件。",
+               alreadyRest: "我已重設密碼?",
+               reLogin: "重新登入",
+           },
            Common: Common,
        },
        "en-us": {
@@ -228,10 +243,25 @@ let _appLabels = {
                id: Common.id,
                email: Common.email,
                password: Common.password,
-               forgetPassword: "Forgot your password?",
+               forgetPassword: "Forget your password?",
                login: Common.login,
                noAccount: "I don't have an account.",
                register: "Register",
+           },
+           ForgetPasswordScreen: {
+               forgetPassword: "Forget Password",
+               description : "Please fill the email that registered, we will send a template URL to your email for reset password.",
+               email: Common.email,
+               continue: Common.continue,
+               justRemembered: "Just remembered?",
+               reLogin: "Login"
+           },
+           ForgetPasswordSuccessScreen: {
+               mailSent: "Mail Sent",
+               alreadySent : "We already sent email to:",
+               description: "Click the URL in the email to reset password. if you not receive , please check the spam box.",
+               alreadyRest: "Already reset password?",
+               reLogin: "Login",
            },
            Common: Common,
        }

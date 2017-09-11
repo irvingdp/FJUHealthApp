@@ -97,6 +97,11 @@ export const Texts = {
         fontSize: 17,
         fontWeight: '600',
     },
+    Font_17_900: {
+        fontSize: 17,
+        fontSize: 17,
+        fontWeight: '900',
+    },
     Font_18_400: {
         fontSize: 18,
         fontWeight: '400',

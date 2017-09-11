@@ -26,6 +26,12 @@ const UserService = {
             return DomainCommon.fetchPost(endPoint, {token}, resolve, reject);
         })
     },
+    forgetPassword: ({email}) => {
+        let endPoint = DomainCommon.buildAPIUrl() + "forgetPassword/generate";
+        return new Promise((resolve, reject) => {
+            return DomainCommon.fetchPost(endPoint, {email}, resolve, reject);
+        })
+    },
 };
 
 export default UserService;
